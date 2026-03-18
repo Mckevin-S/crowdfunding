@@ -6,6 +6,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing a user's virtual wallet.
+ * Holds the current balance available for investments or withdrawals.
+ */
 @Entity
 @Table(name = "wallets")
 @Data

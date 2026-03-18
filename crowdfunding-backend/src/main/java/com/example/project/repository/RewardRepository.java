@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RewardRepository extends JpaRepository<Reward, Long> {
-    
+
     List<Reward> findByProjet(Projet projet);
-    
+
     @Query("SELECT r FROM Reward r WHERE r.projet = :projet ORDER BY r.montantMinimum ASC")
     List<Reward> findByProjetOrderedByAmount(@Param("projet") Projet projet);
 }

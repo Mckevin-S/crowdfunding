@@ -9,15 +9,15 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface WalletMapper {
-    
+
     WalletMapper INSTANCE = Mappers.getMapper(WalletMapper.class);
-    
+
     @Mapping(target = "utilisateur", ignore = true)
     Wallet toEntity(WalletRequestDTO dto);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     WalletResponseDTO toResponseDTO(Wallet entity);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     WalletRequestDTO toRequestDTO(Wallet entity);
 }

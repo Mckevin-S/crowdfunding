@@ -9,15 +9,15 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface RewardMapper {
-    
+
     RewardMapper INSTANCE = Mappers.getMapper(RewardMapper.class);
-    
+
     @Mapping(target = "projet", ignore = true)
     Reward toEntity(RewardRequestDTO dto);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     RewardResponseDTO toResponseDTO(Reward entity);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     RewardRequestDTO toRequestDTO(Reward entity);
 }

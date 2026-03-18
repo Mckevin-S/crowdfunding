@@ -5,6 +5,10 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing an AI-driven project analysis.
+ * Stores success/risk scores and the full text of the feasibility study.
+ */
 @Entity
 @Table(name = "ai_analysis")
 @Data

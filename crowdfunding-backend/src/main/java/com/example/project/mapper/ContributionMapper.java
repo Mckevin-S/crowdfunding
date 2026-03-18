@@ -9,17 +9,17 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ContributionMapper {
-    
+
     ContributionMapper INSTANCE = Mappers.getMapper(ContributionMapper.class);
-    
+
     @Mapping(target = "projet", ignore = true)
     @Mapping(target = "utilisateur", ignore = true)
     Contribution toEntity(ContributionRequestDTO dto);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     ContributionResponseDTO toResponseDTO(Contribution entity);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     ContributionRequestDTO toRequestDTO(Contribution entity);

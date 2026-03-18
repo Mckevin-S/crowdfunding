@@ -3,6 +3,10 @@ package com.example.project.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * Entity representing a project recommendation for a user.
+ * Stores an affinity score calculated by the recommendation engine.
+ */
 @Entity
 @Table(name = "recommendations")
 @Data

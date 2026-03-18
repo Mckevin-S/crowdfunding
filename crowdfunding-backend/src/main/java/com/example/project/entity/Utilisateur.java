@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing a user in the system.
+ * Contains core authentication details, profile information, and role-based access control.
+ */
 @Entity
 @Table(name = "users")
 @Data

@@ -8,6 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing a financial transaction (deposit, withdrawal, or investment).
+ * Records the user, amount, payment type, and final status.
+ */
 @Entity
 @Table(name = "transactions")
 @Data

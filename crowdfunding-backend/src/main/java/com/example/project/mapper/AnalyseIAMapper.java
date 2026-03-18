@@ -9,15 +9,15 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface AnalyseIAMapper {
-    
+
     AnalyseIAMapper INSTANCE = Mappers.getMapper(AnalyseIAMapper.class);
-    
+
     @Mapping(target = "projet", ignore = true)
     AnalyseIA toEntity(AnalyseIARequestDTO dto);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     AnalyseIAResponseDTO toResponseDTO(AnalyseIA entity);
-    
+
     @Mapping(target = "projetId", source = "projet.id")
     AnalyseIARequestDTO toRequestDTO(AnalyseIA entity);
 }

@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface KycDocumentRepository extends JpaRepository<KycDocument, Long> {
-    
+
     List<KycDocument> findByUtilisateur(Utilisateur utilisateur);
-    
+
     Optional<KycDocument> findByUtilisateurAndTypeDocument(Utilisateur utilisateur, TypeDocument typeDocument);
-    
-    @Query("SELECT k FROM KycDocument k WHERE k.utilisateur = :utilisateur AND k.estVerifie = true")
+
+    @Query("SELECT k FROM KycDocument k WHERE k.utilisateur = :utilisateur AND k.statut = 'APPROUVE'")
     List<KycDocument> findVerifiedDocumentsByUser(@Param("utilisateur") Utilisateur utilisateur);
-    
-    boolean existsByUtilisateurAndTypeDocumentAndEstVerifieTrue(Utilisateur utilisateur, TypeDocument typeDocument);
+
+    boolean existsByUtilisateurAndTypeDocumentAndStatut(Utilisateur utilisateur, TypeDocument typeDocument, com.example.project.enums.StatutDocument statut);
 }

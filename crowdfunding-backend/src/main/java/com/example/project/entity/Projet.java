@@ -10,6 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity representing a crowdfunding project.
+ * Tracks funding progress, financial goals, and maintains relationships with milestones (Etapes) and rewards.
+ */
 @Entity
 @Table(name = "projects")
 @Data

@@ -10,15 +10,15 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ProjetMapper {
-    
+
     ProjetMapper INSTANCE = Mappers.getMapper(ProjetMapper.class);
-    
+
     @Mapping(target = "porteur", ignore = true)
     Projet toEntity(ProjetRequestDTO dto);
-    
+
     @Mapping(target = "porteurId", source = "porteur.id")
     ProjetResponseDTO toResponseDTO(Projet entity);
-    
+
     @Mapping(target = "porteurId", source = "porteur.id")
     ProjetRequestDTO toRequestDTO(Projet entity);
 }

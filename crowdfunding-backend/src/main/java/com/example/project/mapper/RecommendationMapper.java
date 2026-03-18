@@ -9,17 +9,17 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface RecommendationMapper {
-    
+
     RecommendationMapper INSTANCE = Mappers.getMapper(RecommendationMapper.class);
-    
+
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "projet", ignore = true)
     Recommendation toEntity(RecommendationRequestDTO dto);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     @Mapping(target = "projetId", source = "projet.id")
     RecommendationResponseDTO toResponseDTO(Recommendation entity);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     @Mapping(target = "projetId", source = "projet.id")
     RecommendationRequestDTO toRequestDTO(Recommendation entity);

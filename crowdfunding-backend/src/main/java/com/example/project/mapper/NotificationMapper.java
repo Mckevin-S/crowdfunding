@@ -9,16 +9,16 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface NotificationMapper {
-    
+
     NotificationMapper INSTANCE = Mappers.getMapper(NotificationMapper.class);
-    
+
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "estLu", ignore = true)
     Notification toEntity(NotificationRequestDTO dto);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     NotificationResponseDTO toResponseDTO(Notification entity);
-    
+
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     NotificationRequestDTO toRequestDTO(Notification entity);
 }

@@ -3,6 +3,10 @@ package com.example.project.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * Entity representing a project milestone or step.
+ * Tracks specific progress percentages and completion status for a project.
+ */
 @Entity
 @Table(name = "project_steps")
 @Data

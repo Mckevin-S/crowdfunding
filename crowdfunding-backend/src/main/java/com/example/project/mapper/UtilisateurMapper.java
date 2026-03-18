@@ -8,12 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UtilisateurMapper {
-    
+
     UtilisateurMapper INSTANCE = Mappers.getMapper(UtilisateurMapper.class);
-    
+
     Utilisateur toEntity(UtilisateurRequestDTO dto);
-    
+
     UtilisateurResponseDTO toResponseDTO(Utilisateur entity);
-    
+
     UtilisateurRequestDTO toRequestDTO(Utilisateur entity);
 }

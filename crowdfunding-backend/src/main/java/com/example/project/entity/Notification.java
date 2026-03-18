@@ -5,6 +5,10 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing a system notification for a user.
+ * Stores the message content and tracks whether it has been read.
+ */
 @Entity
 @Table(name = "notifications")
 @Data
