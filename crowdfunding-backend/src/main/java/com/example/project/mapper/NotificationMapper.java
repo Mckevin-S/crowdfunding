@@ -5,12 +5,9 @@ import com.example.project.dto.NotificationResponseDTO;
 import com.example.project.entity.Notification;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface NotificationMapper {
-
-    NotificationMapper INSTANCE = Mappers.getMapper(NotificationMapper.class);
 
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "estLu", ignore = true)

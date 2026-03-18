@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final NotificationMapper notificationMapper;
     private final UtilisateurRepository utilisateurRepository;
     private final EmailService emailService;
 
@@ -36,7 +37,7 @@ public class NotificationServiceImpl implements NotificationService {
         Utilisateur utilisateur = utilisateurRepository.findById(request.getUtilisateurId())
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", request.getUtilisateurId()));
 
-        Notification notification = NotificationMapper.INSTANCE.toEntity(request);
+        Notification notification = notificationMapper.toEntity(request);
         notification.setUtilisateur(utilisateur);
         notification.setEstLu(false);
 
@@ -46,7 +47,7 @@ public class NotificationServiceImpl implements NotificationService {
         // simplicity
         emailService.sendSimpleMessage(utilisateur.getEmail(), "Nouvelle notification", request.getMessage());
 
-        return NotificationMapper.INSTANCE.toResponseDTO(notification);
+        return notificationMapper.toResponseDTO(notification);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class NotificationServiceImpl implements NotificationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", utilisateurId));
 
         return notificationRepository.findByUtilisateur(utilisateur).stream()
-                .map(NotificationMapper.INSTANCE::toResponseDTO)
+                .map(notificationMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 

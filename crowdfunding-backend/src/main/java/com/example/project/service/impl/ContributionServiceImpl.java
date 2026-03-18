@@ -32,6 +32,7 @@ public class ContributionServiceImpl implements ContributionService {
         private final ContributionRepository contributionRepository;
         private final ProjetRepository projetRepository;
         private final UtilisateurRepository utilisateurRepository;
+        private final ContributionMapper contributionMapper;
 
         @Override
         @Transactional
@@ -47,19 +48,19 @@ public class ContributionServiceImpl implements ContributionService {
                         throw new BadRequestException("Vous ne pouvez pas contribuer à votre propre projet");
                 }
 
-                Contribution contribution = ContributionMapper.INSTANCE.toEntity(request);
+                Contribution contribution = contributionMapper.toEntity(request);
                 contribution.setProjet(projet);
                 contribution.setUtilisateur(utilisateur);
                 contribution.setStatus(ContribStatus.PENDING); // Initial status
 
-                return ContributionMapper.INSTANCE.toResponseDTO(contributionRepository.save(contribution));
+                return contributionMapper.toResponseDTO(contributionRepository.save(contribution));
         }
 
         @Override
         public ContributionResponseDTO getContribution(Long id) {
                 Contribution contribution = contributionRepository.findById(id)
                                 .orElseThrow(() -> new ResourceNotFoundException("Contribution", id));
-                return ContributionMapper.INSTANCE.toResponseDTO(contribution);
+                return contributionMapper.toResponseDTO(contribution);
         }
 
         @Override
@@ -67,7 +68,7 @@ public class ContributionServiceImpl implements ContributionService {
                 Projet projet = projetRepository.findById(projetId)
                                 .orElseThrow(() -> new ResourceNotFoundException("Projet", projetId));
                 return contributionRepository.findByProjet(projet).stream()
-                                .map(ContributionMapper.INSTANCE::toResponseDTO)
+                                .map(contributionMapper::toResponseDTO)
                                 .collect(Collectors.toList());
         }
 
@@ -76,14 +77,14 @@ public class ContributionServiceImpl implements ContributionService {
                 Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", utilisateurId));
                 return contributionRepository.findByUtilisateur(utilisateur).stream()
-                                .map(ContributionMapper.INSTANCE::toResponseDTO)
+                                .map(contributionMapper::toResponseDTO)
                                 .collect(Collectors.toList());
         }
 
         @Override
         public List<ContributionResponseDTO> getAllContributions() {
                 return contributionRepository.findAll().stream()
-                                .map(ContributionMapper.INSTANCE::toResponseDTO)
+                                .map(contributionMapper::toResponseDTO)
                                 .collect(Collectors.toList());
         }
 

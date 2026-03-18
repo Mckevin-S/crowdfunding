@@ -5,12 +5,9 @@ import com.example.project.dto.WalletResponseDTO;
 import com.example.project.entity.Wallet;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface WalletMapper {
-
-    WalletMapper INSTANCE = Mappers.getMapper(WalletMapper.class);
 
     @Mapping(target = "utilisateur", ignore = true)
     Wallet toEntity(WalletRequestDTO dto);

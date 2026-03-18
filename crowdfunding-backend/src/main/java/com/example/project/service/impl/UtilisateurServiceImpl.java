@@ -24,11 +24,12 @@ import java.util.stream.Collectors;
 public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
+    private final UtilisateurMapper utilisateurMapper;
 
     @Override
     public UtilisateurResponseDTO getProfil(Long id) {
         Utilisateur user = getUtilisateurById(id);
-        return UtilisateurMapper.INSTANCE.toResponseDTO(user);
+        return utilisateurMapper.toResponseDTO(user);
     }
 
     @Override
@@ -48,13 +49,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (request.getAddress() != null)
             user.setAddress(request.getAddress());
 
-        return UtilisateurMapper.INSTANCE.toResponseDTO(utilisateurRepository.save(user));
+        return utilisateurMapper.toResponseDTO(utilisateurRepository.save(user));
     }
 
     @Override
     public List<UtilisateurResponseDTO> getAllUtilisateurs() {
         return utilisateurRepository.findAll().stream()
-                .map(UtilisateurMapper.INSTANCE::toResponseDTO)
+                .map(utilisateurMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 

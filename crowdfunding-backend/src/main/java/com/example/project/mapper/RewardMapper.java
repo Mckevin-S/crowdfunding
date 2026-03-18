@@ -5,12 +5,9 @@ import com.example.project.dto.RewardResponseDTO;
 import com.example.project.entity.Reward;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RewardMapper {
-
-    RewardMapper INSTANCE = Mappers.getMapper(RewardMapper.class);
 
     @Mapping(target = "projet", ignore = true)
     Reward toEntity(RewardRequestDTO dto);

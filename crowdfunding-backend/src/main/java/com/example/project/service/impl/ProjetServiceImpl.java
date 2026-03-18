@@ -30,6 +30,7 @@ public class ProjetServiceImpl implements ProjetService {
 
     private final ProjetRepository projetRepository;
     private final UtilisateurRepository utilisateurRepository;
+    private final ProjetMapper projetMapper;
 
     @Override
     @Transactional
@@ -41,16 +42,16 @@ public class ProjetServiceImpl implements ProjetService {
         Utilisateur porteur = utilisateurRepository.findById(request.getPorteurId())
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", request.getPorteurId()));
 
-        Projet projet = ProjetMapper.INSTANCE.toEntity(request);
+        Projet projet = projetMapper.toEntity(request);
         projet.setPorteur(porteur);
         projet.setStatut(StatutProjet.BROUILLON); // Toujours BROUILLON à la création
 
-        return ProjetMapper.INSTANCE.toResponseDTO(projetRepository.save(projet));
+        return projetMapper.toResponseDTO(projetRepository.save(projet));
     }
 
     @Override
     public ProjetResponseDTO getProjet(Long id) {
-        return ProjetMapper.INSTANCE.toResponseDTO(getProjetById(id));
+        return projetMapper.toResponseDTO(getProjetById(id));
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ProjetServiceImpl implements ProjetService {
         projet.setDateDebut(request.getDateDebut());
         projet.setDateFin(request.getDateFin());
 
-        return ProjetMapper.INSTANCE.toResponseDTO(projetRepository.save(projet));
+        return projetMapper.toResponseDTO(projetRepository.save(projet));
     }
 
     @Override
@@ -85,7 +86,7 @@ public class ProjetServiceImpl implements ProjetService {
     @Override
     public List<ProjetResponseDTO> getAllProjets() {
         return projetRepository.findAll().stream()
-                .map(ProjetMapper.INSTANCE::toResponseDTO)
+                .map(projetMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -94,7 +95,7 @@ public class ProjetServiceImpl implements ProjetService {
         Utilisateur porteur = utilisateurRepository.findById(porteurId)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", porteurId));
         return projetRepository.findProjectsByOwner(porteur).stream()
-                .map(ProjetMapper.INSTANCE::toResponseDTO)
+                .map(projetMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -102,7 +103,7 @@ public class ProjetServiceImpl implements ProjetService {
     public List<ProjetResponseDTO> getActiveProjets() {
         return projetRepository.findActiveProjectsByStatus(StatutProjet.EN_COURS, LocalDate.now())
                 .stream()
-                .map(ProjetMapper.INSTANCE::toResponseDTO)
+                .map(projetMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -111,7 +112,7 @@ public class ProjetServiceImpl implements ProjetService {
     public ProjetResponseDTO updateStatut(Long id, StatutProjet nouveauStatut) {
         Projet projet = getProjetById(id);
         projet.setStatut(nouveauStatut);
-        return ProjetMapper.INSTANCE.toResponseDTO(projetRepository.save(projet));
+        return projetMapper.toResponseDTO(projetRepository.save(projet));
     }
 
     private Projet getProjetById(Long id) {

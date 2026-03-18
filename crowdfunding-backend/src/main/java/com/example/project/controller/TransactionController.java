@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class TransactionController {
 
     private final TransactionRepository transactionRepository;
+    private final TransactionMapper transactionMapper;
     private final UtilisateurRepository utilisateurRepository;
 
     @GetMapping("/utilisateur/{utilisateurId}")
@@ -30,7 +31,7 @@ public class TransactionController {
 
         List<TransactionResponseDTO> transactions = transactionRepository.findByUtilisateur(utilisateur)
                 .stream()
-                .map(TransactionMapper.INSTANCE::toResponseDTO)
+                .map(transactionMapper::toResponseDTO)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(transactions);
@@ -39,7 +40,7 @@ public class TransactionController {
     @GetMapping("/{id}")
     public ResponseEntity<TransactionResponseDTO> getTransactionById(@PathVariable Long id) {
         return transactionRepository.findById(id)
-                .map(TransactionMapper.INSTANCE::toResponseDTO)
+                .map(transactionMapper::toResponseDTO)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction", id));
     }

@@ -27,6 +27,7 @@ public class KycDocumentServiceImpl implements KycDocumentService {
 
     private final KycDocumentRepository kycDocumentRepository;
     private final UtilisateurRepository utilisateurRepository;
+    private final KycDocumentMapper kycDocumentMapper;
 
     @Override
     @Transactional
@@ -34,18 +35,18 @@ public class KycDocumentServiceImpl implements KycDocumentService {
         Utilisateur utilisateur = utilisateurRepository.findById(request.getUtilisateurId())
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", request.getUtilisateurId()));
 
-        KycDocument document = KycDocumentMapper.INSTANCE.toEntity(request);
+        KycDocument document = kycDocumentMapper.toEntity(request);
         document.setUtilisateur(utilisateur);
         document.setStatut(StatutDocument.EN_ATTENTE); // Initial state
 
-        return KycDocumentMapper.INSTANCE.toResponseDTO(kycDocumentRepository.save(document));
+        return kycDocumentMapper.toResponseDTO(kycDocumentRepository.save(document));
     }
 
     @Override
     public KycDocumentResponseDTO getDocument(Long id) {
         KycDocument document = kycDocumentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Document KYC", id));
-        return KycDocumentMapper.INSTANCE.toResponseDTO(document);
+        return kycDocumentMapper.toResponseDTO(document);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class KycDocumentServiceImpl implements KycDocumentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", utilisateurId));
 
         return kycDocumentRepository.findByUtilisateur(utilisateur).stream()
-                .map(KycDocumentMapper.INSTANCE::toResponseDTO)
+                .map(kycDocumentMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 

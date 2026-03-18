@@ -6,6 +6,7 @@ import com.example.project.entity.AnalyseIA;
 import com.example.project.entity.Projet;
 import com.example.project.exception.ResourceNotFoundException;
 import com.example.project.mapper.AnalyseIAMapper;
+import com.example.project.mapper.EtapesMapper;
 import com.example.project.repository.AnalyseIARepository;
 import com.example.project.repository.ProjetRepository;
 import com.example.project.service.interfaces.AnalyseIAService;
@@ -27,6 +28,7 @@ public class AnalyseIAServiceImpl implements AnalyseIAService {
 
     private final AnalyseIARepository analyseIARepository;
     private final ProjetRepository projetRepository;
+    private final AnalyseIAMapper analyseIAMapper;
 
     @Override
     @Transactional
@@ -58,14 +60,14 @@ public class AnalyseIAServiceImpl implements AnalyseIAService {
         analyse.setScoreSucces((float) score);
         analyse.setAnalyse(recommendations.toString());
 
-        return AnalyseIAMapper.INSTANCE.toResponseDTO(analyseIARepository.save(analyse));
+        return analyseIAMapper.toResponseDTO(analyseIARepository.save(analyse));
     }
 
     @Override
     public AnalyseIAResponseDTO getAnalysis(Long id) {
         AnalyseIA analyse = analyseIARepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("AnalyseIA", id));
-        return AnalyseIAMapper.INSTANCE.toResponseDTO(analyse);
+        return analyseIAMapper.toResponseDTO(analyse);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class AnalyseIAServiceImpl implements AnalyseIAService {
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", projetId));
 
         return analyseIARepository.findByProjet(projet).stream()
-                .map(AnalyseIAMapper.INSTANCE::toResponseDTO)
+                .map(analyseIAMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 }

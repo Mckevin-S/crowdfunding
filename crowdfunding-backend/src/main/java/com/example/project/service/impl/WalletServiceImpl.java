@@ -12,6 +12,7 @@ import com.example.project.mapper.WalletMapper;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.repository.WalletRepository;
 import com.example.project.service.interfaces.WalletService;
+import com.example.project.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,9 @@ import java.math.BigDecimal;
 public class WalletServiceImpl implements WalletService {
 
     private final WalletRepository walletRepository;
+    private final WalletMapper walletMapper;
     private final UtilisateurRepository utilisateurRepository;
-    private final com.example.project.repository.TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
 
     @Override
     public WalletResponseDTO getWalletByUtilisateurId(Long utilisateurId) {
@@ -39,7 +41,7 @@ public class WalletServiceImpl implements WalletService {
         Wallet wallet = walletRepository.findByUtilisateur(utilisateur)
                 .orElseThrow(() -> new ResourceNotFoundException("Wallet pour utilisateur", utilisateurId));
 
-        return WalletMapper.INSTANCE.toResponseDTO(wallet);
+        return walletMapper.toResponseDTO(wallet);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class WalletServiceImpl implements WalletService {
         transaction.setStatus(StatutTransaction.CONFIRMER);
         transactionRepository.save(transaction);
 
-        return WalletMapper.INSTANCE.toResponseDTO(savedWallet);
+        return walletMapper.toResponseDTO(savedWallet);
     }
 
     @Override
@@ -97,6 +99,6 @@ public class WalletServiceImpl implements WalletService {
         transaction.setStatus(StatutTransaction.CONFIRMER);
         transactionRepository.save(transaction);
 
-        return WalletMapper.INSTANCE.toResponseDTO(savedWallet);
+        return walletMapper.toResponseDTO(savedWallet);
     }
 }

@@ -6,12 +6,9 @@ import com.example.project.entity.Projet;
 import com.example.project.entity.Utilisateur;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ProjetMapper {
-
-    ProjetMapper INSTANCE = Mappers.getMapper(ProjetMapper.class);
 
     @Mapping(target = "porteur", ignore = true)
     Projet toEntity(ProjetRequestDTO dto);

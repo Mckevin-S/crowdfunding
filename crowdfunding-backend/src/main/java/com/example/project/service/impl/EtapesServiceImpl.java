@@ -91,7 +91,7 @@ public class EtapesServiceImpl implements EtapesService {
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", projetId));
 
         return etapesRepository.findByProjet(projet).stream()
-                .map(EtapesMapper.INSTANCE::toResponseDTO)
+                .map(etapesMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 }

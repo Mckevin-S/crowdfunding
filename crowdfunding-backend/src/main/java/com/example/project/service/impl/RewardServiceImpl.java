@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 public class RewardServiceImpl implements RewardService {
 
     private final RewardRepository rewardRepository;
+    private final RewardMapper rewardMapper;
     private final ProjetRepository projetRepository;
     private final ContributionRepository contributionRepository;
 
@@ -40,19 +41,19 @@ public class RewardServiceImpl implements RewardService {
         Projet projet = projetRepository.findById(request.getProjetId())
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", request.getProjetId()));
 
-        Reward reward = RewardMapper.INSTANCE.toEntity(request);
+        Reward reward =rewardMapper.toEntity(request);
         reward.setProjet(projet);
         reward.setQuantiteReservee(0);
         reward.setStatutLivraison(DeliveryStatus.EN_PREPARATION);
 
-        return RewardMapper.INSTANCE.toResponseDTO(rewardRepository.save(reward));
+        return rewardMapper.toResponseDTO(rewardRepository.save(reward));
     }
 
     @Override
     public RewardResponseDTO getReward(Long id) {
         Reward reward = rewardRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contrepartie", id));
-        return RewardMapper.INSTANCE.toResponseDTO(reward);
+        return rewardMapper.toResponseDTO(reward);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class RewardServiceImpl implements RewardService {
         Projet projet = projetRepository.findById(projetId)
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", projetId));
         return rewardRepository.findByProjet(projet).stream()
-                .map(RewardMapper.INSTANCE::toResponseDTO)
+                .map(rewardMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -87,7 +88,7 @@ public class RewardServiceImpl implements RewardService {
         reward.setQuantite(request.getQuantite());
         // Do not update projetId safely
 
-        return RewardMapper.INSTANCE.toResponseDTO(rewardRepository.save(reward));
+        return rewardMapper.toResponseDTO(rewardRepository.save(reward));
     }
 
     @Override

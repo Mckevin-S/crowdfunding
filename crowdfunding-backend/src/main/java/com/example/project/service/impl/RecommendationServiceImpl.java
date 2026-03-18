@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 public class RecommendationServiceImpl implements RecommendationService {
 
     private final RecommendationRepository recommendationRepository;
+    private final RecommendationMapper recommendationMapper;
     private final UtilisateurRepository utilisateurRepository;
     private final ProjetRepository projetRepository;
 
@@ -41,11 +42,11 @@ public class RecommendationServiceImpl implements RecommendationService {
         Projet projet = projetRepository.findById(request.getProjetId())
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", request.getProjetId()));
 
-        Recommendation recommendation = RecommendationMapper.INSTANCE.toEntity(request);
+        Recommendation recommendation = recommendationMapper.toEntity(request);
         recommendation.setUtilisateur(utilisateur);
         recommendation.setProjet(projet);
 
-        return RecommendationMapper.INSTANCE.toResponseDTO(recommendationRepository.save(recommendation));
+        return recommendationMapper.toResponseDTO(recommendationRepository.save(recommendation));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class RecommendationServiceImpl implements RecommendationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", utilisateurId));
 
         return recommendationRepository.findByUtilisateur(utilisateur).stream()
-                .map(RecommendationMapper.INSTANCE::toResponseDTO)
+                .map(recommendationMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 

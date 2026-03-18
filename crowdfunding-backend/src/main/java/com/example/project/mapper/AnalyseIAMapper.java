@@ -5,12 +5,9 @@ import com.example.project.dto.AnalyseIAResponseDTO;
 import com.example.project.entity.AnalyseIA;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AnalyseIAMapper {
-
-    AnalyseIAMapper INSTANCE = Mappers.getMapper(AnalyseIAMapper.class);
 
     @Mapping(target = "projet", ignore = true)
     AnalyseIA toEntity(AnalyseIARequestDTO dto);

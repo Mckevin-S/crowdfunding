@@ -5,12 +5,9 @@ import com.example.project.dto.ContributionResponseDTO;
 import com.example.project.entity.Contribution;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ContributionMapper {
-
-    ContributionMapper INSTANCE = Mappers.getMapper(ContributionMapper.class);
 
     @Mapping(target = "projet", ignore = true)
     @Mapping(target = "utilisateur", ignore = true)

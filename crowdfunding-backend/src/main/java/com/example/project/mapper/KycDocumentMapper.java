@@ -5,12 +5,9 @@ import com.example.project.dto.KycDocumentResponseDTO;
 import com.example.project.entity.KycDocument;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface KycDocumentMapper {
-
-    KycDocumentMapper INSTANCE = Mappers.getMapper(KycDocumentMapper.class);
 
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "statut", ignore = true)
