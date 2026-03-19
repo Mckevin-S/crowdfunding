@@ -44,10 +44,12 @@ public class LoanController {
             @PathVariable Long projetId,
             @RequestParam BigDecimal tauxInteret,
             @RequestParam Integer dureeEnMois,
-            @RequestParam(required = false, defaultValue = "0") Integer gracePeriod) {
-        log.info("LOAN_INIT: Initialisation du prêt pour le projet ID: {}, Taux: {}%, Durée: {} mois", 
-                projetId, tauxInteret, dureeEnMois);
-        loanService.initializeLoanRules(projetId, tauxInteret, dureeEnMois, gracePeriod);
+            @RequestParam(required = false, defaultValue = "0") Integer gracePeriod,
+            @RequestParam(required = false) BigDecimal tauxPenalite,
+            @RequestParam(required = false) Integer seuilDefautJours) {
+        log.info("LOAN_INIT: Initialisation du prêt pour le projet ID: {}, Taux: {}%, Durée: {} mois, Pénalité: {}%", 
+                projetId, tauxInteret, dureeEnMois, tauxPenalite);
+        loanService.initializeLoanRules(projetId, tauxInteret, dureeEnMois, gracePeriod, tauxPenalite, seuilDefautJours);
         return ResponseEntity.ok().build();
     }
 

@@ -1,8 +1,6 @@
 package com.example.project.service.interfaces;
 
-import com.example.project.dto.AuthResponse;
-import com.example.project.dto.LoginRequest;
-import com.example.project.dto.RegisterRequest;
+import com.example.project.dto.*;
 
 /**
  * Service interface for user authentication and registration.
@@ -24,4 +22,26 @@ public interface AuthService {
      * @return the authentication response including JWT.
      */
     AuthResponse login(LoginRequest request);
+
+    /**
+     * Initiates the password reset flow.
+     * Generates a token and sends an email to the user.
+     *
+     * @param request contains the user email.
+     */
+    void forgotPassword(ForgotPasswordRequest request);
+
+    /**
+     * Resets the user password using a valid token.
+     *
+     * @param request contains the token and new password.
+     */
+    void resetPassword(ResetPasswordRequest request);
+
+    /**
+     * Changes the password for an authenticated user.
+     *
+     * @param request contains old and new passwords.
+     */
+    void changePassword(ChangePasswordRequest request);
 }

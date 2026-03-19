@@ -58,4 +58,12 @@ public class LoanDetails {
     /** Description des garanties (informatif) */
     @Column(name = "guarantees", columnDefinition = "TEXT")
     private String garanties;
+
+    /** Taux de pénalité en cas de retard (% additionnel) */
+    @Column(name = "penalty_rate", precision = 5, scale = 2)
+    private BigDecimal tauxPenalite = BigDecimal.valueOf(2.0);
+
+    /** Seuil de jours avant déclenchement du contentieux */
+    @Column(name = "default_threshold_days")
+    private Integer seuilDefautJours = 90;
 }

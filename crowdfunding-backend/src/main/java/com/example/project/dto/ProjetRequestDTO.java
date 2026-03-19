@@ -48,6 +48,9 @@ public class ProjetRequestDTO {
     @Schema(description = "Statut initial du projet", example = "BROUILLON")
     private StatutProjet statut;
     
+    @Schema(description = "Politique Tout-ou-Rien (All-or-Nothing)", example = "true")
+    private boolean allOrNothing = true;
+
     @Schema(description = "ID de l'utilisateur porteur du projet", example = "1")
     private Long porteurId;
 }

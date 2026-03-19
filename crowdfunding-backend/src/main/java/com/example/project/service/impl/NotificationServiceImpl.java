@@ -14,13 +14,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link NotificationService}.
- * Dispatches in-app notifications and triggers corresponding email alerts via {@link EmailService}.
+ * Dispatches in-app notifications and triggers corresponding email alerts via
+ * {@link EmailService}.
  */
 @Service
 @RequiredArgsConstructor

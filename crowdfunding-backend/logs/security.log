@@ -1,1 +1,31 @@
 2026-03-19 03:50:49.621 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 03:51:06.943 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@30464500, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60219a32, org.springframework.security.web.context.SecurityContextHolderFilter@2f38b35e, org.springframework.security.web.header.HeaderWriterFilter@4f8d7222, org.springframework.web.filter.CorsFilter@63792a7a, org.springframework.web.filter.CorsFilter@6911005b, org.springframework.security.web.authentication.logout.LogoutFilter@24af33a1, com.example.project.security.JwtAuthFilter@75acb326, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75288f47, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@42491839, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6b7d363c, org.springframework.security.web.session.SessionManagementFilter@48c7773, org.springframework.security.web.access.ExceptionTranslationFilter@32e14e55, org.springframework.security.web.access.intercept.AuthorizationFilter@77eb383a]
+2026-03-19 05:06:13.948 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 05:15:46.299 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 05:23:46.043 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 05:39:29.937 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 05:39:35.682 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6670d46e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@da87122, org.springframework.security.web.context.SecurityContextHolderFilter@46808854, org.springframework.security.web.header.HeaderWriterFilter@438cb294, org.springframework.web.filter.CorsFilter@729cb7b, org.springframework.web.filter.CorsFilter@9bd7c1, org.springframework.security.web.authentication.logout.LogoutFilter@64992713, com.example.project.security.JwtAuthFilter@6385af63, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20d5668, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@18f9745a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6028b018, org.springframework.security.web.session.SessionManagementFilter@14f03098, org.springframework.security.web.access.ExceptionTranslationFilter@2a04a440, org.springframework.security.web.access.intercept.AuthorizationFilter@49bf800f]
+2026-03-19 05:40:23.282 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.html
+2026-03-19 05:40:23.333 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.347 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.html
+2026-03-19 05:40:23.490 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-bundle.js
+2026-03-19 05:40:23.491 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.css
+2026-03-19 05:40:23.487 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui.css
+2026-03-19 05:40:23.494 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-initializer.js
+2026-03-19 05:40:23.498 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-03-19 05:40:23.506 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.508 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.510 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-bundle.js
+2026-03-19 05:40:23.510 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.515 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.515 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.516 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.css
+2026-03-19 05:40:23.519 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui.css
+2026-03-19 05:40:23.519 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-initializer.js
+2026-03-19 05:40:23.523 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-03-19 05:40:23.982 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs/swagger-config
+2026-03-19 05:40:23.985 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:23.986 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs/swagger-config
+2026-03-19 05:40:24.149 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs
+2026-03-19 05:40:24.154 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-19 05:40:24.155 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs

@@ -1,26 +1,33 @@
 package com.example.project.service.impl;
 
-import com.example.project.dto.AuthResponse;
-import com.example.project.dto.LoginRequest;
-import com.example.project.dto.RegisterRequest;
+import com.example.project.dto.*;
+import com.example.project.entity.PasswordResetToken;
 import com.example.project.entity.Utilisateur;
 import com.example.project.entity.Wallet;
 import com.example.project.enums.UserRole;
 import com.example.project.enums.UserStatus;
 import com.example.project.exception.BadRequestException;
 import com.example.project.exception.ConflictException;
+import com.example.project.exception.ResourceNotFoundException;
+import com.example.project.repository.PasswordResetTokenRepository;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.repository.WalletRepository;
 import com.example.project.service.interfaces.AuthService;
+import com.example.project.service.interfaces.EmailService;
 import com.example.project.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * Implementation of {@link AuthService}.
@@ -29,10 +36,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final WalletRepository walletRepository;
+    private final PasswordResetTokenRepository tokenRepository;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
@@ -108,5 +118,67 @@ public class AuthServiceImpl implements AuthService {
                 .nom(utilisateur.getNom())
                 .prenom(utilisateur.getPrenom())
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public void forgotPassword(ForgotPasswordRequest request) {
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", "email", request.getEmail()));
+
+        // Invalid any previous tokens
+        tokenRepository.deleteByUtilisateur(utilisateur);
+
+        String token = UUID.randomUUID().toString();
+        PasswordResetToken resetToken = PasswordResetToken.builder()
+                .token(token)
+                .utilisateur(utilisateur)
+                .expiryDate(LocalDateTime.now().plusHours(24))
+                .build();
+
+        tokenRepository.save(resetToken);
+
+        String resetLink = "http://localhost:3000/reset-password?token=" + token; // Simplified for dev
+        emailService.sendSimpleMessage(
+                utilisateur.getEmail(),
+                "Réinitialisation de votre mot de passe",
+                "Cliquez sur ce lien pour réinitialiser votre mot de passe : " + resetLink
+        );
+        log.info("FORGOT_PASSWORD: Token généré pour {}", utilisateur.getEmail());
+    }
+
+    @Override
+    @Transactional
+    public void resetPassword(ResetPasswordRequest request) {
+        PasswordResetToken token = tokenRepository.findByToken(request.getToken())
+                .orElseThrow(() -> new BadRequestException("Token invalide"));
+
+        if (token.isExpired()) {
+            tokenRepository.delete(token);
+            throw new BadRequestException("Le token a expiré");
+        }
+
+        Utilisateur utilisateur = token.getUtilisateur();
+        utilisateur.setMotsDePasse(passwordEncoder.encode(request.getNewPassword()));
+        utilisateurRepository.save(utilisateur);
+
+        tokenRepository.delete(token);
+        log.info("RESET_PASSWORD: Mot de passe réinitialisé avec succès pour {}", utilisateur.getEmail());
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(ChangePasswordRequest request) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", "email", email));
+
+        if (!passwordEncoder.matches(request.getOldPassword(), utilisateur.getMotsDePasse())) {
+            throw new BadRequestException("L'ancien mot de passe est incorrect");
+        }
+
+        utilisateur.setMotsDePasse(passwordEncoder.encode(request.getNewPassword()));
+        utilisateurRepository.save(utilisateur);
+        log.info("CHANGE_PASSWORD: Mot de passe modifié pour {}", email);
     }
 }

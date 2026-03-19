@@ -51,7 +51,13 @@ public class Utilisateur {
     
     @Column(length = 255)
     private String address;
-    
+
+    @Column(name = "preferred_category", length = 50)
+    private String categoriePreferee;
+
+    @Column(length = 100)
+    private String ville;
+
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime dateCreation;

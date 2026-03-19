@@ -73,4 +73,10 @@ public interface ProjetService {
      * @return the updated project response.
      */
     ProjetResponseDTO updateStatut(Long id, StatutProjet nouveauStatut);
+
+    /**
+     * Periodically closes projects that have reached their end date.
+     * Implements All-or-Nothing policy checks.
+     */
+    void closeExpiredProjects();
 }

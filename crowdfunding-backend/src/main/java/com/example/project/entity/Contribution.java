@@ -37,8 +37,16 @@ public class Contribution {
     @JoinColumn(name = "user_id", nullable = false)
     private Utilisateur utilisateur;
 
-    @Column(precision = 15, scale = 2, nullable = false)
+    @Column(name = "amount_xaf", precision = 15, scale = 2, nullable = false)
     private BigDecimal amount;
+
+    /** Montant dans la devise d'origine */
+    @Column(name = "source_amount", precision = 15, scale = 2)
+    private BigDecimal sourceAmount;
+
+    /** Devise d'origine (EUR, USD, XAF, etc.) */
+    @Column(name = "source_currency", length = 3)
+    private String sourceCurrency = "XAF";
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

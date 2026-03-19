@@ -24,9 +24,15 @@ public class Transaction {
     @JoinColumn(name = "user_id")
     private Utilisateur utilisateur;
     
-    @Column(precision = 15, scale = 2)
+    @Column(name = "amount_xaf", precision = 15, scale = 2)
     private BigDecimal amount;
     
+    @Column(name = "source_amount", precision = 15, scale = 2)
+    private BigDecimal sourceAmount;
+
+    @Column(name = "source_currency", length = 3)
+    private String sourceCurrency = "XAF";
+
     @Enumerated(EnumType.STRING)
     private PaiementType type;
     

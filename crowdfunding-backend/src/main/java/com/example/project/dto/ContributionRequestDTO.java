@@ -30,4 +30,7 @@ public class ContributionRequestDTO {
     @Schema(description = "ID de l'utilisateur contributeur", example = "1")
     @NotNull(message = "L'ID de l'utilisateur ne doit pas être nul")
     private Long utilisateurId;
+
+    @Schema(description = "Devise de la contribution", example = "XAF")
+    private String currency = "XAF";
 }

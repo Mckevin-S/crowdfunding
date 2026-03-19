@@ -56,6 +56,15 @@ public class Projet {
     @CreationTimestamp
     private LocalDateTime dateCreation;
 
+    @Column(name = "all_or_nothing")
+    private boolean allOrNothing = true;
+
+    @Column(length = 50)
+    private String categorie;
+
+    @Column(length = 100)
+    private String localisation;
+
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Etapes> etapes;
 

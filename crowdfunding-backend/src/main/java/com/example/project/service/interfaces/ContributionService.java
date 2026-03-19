@@ -56,4 +56,12 @@ public interface ContributionService {
      * @return the sum of all successful contributions.
      */
     BigDecimal getTotalAmountForProjet(Long projetId);
+
+    /**
+     * Finalizes a successful contribution.
+     * Updates project funding, records transaction, and generates receipt.
+     *
+     * @param contributionId the ID of the confirmed contribution.
+     */
+    void recordSuccessfulContribution(Long contributionId);
 }

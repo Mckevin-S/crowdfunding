@@ -54,7 +54,13 @@ public class RepaymentSchedule {
     @Column(name = "remaining_principal", precision = 15, scale = 2)
     private BigDecimal capitalRestant;
 
+    /** Montant des pénalités appliquées */
+    @Builder.Default
+    @Column(name = "penalty_amount", precision = 15, scale = 2)
+    private BigDecimal montantPenalites = BigDecimal.ZERO;
+
     /** Statut: PENDING, PAID, OVERDUE, RESCHEDULED */
+    @Builder.Default
     @Column(name = "status", length = 20)
     private String statut = "PENDING";
 

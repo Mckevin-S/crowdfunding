@@ -46,6 +46,9 @@ public class ProjetResponseDTO {
     @Schema(description = "Date de fin", example = "2026-06-30")
     private LocalDate dateFin;
     
+    @Schema(description = "Politique Tout-ou-Rien", example = "true")
+    private boolean allOrNothing;
+
     @Schema(description = "ID du porteur du projet", example = "1")
     private Long porteurId;
 }

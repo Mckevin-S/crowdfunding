@@ -79,13 +79,39 @@ public class RecommendationServiceImpl implements RecommendationService {
                     .anyMatch(r -> r.getProjet().getId().equals(projet.getId()));
 
             if (!exists) {
+                float score = calculateAffinityScore(utilisateur, projet);
+                
                 Recommendation recommendation = new Recommendation();
                 recommendation.setUtilisateur(utilisateur);
                 recommendation.setProjet(projet);
-                recommendation.setScoreAffinite((float) (80.0 + count)); // Dummy score
+                recommendation.setScoreAffinite(score);
                 recommendationRepository.save(recommendation);
                 count++;
             }
         }
+    }
+
+    private float calculateAffinityScore(Utilisateur user, Projet project) {
+        float score = 50.0f; // Base score
+
+        // Category match (+30)
+        if (project.getCategorie() != null && project.getCategorie().equalsIgnoreCase(user.getCategoriePreferee())) {
+            score += 30.0f;
+        }
+
+        // Location match (+10)
+        if (project.getLocalisation() != null && project.getLocalisation().equalsIgnoreCase(user.getVille())) {
+            score += 10.0f;
+        }
+
+        // Funding progress penalty (max -20 if > 90%)
+        if (project.getObjectifFinancier().compareTo(java.math.BigDecimal.ZERO) > 0) {
+            double progress = project.getMontantActuel().doubleValue() / project.getObjectifFinancier().doubleValue();
+            if (progress > 0.9) {
+                score -= 20.0f;
+            }
+        }
+
+        return Math.max(0, Math.min(100, score));
     }
 }

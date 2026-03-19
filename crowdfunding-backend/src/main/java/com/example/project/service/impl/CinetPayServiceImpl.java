@@ -1,13 +1,15 @@
 package com.example.project.service.impl;
 
-import com.example.project.entity.Contribution;
-import com.example.project.enums.ContribStatus;
+import com.example.project.dto.external.cinetpay.CinetPayRequest;
+import com.example.project.dto.external.cinetpay.CinetPayResponse;
 import com.example.project.repository.ContributionRepository;
 import com.example.project.service.interfaces.CinetPayService;
+import com.example.project.service.interfaces.ContributionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.math.BigDecimal;
 
@@ -22,6 +24,8 @@ import java.math.BigDecimal;
 public class CinetPayServiceImpl implements CinetPayService {
 
     private final ContributionRepository contributionRepository;
+    private final ContributionService contributionService;
+    private final WebClient webClient;
 
     @Value("${cinetpay.api.key}")
     private String apiKey;
@@ -29,33 +33,74 @@ public class CinetPayServiceImpl implements CinetPayService {
     @Value("${cinetpay.site.id}")
     private String siteId;
 
+
+    @Value("${app.url:http://localhost:8080}")
+    private String appUrl;
+
     @Override
     public String generatePaymentLink(Long contributionId, BigDecimal amount) {
-        log.info("Generating CinetPay link for contribution {} with amount {}", contributionId, amount);
-        // FIXME: Call CinetPay REST API to generate a link. Returning dummy link for
-        // now.
-        return "https://checkout.cinetpay.com/payment/" + contributionId + "-dummy-token";
+        log.info("Generating real CinetPay link for contribution {} with amount {}", contributionId, amount);
+        
+        CinetPayRequest request = CinetPayRequest.builder()
+                .apikey(apiKey)
+                .siteId(siteId)
+                .transactionId(String.valueOf(contributionId))
+                .amount(amount)
+                .currency("XAF")
+                .description("Contribution au projet Crowdfunding")
+                .notifyUrl(appUrl + "/api/v1/payments/cinetpay/notify")
+                .returnUrl(appUrl + "/payment-success")
+                .build();
+
+        try {
+            CinetPayResponse response = webClient.post()
+                    .uri("https://api-checkout.cinetpay.com/api/v2/payment")
+                    .bodyValue(request)
+                    .retrieve()
+                    .bodyToMono(CinetPayResponse.class)
+                    .block();
+
+            if (response != null && "201".equals(response.getCode())) {
+                return response.getData().getPayment_url();
+            } else {
+                log.error("CinetPay error: {}", response != null ? response.getMessage() : "No response");
+            }
+        } catch (Exception e) {
+            log.error("Failed to call CinetPay API: {}", e.getMessage());
+        }
+
+        return "https://checkout.cinetpay.com/error"; // Fallback
     }
 
     @Override
     public void handleNotify(String transactionId) {
         log.info("Received CinetPay notification for transaction: {}", transactionId);
 
-        // FIXME: Extract contributionId from transaction detail
-        // For demonstration, assume transactionId IS the contributionId string
         try {
             Long contribId = Long.parseLong(transactionId);
-            Contribution contribution = contributionRepository.findById(contribId).orElse(null);
+            
+            // Real status check
+            CinetPayRequest checkRequest = CinetPayRequest.builder()
+                    .apikey(apiKey)
+                    .siteId(siteId)
+                    .transactionId(transactionId)
+                    .build();
 
-            if (contribution != null && contribution.getStatus() == ContribStatus.PENDING) {
-                // Call CinetPay check payment API to verify
-                // If SUCCESS:
-                contribution.setStatus(ContribStatus.COMPLETED);
-                contributionRepository.save(contribution);
-                log.info("Mobile Money Contribution {} marked as COMPLETED", contribId);
+            CinetPayResponse response = webClient.post()
+                    .uri("https://api-checkout.cinetpay.com/api/v2/payment/check")
+                    .bodyValue(checkRequest)
+                    .retrieve()
+                    .bodyToMono(CinetPayResponse.class)
+                    .block();
+
+            if (response != null && "200".equals(response.getCode())) {
+                contributionService.recordSuccessfulContribution(contribId);
+            } else {
+                log.warn("CinetPay check failed for transaction {}: {}", transactionId, 
+                        response != null ? response.getMessage() : "No response");
             }
-        } catch (NumberFormatException e) {
-            log.error("Unable to parse transaction ID for CinetPay notify");
+        } catch (Exception e) {
+            log.error("Error processing CinetPay notification: {}", e.getMessage());
         }
     }
 }

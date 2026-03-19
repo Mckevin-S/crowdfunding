@@ -115,6 +115,29 @@ public class ProjetServiceImpl implements ProjetService {
         return projetMapper.toResponseDTO(projetRepository.save(projet));
     }
 
+    @Override
+    @Transactional
+    @org.springframework.scheduling.annotation.Scheduled(cron = "0 0 0 * * *") // Daily at midnight
+    public void closeExpiredProjects() {
+        LocalDate today = LocalDate.now();
+        List<Projet> expiredProjects = projetRepository.findAll().stream()
+                .filter(p -> p.getStatut() == StatutProjet.EN_COURS && p.getDateFin().isBefore(today))
+                .collect(Collectors.toList());
+
+        for (Projet p : expiredProjects) {
+            if (p.isAllOrNothing()) {
+                if (p.getMontantActuel().compareTo(p.getObjectifFinancier()) >= 0) {
+                    p.setStatut(StatutProjet.TERMINE);
+                } else {
+                    p.setStatut(StatutProjet.ECHEC);
+                }
+            } else {
+                p.setStatut(StatutProjet.TERMINE);
+            }
+            projetRepository.save(p);
+        }
+    }
+
     private Projet getProjetById(Long id) {
         return projetRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", id));

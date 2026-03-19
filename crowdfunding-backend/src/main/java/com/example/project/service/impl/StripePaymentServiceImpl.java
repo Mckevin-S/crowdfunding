@@ -17,6 +17,7 @@ import com.example.project.repository.ContributionRepository;
 import com.example.project.repository.ProjetRepository;
 import com.example.project.repository.TransactionRepository;
 import com.example.project.repository.UtilisateurRepository;
+import com.example.project.service.interfaces.ContributionService;
 import com.example.project.service.interfaces.StripePaymentService;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -48,6 +49,7 @@ public class StripePaymentServiceImpl implements StripePaymentService {
     private final ProjetRepository projetRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final TransactionRepository transactionRepository;
+    private final ContributionService contributionService;
 
     @Value("${stripe.webhook.secret}")
     private String endpointSecret;
@@ -160,28 +162,7 @@ public class StripePaymentServiceImpl implements StripePaymentService {
             return;
 
         Long contribId = Long.parseLong(contributionIdStr);
-        Contribution contribution = contributionRepository.findById(contribId).orElse(null);
-
-        if (contribution != null && contribution.getStatus() == ContribStatus.PENDING) {
-            contribution.setStatus(ContribStatus.COMPLETED);
-            contributionRepository.save(contribution);
-
-            // Update Project Total Amount safely
-            Projet projet = contribution.getProjet();
-            BigDecimal currentAmount = projet.getMontantActuel() != null ? projet.getMontantActuel() : BigDecimal.ZERO;
-            projet.setMontantActuel(currentAmount.add(contribution.getAmount()));
-            projetRepository.save(projet);
-
-            // Record transaction
-            Transaction transaction = new Transaction();
-            transaction.setUtilisateur(contribution.getUtilisateur());
-            transaction.setAmount(contribution.getAmount());
-            transaction.setType(PaiementType.INVESTISSEMENT);
-            transaction.setStatus(StatutTransaction.CONFIRMER);
-            transactionRepository.save(transaction);
-
-            log.info("Contribution {} marked as completed for projet {}", contribId, projet.getId());
-        }
+        contributionService.recordSuccessfulContribution(contribId);
     }
 
     private void handleFailedPayment(PaymentIntent pi) {

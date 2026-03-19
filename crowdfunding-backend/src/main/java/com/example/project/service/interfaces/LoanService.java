@@ -15,8 +15,11 @@ public interface LoanService {
      * @param tauxInteret the annual interest rate.
      * @param dureeEnMois the loan duration in months.
      * @param gracePeriod the grace period (in months) before first repayment.
+     * @param tauxPenalite the penalty interest rate for late payments.
+     * @param seuilDefautJours the number of days before a loan is considered in default.
      */
-    void initializeLoanRules(Long projetId, java.math.BigDecimal tauxInteret, Integer dureeEnMois, Integer gracePeriod);
+    void initializeLoanRules(Long projetId, java.math.BigDecimal tauxInteret, Integer dureeEnMois, 
+                             Integer gracePeriod, java.math.BigDecimal tauxPenalite, Integer seuilDefautJours);
 
     /**
      * Generates the periodic repayment schedule for a funded project.
@@ -39,4 +42,9 @@ public interface LoanService {
      * @param scheduleId the repayment schedule entry ID.
      */
     void markInstallmentPaid(Long scheduleId);
+
+    /**
+     * Automated job to check for overdue payments and apply penalties.
+     */
+    void applyPenalties();
 }

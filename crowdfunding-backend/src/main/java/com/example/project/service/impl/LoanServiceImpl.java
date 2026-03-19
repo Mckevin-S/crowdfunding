@@ -12,6 +12,8 @@ import com.example.project.repository.ProjetRepository;
 import com.example.project.repository.RepaymentScheduleRepository;
 import com.example.project.service.interfaces.LoanService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +26,13 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link LoanService}.
- * Uses standard amortization formulas to calculate monthly payments and interest for debt crowdfunding.
- * Generates and persists the full repayment schedule upon project funding completion.
+ * Uses standard amortization formulas to calculate monthly payments and
+ * interest for debt crowdfunding.
+ * Generates and persists the full repayment schedule upon project funding
+ * completion.
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class LoanServiceImpl implements LoanService {
 
@@ -37,7 +42,8 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     @Transactional
-    public void initializeLoanRules(Long projetId, BigDecimal tauxInteret, Integer dureeEnMois, Integer gracePeriod) {
+    public void initializeLoanRules(Long projetId, BigDecimal tauxInteret, Integer dureeEnMois,
+            Integer gracePeriod, BigDecimal tauxPenalite, Integer seuilDefautJours) {
         Projet projet = projetRepository.findById(projetId)
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", projetId));
 
@@ -49,6 +55,11 @@ public class LoanServiceImpl implements LoanService {
         details.setDureeEnMois(dureeEnMois);
         details.setPeriodeGrace(gracePeriod != null ? gracePeriod : 0);
         details.setFrequenceRemboursement("MONTHLY");
+
+        if (tauxPenalite != null)
+            details.setTauxPenalite(tauxPenalite);
+        if (seuilDefautJours != null)
+            details.setSeuilDefautJours(seuilDefautJours);
 
         loanDetailsRepository.save(details);
     }
@@ -144,10 +155,38 @@ public class LoanServiceImpl implements LoanService {
     @Override
     @Transactional
     public void markInstallmentPaid(Long scheduleId) {
-        RepaymentSchedule row = scheduleRepository.findById(scheduleId)
+        RepaymentSchedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Echéance", scheduleId));
-        row.setStatut("PAID");
-        row.setDatePaiement(LocalDateTime.now());
-        scheduleRepository.save(row);
+        schedule.setStatut("PAID");
+        schedule.setDatePaiement(LocalDateTime.now());
+        scheduleRepository.save(schedule);
+    }
+
+    @Override
+    @Transactional
+    @org.springframework.scheduling.annotation.Scheduled(cron = "0 0 1 * * *") // Daily at 1 AM
+    public void applyPenalties() {
+        LocalDate today = LocalDate.now();
+        List<RepaymentSchedule> pendingOrOverdue = scheduleRepository.findAll().stream()
+                .filter(s -> "PENDING".equals(s.getStatut()) || "OVERDUE".equals(s.getStatut()))
+                .collect(Collectors.toList());
+
+        for (RepaymentSchedule schedule : pendingOrOverdue) {
+            if (schedule.getDateEcheance().isBefore(today)) {
+                // Determine penalty rate from LoanDetails
+                LoanDetails details = loanDetailsRepository.findByProjet(schedule.getProjet()).orElse(null);
+                if (details != null && details.getTauxPenalite() != null) {
+                    BigDecimal dailyRate = details.getTauxPenalite().divide(BigDecimal.valueOf(100), 4,
+                            RoundingMode.HALF_UP);
+                    BigDecimal penalty = schedule.getMontantTotal().multiply(dailyRate);
+
+                    schedule.setStatut("OVERDUE");
+                    schedule.setMontantPenalites(schedule.getMontantPenalites().add(penalty));
+                    scheduleRepository.save(schedule);
+                    log.info("Applied penalty of {} to schedule {} for project {}", penalty, schedule.getId(),
+                            schedule.getProjet().getId());
+                }
+            }
+        }
     }
 }

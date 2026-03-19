@@ -1,8 +1,6 @@
 package com.example.project.controller;
 
-import com.example.project.dto.AuthResponse;
-import com.example.project.dto.LoginRequest;
-import com.example.project.dto.RegisterRequest;
+import com.example.project.dto.*;
 import com.example.project.service.interfaces.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -55,5 +53,62 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         log.info("USER_LOGIN: Tentative de connexion pour l'email: {}", request.getEmail());
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    /**
+     * Initiates the password reset flow.
+     *
+     * @param request the forgot password details.
+     * @return 200 OK.
+     */
+    @PostMapping("/forgot-password")
+    @Operation(summary = "Mot de passe oublié", description = "Envoie un email de réinitialisation si l'utilisateur existe.")
+    @ApiResponse(responseCode = "200", description = "Email envoyé si le compte existe")
+    public ResponseEntity<Void> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        authService.forgotPassword(request);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Resets the password using a token.
+     *
+     * @param request the reset password details.
+     * @return 200 OK.
+     */
+    @PostMapping("/reset-password")
+    @Operation(summary = "Réinitialiser le mot de passe", description = "Réinitialise le mot de passe via un token valide.")
+    @ApiResponse(responseCode = "200", description = "Mot de passe modifié avec succès")
+    @ApiResponse(responseCode = "400", description = "Token invalide ou expiré")
+    public ResponseEntity<Void> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Changes the password for an authenticated user.
+     *
+     * @param request the change password details.
+     * @return 200 OK.
+     */
+    @PostMapping("/change-password")
+    @Operation(summary = "Changer le mot de passe", description = "Modifie le mot de passe d'un utilisateur connecté.")
+    @ApiResponse(responseCode = "200", description = "Mot de passe mis à jour")
+    @ApiResponse(responseCode = "401", description = "Non authentifié")
+    public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
+        authService.changePassword(request);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Logs out the user.
+     *
+     * @return 200 OK.
+     */
+    @PostMapping("/logout")
+    @Operation(summary = "Déconnecter l'utilisateur", description = "Invalide la session (principalement côté client, mais fournit un point de terminaison).")
+    @ApiResponse(responseCode = "200", description = "Déconnexion réussie")
+    public ResponseEntity<Void> logout() {
+        log.info("USER_LOGOUT: Déconnexion demandée");
+        return ResponseEntity.ok().build();
     }
 }
