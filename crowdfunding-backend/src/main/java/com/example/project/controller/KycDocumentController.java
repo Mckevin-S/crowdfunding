@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/kyc-documents")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "KYC Documents", description = "Vérification d'identité et gestion des documents légaux")
 public class KycDocumentController {
 
@@ -40,6 +42,8 @@ public class KycDocumentController {
     @ApiResponse(responseCode = "201", description = "Document soumis avec succès")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<KycDocumentResponseDTO> uploadDocument(@Valid @RequestBody KycDocumentRequestDTO request) {
+        log.info("KYC_UPLOAD: Nouveau document soumis pour l'utilisateur ID: {}, Type: {}",
+                request.getUtilisateurId(), request.getTypeDocument());
         return ResponseEntity.status(HttpStatus.CREATED).body(kycDocumentService.uploadDocument(request));
     }
 
@@ -74,7 +78,7 @@ public class KycDocumentController {
     /**
      * Approves or rejects a KYC document (Admin only).
      *
-     * @param id the document ID.
+     * @param id     the document ID.
      * @param status the new status.
      * @param reason the reason for rejection (if applicable).
      * @return a success response.
@@ -87,6 +91,8 @@ public class KycDocumentController {
             @PathVariable Long id,
             @RequestParam StatutDocument status,
             @RequestParam(required = false) String reason) {
+        log.info("KYC_STATUS_UPDATE: Changement de statut du document ID: {} vers {}, Raison: {}",
+                id, status, reason != null ? reason : "N/A");
         kycDocumentService.updateDocumentStatus(id, status, reason);
         return ResponseEntity.ok().build();
     }

@@ -1,0 +1,8 @@
+2026-03-19 03:22:41.793 [main] INFO  c.example.project.ProjectApplication - Starting ProjectApplication using Java 17.0.12 with PID 8068 (C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target\classes started by Mc-kevin in C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend)
+2026-03-19 03:22:41.804 [main] DEBUG c.example.project.ProjectApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-03-19 03:22:41.809 [main] INFO  c.example.project.ProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-19 03:50:38.173 [main] INFO  c.example.project.ProjectApplication - Starting ProjectApplication using Java 17.0.12 with PID 16832 (C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target\classes started by Mc-kevin in C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend)
+2026-03-19 03:50:38.706 [main] DEBUG c.example.project.ProjectApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-03-19 03:50:38.709 [main] INFO  c.example.project.ProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-19 03:50:49.621 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-19 03:51:13.139 [main] INFO  c.example.project.ProjectApplication - Started ProjectApplication in 36.203 seconds (process running for 36.992)

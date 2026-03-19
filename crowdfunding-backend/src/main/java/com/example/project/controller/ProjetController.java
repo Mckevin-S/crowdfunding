@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/projets")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Projets", description = "Gestion des campagnes de crowdfunding")
 public class ProjetController {
 
@@ -40,6 +42,7 @@ public class ProjetController {
     @ApiResponse(responseCode = "210", description = "Projet créé avec succès")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<ProjetResponseDTO> createProjet(@Valid @RequestBody ProjetRequestDTO request) {
+        log.info("CREATION_PROJET: Initialisation d'un nouveau projet '{}'", request.getTitre());
         return ResponseEntity.status(HttpStatus.CREATED).body(projetService.createProjet(request));
     }
 
@@ -71,6 +74,7 @@ public class ProjetController {
     public ResponseEntity<ProjetResponseDTO> updateProjet(
             @PathVariable Long id, 
             @Valid @RequestBody ProjetRequestDTO request) {
+        log.info("UPDATE_PROJET: Mise à jour du projet ID: {}", id);
         return ResponseEntity.ok(projetService.updateProjet(id, request));
     }
 
@@ -85,6 +89,7 @@ public class ProjetController {
     @ApiResponse(responseCode = "204", description = "Projet supprimé")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> deleteProjet(@PathVariable Long id) {
+        log.info("DELETE_PROJET: Suppression du projet ID: {}", id);
         projetService.deleteProjet(id);
         return ResponseEntity.noContent().build();
     }
@@ -137,6 +142,7 @@ public class ProjetController {
     public ResponseEntity<ProjetResponseDTO> updateStatut(
             @PathVariable Long id, 
             @RequestParam StatutProjet statut) {
+        log.info("UPDATE_STATUT_PROJET: Changement de statut pour le projet ID: {} vers {}", id, statut);
         return ResponseEntity.ok(projetService.updateStatut(id, statut));
     }
 }

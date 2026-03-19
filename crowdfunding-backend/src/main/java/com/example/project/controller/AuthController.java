@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Authentification", description = "Endpoints pour l'inscription et la connexion des utilisateurs")
 public class AuthController {
 
@@ -36,6 +38,7 @@ public class AuthController {
     @ApiResponse(responseCode = "201", description = "Utilisateur créé avec succès")
     @ApiResponse(responseCode = "400", description = "Données invalides ou email déjà utilisé")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        log.info("USER_REGISTRATION: Tentative d'inscription pour l'email: {}", request.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
     }
 
@@ -50,6 +53,7 @@ public class AuthController {
     @ApiResponse(responseCode = "200", description = "Connexion réussie")
     @ApiResponse(responseCode = "401", description = "Identifiants invalides")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        log.info("USER_LOGIN: Tentative de connexion pour l'email: {}", request.getEmail());
         return ResponseEntity.ok(authService.login(request));
     }
 }

@@ -7,6 +7,7 @@ import com.example.project.mapper.TransactionMapper;
 import com.example.project.repository.TransactionRepository;
 import com.example.project.repository.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/transactions")
 @RequiredArgsConstructor
+@Slf4j
 public class TransactionController {
 
     private final TransactionRepository transactionRepository;

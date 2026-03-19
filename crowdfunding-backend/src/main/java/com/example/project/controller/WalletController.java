@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/api/v1/wallets")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Portefeuilles", description = "Gestion des portefeuilles virtuels et du solde utilisateur")
 public class WalletController {
 
@@ -53,6 +55,7 @@ public class WalletController {
     public ResponseEntity<WalletResponseDTO> addFunds(
             @PathVariable Long utilisateurId,
             @RequestParam BigDecimal amount) {
+        log.info("WALLET_DEPOSIT: Ajout de {} au portefeuille de l'utilisateur ID: {}", amount, utilisateurId);
         return ResponseEntity.ok(walletService.addFunds(utilisateurId, amount));
     }
 
@@ -70,6 +73,7 @@ public class WalletController {
     public ResponseEntity<WalletResponseDTO> withdrawFunds(
             @PathVariable Long utilisateurId,
             @RequestParam BigDecimal amount) {
+        log.info("WALLET_WITHDRAW: Retrait de {} du portefeuille de l'utilisateur ID: {}", amount, utilisateurId);
         return ResponseEntity.ok(walletService.withdrawFunds(utilisateurId, amount));
     }
 }

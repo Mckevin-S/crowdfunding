@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/etapes")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Etapes", description = "Suivi des étapes d'avancement des projets")
 public class EtapesController {
 
@@ -40,6 +42,8 @@ public class EtapesController {
     @ApiResponse(responseCode = "201", description = "Etape créée")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<EtapesResponseDTO> createEtape(@Valid @RequestBody EtapesRequestDTO request) {
+        log.info("ETAPE_CREATE: Nouvelle étape pour le projet ID: {}, Titre: {}", 
+                request.getProjetId(), request.getTitre());
         return ResponseEntity.status(HttpStatus.CREATED).body(etapesService.createEtape(request));
     }
 
@@ -81,6 +85,7 @@ public class EtapesController {
     public ResponseEntity<EtapesResponseDTO> updateEtape(
             @PathVariable Long id,
             @Valid @RequestBody EtapesRequestDTO request) {
+        log.info("ETAPE_UPDATE: Mise à jour de l'étape ID: {}", id);
         return ResponseEntity.ok(etapesService.updateEtape(id, request));
     }
 
@@ -96,6 +101,7 @@ public class EtapesController {
     @ApiResponse(responseCode = "204", description = "Etape supprimée")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> deleteEtape(@PathVariable Long id) {
+        log.info("ETAPE_DELETE: Suppression de l'étape ID: {}", id);
         etapesService.deleteEtape(id);
         return ResponseEntity.noContent().build();
     }

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/rewards")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Rewards", description = "Gestion des contreparties et récompenses des projets")
 public class RewardController {
 
@@ -41,6 +43,8 @@ public class RewardController {
     @ApiResponse(responseCode = "201", description = "Contrepartie créée")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<RewardResponseDTO> createReward(@Valid @RequestBody RewardRequestDTO request) {
+        log.info("REWARD_CREATE: Nouvelle récompense pour le projet ID: {}, Titre: {}",
+                request.getProjetId(), request.getTitre());
         return ResponseEntity.status(HttpStatus.CREATED).body(rewardService.createReward(request));
     }
 
@@ -71,7 +75,7 @@ public class RewardController {
     /**
      * Updates an existing reward.
      *
-     * @param id the reward ID.
+     * @param id      the reward ID.
      * @param request the update data.
      * @return the updated reward data.
      */
@@ -82,6 +86,7 @@ public class RewardController {
     public ResponseEntity<RewardResponseDTO> updateReward(
             @PathVariable Long id,
             @Valid @RequestBody RewardRequestDTO request) {
+        log.info("REWARD_UPDATE: Mise à jour de la récompense ID: {}", id);
         return ResponseEntity.ok(rewardService.updateReward(id, request));
     }
 
@@ -97,6 +102,7 @@ public class RewardController {
     @ApiResponse(responseCode = "204", description = "Contrepartie supprimée")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> deleteReward(@PathVariable Long id) {
+        log.info("REWARD_DELETE: Suppression de la récompense ID: {}", id);
         rewardService.deleteReward(id);
         return ResponseEntity.noContent().build();
     }
@@ -104,7 +110,7 @@ public class RewardController {
     /**
      * Associates a reward with a specific contribution.
      *
-     * @param rewardId the reward ID.
+     * @param rewardId       the reward ID.
      * @param contributionId the contribution ID.
      * @return a success response.
      */
@@ -114,6 +120,8 @@ public class RewardController {
     public ResponseEntity<Void> claimReward(
             @PathVariable Long rewardId,
             @PathVariable Long contributionId) {
+        log.info("REWARD_CLAIM: Réclamation de la récompense ID: {} pour la contribution ID: {}",
+                rewardId, contributionId);
         rewardService.claimReward(rewardId, contributionId);
         return ResponseEntity.ok().build();
     }
@@ -121,8 +129,8 @@ public class RewardController {
     /**
      * Updates the delivery status of a reward.
      *
-     * @param rewardId the reward ID.
-     * @param status the new delivery status.
+     * @param rewardId       the reward ID.
+     * @param status         the new delivery status.
      * @param trackingNumber optional tracking number.
      * @return a success response.
      */
@@ -134,6 +142,8 @@ public class RewardController {
             @PathVariable Long rewardId,
             @RequestParam DeliveryStatus status,
             @RequestParam(required = false) String trackingNumber) {
+        log.info("REWARD_DELIVERY_UPDATE: Statut de livraison pour la récompense ID: {} changé vers {}",
+                rewardId, status);
         rewardService.updateDeliveryStatus(rewardId, status, trackingNumber);
         return ResponseEntity.ok().build();
     }

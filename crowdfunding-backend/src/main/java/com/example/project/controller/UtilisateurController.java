@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/utilisateurs")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Utilisateurs", description = "Gestion des profils utilisateurs et administration")
 public class UtilisateurController {
 
@@ -55,6 +57,7 @@ public class UtilisateurController {
     public ResponseEntity<UtilisateurResponseDTO> updateProfil(
             @PathVariable Long id,
             @Valid @RequestBody UtilisateurRequestDTO request) {
+        log.info("UPDATE_PROFIL: Mise à jour du profil utilisateur ID: {}", id);
         return ResponseEntity.ok(utilisateurService.updateProfil(id, request));
     }
 
@@ -86,6 +89,7 @@ public class UtilisateurController {
     @Operation(summary = "Bannir un utilisateur", description = "Désactive le compte d'un utilisateur (Admin uniquement).")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> banUtilisateur(@PathVariable Long id) {
+        log.warn("ADMIN_ACTION: Bannissement de l'utilisateur ID: {}", id);
         utilisateurService.banUtilisateur(id);
         return ResponseEntity.noContent().build();
     }
@@ -102,6 +106,7 @@ public class UtilisateurController {
     @Operation(summary = "Réactiver un utilisateur", description = "Réactive le compte d'un utilisateur précédemment banni (Admin uniquement).")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> activateUtilisateur(@PathVariable Long id) {
+        log.info("ADMIN_ACTION: Réactivation de l'utilisateur ID: {}", id);
         utilisateurService.activateUtilisateur(id);
         return ResponseEntity.noContent().build();
     }

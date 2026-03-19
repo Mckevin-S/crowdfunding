@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Import Spring Boot default configuration -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Define properties -->
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}}"/>
+    <property name="LOG_DIR" value="logs"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_FILE_MAX_SIZE" value="10MB"/>
+    <property name="LOG_FILE_MAX_HISTORY" value="30"/>
+
+    <!-- Console Appender (for development) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for All Logs -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/application.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/application-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- File Appender for Error Logs Only -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- File Appender for Application Service Logs -->
+    <appender name="SERVICE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/service.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/service-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- File Appender for Security/Authentication Logs -->
+    <appender name="SECURITY_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/security.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/security-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- File Appender for Database Logs -->
+    <appender name="DATABASE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/database.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/database-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- File Appender for Payment Logs (Stripe, CinetPay) -->
+    <appender name="PAYMENT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/payment.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/payment-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Logger Configuration for Application Packages -->
+    <!-- Base application logger -->
+    <logger name="com.example.project" level="INFO">
+        <appender-ref ref="SERVICE_FILE"/>
+    </logger>
+
+    <!-- Service Loggers : Detailed debug for logic -->
+    <logger name="com.example.project.service" level="DEBUG" additivity="true">
+    </logger>
+
+    <!-- Controller Loggers : Debug level to see performance metrics from AOP -->
+    <logger name="com.example.project.controller" level="DEBUG" additivity="true">
+    </logger>
+
+    <!-- Security Loggers -->
+    <logger name="com.example.project.security" level="DEBUG">
+        <appender-ref ref="SECURITY_FILE"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="DEBUG">
+        <appender-ref ref="SECURITY_FILE"/>
+    </logger>
+
+    <!-- Payment Loggers -->
+    <logger name="com.example.project.service.impl.StripePaymentServiceImpl" level="DEBUG">
+        <appender-ref ref="PAYMENT_FILE"/>
+    </logger>
+
+    <logger name="com.stripe" level="DEBUG">
+        <appender-ref ref="PAYMENT_FILE"/>
+    </logger>
+
+    <!-- Database Loggers -->
+    <logger name="org.springframework.orm.jpa" level="DEBUG">
+        <appender-ref ref="DATABASE_FILE"/>
+    </logger>
+
+    <logger name="org.hibernate" level="WARN">
+        <appender-ref ref="DATABASE_FILE"/>
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="DEBUG">
+        <appender-ref ref="DATABASE_FILE"/>
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE">
+        <appender-ref ref="DATABASE_FILE"/>
+    </logger>
+
+    <!-- Reduce verbosity for third-party libraries -->
+    <logger name="org.springframework.boot" level="INFO"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.data" level="WARN"/>
+
+    <!-- Root Logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </root>
+
+    <!-- Spring Profiles -->
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="WARN">
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+        </root>
+    </springProfile>
+</configuration>

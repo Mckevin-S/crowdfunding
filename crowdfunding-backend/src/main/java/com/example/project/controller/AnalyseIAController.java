@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/analyses-ia")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "AI Analysis", description = "Analyses de projets par intelligence artificielle")
 public class AnalyseIAController {
 
@@ -40,6 +42,7 @@ public class AnalyseIAController {
     @ApiResponse(responseCode = "201", description = "Analyse générée avec succès")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<AnalyseIAResponseDTO> analyzeProject(@Valid @RequestBody AnalyseIARequestDTO request) {
+        log.info("AI_ANALYSIS_REQUEST: Lancement d'une analyse IA pour le projet ID: {}", request.getProjetId());
         return ResponseEntity.status(HttpStatus.CREATED).body(analyseIAService.analyzeProject(request));
     }
 

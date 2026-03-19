@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/recommendations")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Recommendations", description = "Système de recommandation de projets personnalisés")
 public class RecommendationController {
 
@@ -41,6 +43,8 @@ public class RecommendationController {
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<RecommendationResponseDTO> createRecommendation(
             @Valid @RequestBody RecommendationRequestDTO request) {
+        log.info("RECOMMENDATION_CREATE: Nouvelle recommandation pour l'utilisateur ID: {}, Projet ID: {}", 
+                request.getUtilisateurId(), request.getProjetId());
         return ResponseEntity.status(HttpStatus.CREATED).body(recommendationService.createRecommendation(request));
     }
 
@@ -69,6 +73,7 @@ public class RecommendationController {
     @Operation(summary = "Régénérer les recommandations", description = "Lance l'algorithme de recommandation pour un utilisateur (Admin uniquement).")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> generateRecommendationsForUser(@PathVariable Long utilisateurId) {
+        log.info("RECOMMENDATION_GENERATE: Relance de l'algorithme pour l'utilisateur ID: {}", utilisateurId);
         recommendationService.generateRecommendationsForUser(utilisateurId);
         return ResponseEntity.ok().build();
     }

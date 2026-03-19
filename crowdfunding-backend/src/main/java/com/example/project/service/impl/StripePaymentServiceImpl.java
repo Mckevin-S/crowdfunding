@@ -55,6 +55,8 @@ public class StripePaymentServiceImpl implements StripePaymentService {
     @Override
     @Transactional
     public StripePaymentIntentResponseDTO createPaymentIntent(StripePaymentIntentRequestDTO dto) {
+        log.info("STRIPE_PAYMENT_START: Création d'une intention de paiement pour le projet ID: {}, Utilisateur ID: {}, Montant: {}", 
+                dto.getProjetId(), dto.getUtilisateurId(), dto.getAmount());
 
         Projet projet = projetRepository.findById(dto.getProjetId())
                 .orElseThrow(() -> new ResourceNotFoundException("Projet", dto.getProjetId()));

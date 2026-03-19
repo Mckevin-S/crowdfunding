@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/api/v1/equity")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Equity Crowdfunding", description = "Gestion des investissements en capital (actions)")
 public class EquityController {
 
@@ -47,6 +49,8 @@ public class EquityController {
             @RequestParam BigDecimal investissementMinimum,
             @RequestParam(required = false) BigDecimal investissementMaximumParInvestisseur) {
 
+        log.info("EQUITY_INIT: Initialisation des règles d'equity pour le projet ID: {}, Valorisation: {}", 
+                projetId, valuationPreMoney);
         equityService.initializeEquityRules(
                 projetId, valuationPreMoney, pourcentageCapitalOffert, totalActions, investissementMinimum,
                 investissementMaximumParInvestisseur);
@@ -94,6 +98,8 @@ public class EquityController {
             @PathVariable Long projetId,
             @RequestParam Long utilisateurId,
             @RequestParam BigDecimal amount) {
+        log.info("EQUITY_DISTRIBUTE: Distribution d'actions pour le projet ID: {}, Utilisateur ID: {}, Montant: {}", 
+                projetId, utilisateurId, amount);
         equityService.distributeShares(projetId, utilisateurId, amount);
         return ResponseEntity.ok().build();
     }

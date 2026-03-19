@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/loans")
 @RequiredArgsConstructor
+@Slf4j
 @Tag(name = "Loan Crowdfunding", description = "Gestion des prêts et des remboursements (Crowdlending)")
 public class LoanController {
 
@@ -43,6 +45,8 @@ public class LoanController {
             @RequestParam BigDecimal tauxInteret,
             @RequestParam Integer dureeEnMois,
             @RequestParam(required = false, defaultValue = "0") Integer gracePeriod) {
+        log.info("LOAN_INIT: Initialisation du prêt pour le projet ID: {}, Taux: {}%, Durée: {} mois", 
+                projetId, tauxInteret, dureeEnMois);
         loanService.initializeLoanRules(projetId, tauxInteret, dureeEnMois, gracePeriod);
         return ResponseEntity.ok().build();
     }
@@ -58,6 +62,7 @@ public class LoanController {
     @Operation(summary = "Générer l'échéancier", description = "Crée automatiquement les échéances de remboursement mensuelles (Admin uniquement).")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> generateSchedule(@PathVariable Long projetId) {
+        log.info("LOAN_SCHEDULE_GENERATE: Génération de l'échéancier pour le projet ID: {}", projetId);
         loanService.generateRepaymentSchedule(projetId);
         return ResponseEntity.ok().build();
     }
@@ -85,6 +90,7 @@ public class LoanController {
     @Operation(summary = "Valider un paiement", description = "Marque une échéance de remboursement comme ayant été payée (Admin uniquement).")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Void> markPaid(@PathVariable Long scheduleId) {
+        log.info("LOAN_REPAYMENT_PAID: Validation du paiement pour l'échéance ID: {}", scheduleId);
         loanService.markInstallmentPaid(scheduleId);
         return ResponseEntity.ok().build();
     }

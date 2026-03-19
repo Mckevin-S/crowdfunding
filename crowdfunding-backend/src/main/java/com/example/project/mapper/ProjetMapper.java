@@ -3,7 +3,6 @@ package com.example.project.mapper;
 import com.example.project.dto.ProjetRequestDTO;
 import com.example.project.dto.ProjetResponseDTO;
 import com.example.project.entity.Projet;
-import com.example.project.entity.Utilisateur;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

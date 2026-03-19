@@ -1,0 +1,9 @@
+2026-03-18 17:45:54.359 [main] INFO  c.example.project.ProjectApplication - Starting ProjectApplication using Java 17.0.12 with PID 12812 (C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target\classes started by Mc-kevin in C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend)
+2026-03-18 17:45:54.371 [main] DEBUG c.example.project.ProjectApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-03-18 17:45:54.385 [main] INFO  c.example.project.ProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-18 20:45:19.100 [main] INFO  c.example.project.ProjectApplication - Starting ProjectApplication using Java 17.0.12 with PID 4320 (C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target\classes started by Mc-kevin in C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend)
+2026-03-18 20:45:19.104 [main] DEBUG c.example.project.ProjectApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-03-18 20:45:19.106 [main] INFO  c.example.project.ProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-18 20:47:32.118 [main] INFO  c.example.project.ProjectApplication - Starting ProjectApplication using Java 17.0.12 with PID 11504 (C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target\classes started by Mc-kevin in C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend)
+2026-03-18 20:47:32.121 [main] DEBUG c.example.project.ProjectApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-03-18 20:47:32.124 [main] INFO  c.example.project.ProjectApplication - No active profile set, falling back to 1 default profile: "default"
