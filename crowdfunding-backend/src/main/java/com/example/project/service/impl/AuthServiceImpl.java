@@ -176,4 +176,12 @@ public class AuthServiceImpl implements AuthService {
         utilisateurRepository.save(utilisateur);
         log.info("CHANGE_PASSWORD: Mot de passe modifié pour {}", email);
     }
+
+    @Override
+    public AuthResponse getCurrentUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", "email", email));
+        return generateAuthResponse(utilisateur);
+    }
 }

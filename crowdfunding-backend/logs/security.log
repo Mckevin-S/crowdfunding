@@ -440,3 +440,7 @@
 2026-03-25 04:27:02.879 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
 2026-03-25 04:27:03.131 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
 2026-03-25 04:27:03.399 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-25 04:34:39.842 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-25 04:34:39.913 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-25 04:34:40.895 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-25 04:34:40.984 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets

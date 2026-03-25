@@ -118,6 +118,20 @@ public class AuthController {
     }
 
     /**
+     * Gets the current authenticated user.
+     *
+     * @return the authenticated user details.
+     */
+    @GetMapping("/me")
+    @Operation(summary = "Obtenir l'utilisateur courant", description = "Retourne les détails de l'utilisateur actuellement authentifié.")
+    @ApiResponse(responseCode = "200", description = "Utilisateur trouvé")
+    @ApiResponse(responseCode = "401", description = "Non authentifié")
+    public ResponseEntity<AuthResponse> getCurrentUser() {
+        log.info("GET_CURRENT_USER: Récupération de l'utilisateur conecté");
+        return ResponseEntity.ok(authService.getCurrentUser());
+    }
+
+    /**
      * Logs out the user.
      *
      * @return 200 OK.

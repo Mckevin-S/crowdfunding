@@ -52,4 +52,11 @@ public interface AuthService {
      * @return the authentication response.
      */
     AuthResponse generateAuthResponse(com.example.project.entity.Utilisateur user);
+
+    /**
+     * Gets the currently authenticated user.
+     *
+     * @return the authentication response with current user data.
+     */
+    AuthResponse getCurrentUser();
 }
