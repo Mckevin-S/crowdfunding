@@ -1,0 +1,122 @@
+2026-03-24 15:57:42.974 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-24 15:58:00.805 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@524d00e7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15652e7e, org.springframework.security.web.context.SecurityContextHolderFilter@19b019a6, org.springframework.security.web.header.HeaderWriterFilter@6e6d544, org.springframework.web.filter.CorsFilter@5a83be9, org.springframework.web.filter.CorsFilter@6a9781fd, org.springframework.security.web.authentication.logout.LogoutFilter@62e9a6cc, com.example.project.security.JwtAuthFilter@3096a890, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@599bda7e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1dbecb0a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@50e7ee70, org.springframework.security.web.session.SessionManagementFilter@194ff162, org.springframework.security.web.access.ExceptionTranslationFilter@3453a820, org.springframework.security.web.access.intercept.AuthorizationFilter@2375fe4a]
+2026-03-24 16:35:31.479 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:35:31.791 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:37:09.170 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:37:09.184 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:37:37.664 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:37:37.686 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:37:52.118 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:37:52.167 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:37:57.491 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets?category=Don
+2026-03-24 16:37:59.075 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets?category=R%C3%A9compense
+2026-03-24 16:38:01.177 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets?category=Pr%C3%AAt
+2026-03-24 16:38:02.565 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets?category=Capital
+2026-03-24 16:38:04.327 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:38:10.619 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:38:10.630 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:47:15.321 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:47:15.331 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:54:39.824 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:54:39.977 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:54:40.091 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:54:40.185 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:54:40.186 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:54:40.186 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:54:40.200 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:54:40.201 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:54:40.205 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:54:40.207 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:54:40.209 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:54:40.211 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:55:47.839 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:55:47.851 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:55:47.892 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:55:47.942 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:55:47.945 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:55:47.947 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:55:47.967 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets/featured
+2026-03-24 16:55:47.969 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:55:47.972 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:55:47.976 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:55:47.985 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:55:47.986 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:56:12.998 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:56:13.001 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:56:13.003 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:56:13.011 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:56:13.014 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:56:13.023 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:56:13.040 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/projets
+2026-03-24 16:56:13.047 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:56:13.049 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:56:13.058 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:56:13.062 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:56:13.065 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:57:51.903 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 16:57:51.962 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:57:52.032 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:57:52.035 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:57:52.052 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:57:52.064 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:57:52.092 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 16:57:52.094 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:57:52.095 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 16:57:52.098 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2026-03-24 16:57:52.101 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 16:57:52.101 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2026-03-24 19:44:58.922 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-03-24 19:45:17.630 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@779d7ff4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@33a9f5b0, org.springframework.security.web.context.SecurityContextHolderFilter@164fba04, org.springframework.security.web.header.HeaderWriterFilter@21ec7946, org.springframework.web.filter.CorsFilter@1050fcff, org.springframework.web.filter.CorsFilter@bcfe4ba, org.springframework.security.web.authentication.logout.LogoutFilter@7d7a0e06, com.example.project.security.JwtAuthFilter@69cf9acb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13d7410a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e2a6063, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@173158e8, org.springframework.security.web.session.SessionManagementFilter@76cb6d16, org.springframework.security.web.access.ExceptionTranslationFilter@3e0d722f, org.springframework.security.web.access.intercept.AuthorizationFilter@36ad4b58]
+2026-03-24 19:47:04.899 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/register
+2026-03-24 19:47:05.066 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2026-03-24 19:47:05.077 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 19:47:05.083 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2026-03-24 20:46:41.737 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/register
+2026-03-24 20:46:41.760 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2026-03-24 20:46:41.765 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 20:46:41.768 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2026-03-24 21:03:19.190 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/register
+2026-03-24 21:03:19.226 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2026-03-24 21:03:19.236 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:03:19.241 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2026-03-24 21:07:13.941 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets
+2026-03-24 21:07:13.941 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets
+2026-03-24 21:07:13.971 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:07:14.573 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:07:14.911 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:07:14.963 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:07:20.188 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets?category=R%C3%A9compense
+2026-03-24 21:07:20.202 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets?category=R%C3%A9compense
+2026-03-24 21:07:20.221 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets?category=R%C3%A9compense
+2026-03-24 21:07:23.249 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets?category=Pr%C3%AAt
+2026-03-24 21:07:23.961 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets?category=Pr%C3%AAt
+2026-03-24 21:07:23.988 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets?category=Pr%C3%AAt
+2026-03-24 21:07:25.278 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets?category=Capital
+2026-03-24 21:07:25.308 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets?category=Capital
+2026-03-24 21:07:25.374 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets?category=Capital
+2026-03-24 21:07:31.443 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets
+2026-03-24 21:07:31.458 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:07:31.507 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:09:07.048 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/login
+2026-03-24 21:09:07.059 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2026-03-24 21:09:07.065 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:09:07.066 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2026-03-24 21:09:08.825 [http-nio-8080-exec-2] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-03-24 21:13:14.933 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:13:14.939 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:13:14.943 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:13:14.985 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:13:14.987 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:13:14.990 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:27:08.979 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:27:08.983 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:27:08.985 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:27:09.017 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-03-24 21:27:09.021 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:27:09.028 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-03-24 21:32:49.044 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/featured
+2026-03-24 21:32:49.050 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:32:49.065 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/featured
+2026-03-24 21:32:49.182 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/featured
+2026-03-24 21:32:49.199 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-03-24 21:32:49.249 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/featured

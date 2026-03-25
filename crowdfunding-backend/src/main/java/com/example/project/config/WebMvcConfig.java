@@ -19,4 +19,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(httpLoggingInterceptor);
     }
+
+    @Override
+    public void addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
+        // Expose uploads directory to serve images statically
+        registry.addResourceHandler("/files/images/**")
+                .addResourceLocations("file:uploads/images/");
+    }
 }

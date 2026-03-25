@@ -33,4 +33,8 @@ public class ContributionRequestDTO {
 
     @Schema(description = "Devise de la contribution", example = "XAF")
     private String currency = "XAF";
+
+    @Schema(description = "Type de paiement", example = "STRIPE")
+    @NotNull(message = "Le type de paiement est requis")
+    private com.example.project.enums.PaiementType paiementType;
 }

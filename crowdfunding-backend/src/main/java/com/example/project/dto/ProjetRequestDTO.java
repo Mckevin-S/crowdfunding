@@ -37,6 +37,12 @@ public class ProjetRequestDTO {
     @NotNull(message = "Le type de financement ne doit pas être nul")
     private TypeFinancement typeFinancement;
     
+    @Schema(description = "Taux d'intérêt proposé (pour un prêt)", example = "5.5")
+    private BigDecimal tauxInteret;
+    
+    @Schema(description = "Part du capital ouverte aux investisseurs (pour l'equity)", example = "10.0")
+    private BigDecimal partCapitalOuverte;
+    
     @Schema(description = "Date de début de la campagne", example = "2026-04-01")
     @NotNull(message = "La date de début ne doit pas être nulle")
     private LocalDate dateDebut;
@@ -50,6 +56,12 @@ public class ProjetRequestDTO {
     
     @Schema(description = "Politique Tout-ou-Rien (All-or-Nothing)", example = "true")
     private boolean allOrNothing = true;
+
+    @Schema(description = "Catégorie du projet", example = "Technologie")
+    private String categorie;
+
+    @Schema(description = "URL ou chemin de l'image de couverture", example = "/uploads/images/cover.jpg")
+    private String imageCouverture;
 
     @Schema(description = "ID de l'utilisateur porteur du projet", example = "1")
     private Long porteurId;

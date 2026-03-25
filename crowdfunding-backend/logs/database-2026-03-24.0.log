@@ -1,0 +1,1129 @@
+2026-03-24 15:57:24.849 [main] DEBUG o.s.o.j.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2026-03-24 15:57:26.225 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 15:57:27.903 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 15:57:36.907 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 15:57:40.015 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:40.236 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:40.588 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:40.943 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:41.089 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:41.098 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:41.121 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:41.770 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.173 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.237 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.260 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.293 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.302 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.518 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.519 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.528 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.535 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.537 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.544 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:43.555 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:44.904 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:44.912 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:44.922 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:44.932 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:45.174 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:45.181 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:45.189 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:45.192 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.055 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.079 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.102 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.111 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.122 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.130 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.158 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.217 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.490 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.497 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.504 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.507 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.510 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.520 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:46.526 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.488 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.497 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.505 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.772 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.774 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.780 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.787 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:47.795 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.035 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.042 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.045 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.047 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.051 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.059 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.326 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.336 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.343 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.535 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.544 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.550 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.556 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.899 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.907 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.914 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.920 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:48.931 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.238 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.255 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.261 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.270 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.275 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.280 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.517 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.518 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.522 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 15:57:49.528 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 17:27:30.972 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 19:44:39.840 [main] DEBUG o.s.o.j.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2026-03-24 19:44:40.895 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 19:44:42.033 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 19:44:46.971 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column avatar_url varchar(255)
+2026-03-24 19:44:46.971 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column avatar_url varchar(255)
+2026-03-24 19:44:47.578 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column google_id varchar(255)
+2026-03-24 19:44:47.578 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column google_id varchar(255)
+2026-03-24 19:44:47.759 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column kyc_status varchar(20)
+2026-03-24 19:44:47.759 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add column kyc_status varchar(20)
+2026-03-24 19:44:47.905 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       drop index UK_ovh8xmu9ac27t18m56gri58i1
+2026-03-24 19:44:47.905 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       drop index UK_ovh8xmu9ac27t18m56gri58i1
+2026-03-24 19:44:47.925 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add constraint UK_ovh8xmu9ac27t18m56gri58i1 unique (google_id)
+2026-03-24 19:44:47.925 [main] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add constraint UK_ovh8xmu9ac27t18m56gri58i1 unique (google_id)
+2026-03-24 19:44:49.046 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 19:44:52.700 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:52.832 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:53.643 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:53.844 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:53.941 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:53.947 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:54.506 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:44:56.027 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.374 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.422 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.433 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.451 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.467 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.855 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.866 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.912 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.945 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.959 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.972 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:00.990 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.330 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.336 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.344 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.348 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.492 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.501 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.506 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:02.510 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.540 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.550 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.554 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.557 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.570 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.594 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.603 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.609 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.797 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.806 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.809 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.817 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.822 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.829 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:04.834 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.189 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.200 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.204 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.559 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.559 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.567 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.572 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.582 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.918 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.933 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.941 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.945 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.948 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:06.959 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.238 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.246 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.249 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.346 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.358 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.361 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.365 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.621 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.630 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.634 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.636 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.648 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.860 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.866 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.869 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.869 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.869 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:07.877 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:08.021 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:08.023 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:08.025 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:45:08.030 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 19:47:05.094 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 19:47:05.811 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1910792259<open>)] for JPA transaction
+2026-03-24 19:47:05.819 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.AuthServiceImpl.register]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-03-24 19:47:05.850 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4badb582]
+2026-03-24 19:47:06.132 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 19:47:06.132 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 19:47:06.181 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction rollback
+2026-03-24 19:47:06.182 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Rolling back JPA transaction on EntityManager [SessionImpl(1910792259<open>)]
+2026-03-24 19:47:06.195 [http-nio-8080-exec-2] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 19:47:06.265 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 20:46:41.770 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 20:46:41.787 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(583249238<open>)] for JPA transaction
+2026-03-24 20:46:41.787 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.AuthServiceImpl.register]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-03-24 20:46:41.790 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@67c1376a]
+2026-03-24 20:46:41.792 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 20:46:41.792 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 20:46:41.805 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction rollback
+2026-03-24 20:46:41.808 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Rolling back JPA transaction on EntityManager [SessionImpl(583249238<open>)]
+2026-03-24 20:46:41.810 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 20:46:41.854 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:03:19.256 [http-nio-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:03:19.270 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1458754214<open>)] for JPA transaction
+2026-03-24 21:03:19.271 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.AuthServiceImpl.register]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-03-24 21:03:19.273 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@13f0561c]
+2026-03-24 21:03:19.275 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 21:03:19.275 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-03-24 21:03:20.323 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1458754214<open>)] for JPA transaction
+2026-03-24 21:03:20.325 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-03-24 21:03:20.738 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (address, avatar_url, bio, preferred_category, created_at, email, google_id, kyc_status, password, last_name, first_name, role, status, phone, ville) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-24 21:03:20.738 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (address, avatar_url, bio, preferred_category, created_at, email, google_id, kyc_status, password, last_name, first_name, role, status, phone, ville) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-24 21:03:20.998 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        w1_0.id 
+    from
+        wallets w1_0 
+    where
+        w1_0.user_id=? 
+    limit
+        ?
+2026-03-24 21:03:20.998 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        w1_0.id 
+    from
+        wallets w1_0 
+    where
+        w1_0.user_id=? 
+    limit
+        ?
+2026-03-24 21:03:21.101 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1458754214<open>)] for JPA transaction
+2026-03-24 21:03:21.102 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-03-24 21:03:21.104 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        wallets
+        (created_at, balance, user_id) 
+    values
+        (?, ?, ?)
+2026-03-24 21:03:21.104 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        wallets
+        (created_at, balance, user_id) 
+    values
+        (?, ?, ?)
+2026-03-24 21:03:21.688 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:03:21.688 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1458754214<open>)]
+2026-03-24 21:03:21.699 [http-nio-8080-exec-7] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:03:21.744 [http-nio-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:14.167 [http-nio-8080-exec-9] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:14.513 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:14.513 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:14.582 [http-nio-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:14.626 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(151022551<open>)] for JPA transaction
+2026-03-24 21:07:14.627 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:14.644 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1dd3678b]
+2026-03-24 21:07:14.809 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:14.809 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:14.831 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:14.833 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(151022551<open>)]
+2026-03-24 21:07:14.841 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:14.876 [http-nio-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:14.927 [http-nio-8080-exec-9] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:14.945 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:14.945 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:14.970 [http-nio-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:14.972 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1723420780<open>)] for JPA transaction
+2026-03-24 21:07:14.973 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:14.977 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4cf47d57]
+2026-03-24 21:07:14.981 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:14.981 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:14.997 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:15.006 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1723420780<open>)]
+2026-03-24 21:07:15.012 [http-nio-8080-exec-9] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:15.023 [http-nio-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:20.207 [http-nio-8080-exec-5] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:20.210 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:20.210 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:20.229 [http-nio-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:20.238 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1046014093<open>)] for JPA transaction
+2026-03-24 21:07:20.240 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:20.252 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6ae9524e]
+2026-03-24 21:07:20.257 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:20.257 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:20.274 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:20.279 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1046014093<open>)]
+2026-03-24 21:07:20.288 [http-nio-8080-exec-5] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:20.413 [http-nio-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:23.968 [http-nio-8080-exec-3] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:23.976 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:23.976 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:23.988 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:23.988 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(886567932<open>)] for JPA transaction
+2026-03-24 21:07:23.994 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:23.995 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4dd72347]
+2026-03-24 21:07:23.997 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:23.997 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:24.006 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:24.006 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(886567932<open>)]
+2026-03-24 21:07:24.008 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:24.012 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:25.327 [http-nio-8080-exec-6] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:25.340 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:25.340 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:25.380 [http-nio-8080-exec-6] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:25.396 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1707840952<open>)] for JPA transaction
+2026-03-24 21:07:25.397 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:25.408 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@78850f62]
+2026-03-24 21:07:25.411 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:25.411 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:25.421 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:25.421 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1707840952<open>)]
+2026-03-24 21:07:25.424 [http-nio-8080-exec-6] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:25.428 [http-nio-8080-exec-6] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:31.476 [http-nio-8080-exec-8] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-03-24 21:07:31.487 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:31.487 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:07:31.510 [http-nio-8080-exec-8] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:07:31.519 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(162570023<open>)] for JPA transaction
+2026-03-24 21:07:31.520 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:07:31.522 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7d2fac97]
+2026-03-24 21:07:31.524 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:31.524 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:07:31.529 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:07:31.537 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(162570023<open>)]
+2026-03-24 21:07:31.539 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:07:31.544 [http-nio-8080-exec-8] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:09:07.066 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:09:08.631 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:09:08.631 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:09:09.691 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:09:09.691 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-24 21:09:09.709 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:13:14.955 [http-nio-8080-exec-4] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:13:14.959 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(826992876<open>)] for JPA transaction
+2026-03-24 21:13:14.959 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:13:14.962 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@35756a1d]
+2026-03-24 21:13:14.970 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:13:14.970 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:13:14.974 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:13:14.974 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(826992876<open>)]
+2026-03-24 21:13:14.976 [http-nio-8080-exec-4] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:13:14.985 [http-nio-8080-exec-4] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:13:14.994 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:13:15.004 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(924038481<open>)] for JPA transaction
+2026-03-24 21:13:15.006 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:13:15.008 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3774d15]
+2026-03-24 21:13:15.010 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:13:15.010 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:13:15.027 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:13:15.031 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(924038481<open>)]
+2026-03-24 21:13:15.034 [http-nio-8080-exec-3] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:13:15.042 [http-nio-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:27:08.992 [http-nio-8080-exec-8] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:27:08.996 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(897685182<open>)] for JPA transaction
+2026-03-24 21:27:08.996 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:27:08.998 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7f01fe7a]
+2026-03-24 21:27:09.000 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:27:09.000 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:27:09.005 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:27:09.006 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(897685182<open>)]
+2026-03-24 21:27:09.008 [http-nio-8080-exec-8] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:27:09.014 [http-nio-8080-exec-8] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:27:09.032 [http-nio-8080-exec-10] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:27:09.032 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(468421595<open>)] for JPA transaction
+2026-03-24 21:27:09.034 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-03-24 21:27:09.036 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5ee916c2]
+2026-03-24 21:27:09.040 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:27:09.040 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.funding_goal,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-03-24 21:27:09.042 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-03-24 21:27:09.042 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(468421595<open>)]
+2026-03-24 21:27:09.043 [http-nio-8080-exec-10] DEBUG o.s.orm.jpa.JpaTransactionManager - Not closing pre-bound JPA EntityManager after transaction
+2026-03-24 21:27:09.045 [http-nio-8080-exec-10] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:32:49.119 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:32:49.186 [http-nio-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:32:49.281 [http-nio-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-03-24 21:32:49.285 [http-nio-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor

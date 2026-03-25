@@ -64,4 +64,12 @@ public interface ContributionService {
      * @param contributionId the ID of the confirmed contribution.
      */
     void recordSuccessfulContribution(Long contributionId);
+
+    /**
+     * Initiates a new contribution and returns payment metadata.
+     *
+     * @param request the contribution details.
+     * @return the created contribution with payment metadata.
+     */
+    ContributionResponseDTO initiateContribution(ContributionRequestDTO request);
 }

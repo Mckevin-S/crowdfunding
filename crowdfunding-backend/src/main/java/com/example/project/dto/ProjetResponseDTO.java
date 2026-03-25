@@ -36,6 +36,12 @@ public class ProjetResponseDTO {
     
     @Schema(description = "Type de financement", example = "DON")
     private TypeFinancement typeFinancement;
+
+    @Schema(description = "Taux d'intérêt proposé (pour un prêt)", example = "5.5")
+    private BigDecimal tauxInteret;
+    
+    @Schema(description = "Part du capital ouverte aux investisseurs (pour l'equity)", example = "10.0")
+    private BigDecimal partCapitalOuverte;
     
     @Schema(description = "Statut actuel", example = "EN_COURS")
     private StatutProjet statut;
@@ -48,6 +54,15 @@ public class ProjetResponseDTO {
     
     @Schema(description = "Politique Tout-ou-Rien", example = "true")
     private boolean allOrNothing;
+
+    @Schema(description = "Catégorie du projet", example = "Technologie")
+    private String categorie;
+
+    @Schema(description = "URL ou chemin de l'image de couverture", example = "/uploads/images/cover.jpg")
+    private String imageCouverture;
+
+    @Schema(description = "Nombre d'investisseurs/contributeurs", example = "42")
+    private Integer nombreContributeurs;
 
     @Schema(description = "ID du porteur du projet", example = "1")
     private Long porteurId;

@@ -14,6 +14,7 @@ import com.example.project.repository.ProjetRepository;
 import com.example.project.entity.Transaction;
 import com.example.project.enums.PaiementType;
 import com.example.project.enums.StatutTransaction;
+import com.example.project.enums.TypeFinancement;
 import com.example.project.repository.TransactionRepository;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.service.interfaces.CurrencyService;
@@ -25,7 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +48,8 @@ public class ContributionServiceImpl implements ContributionService {
         private final ContributionMapper contributionMapper;
         private final PdfGeneratorService pdfGeneratorService;
         private final CurrencyService currencyService;
+        private final StripeService stripeService;
+        private final CinetPayService cinetPayService;
 
         @Override
         @Transactional
@@ -119,47 +124,71 @@ public class ContributionServiceImpl implements ContributionService {
 
         @Override
         @Transactional
+        public ContributionResponseDTO initiateContribution(ContributionRequestDTO request) {
+                // 1. Validations de base
+                Projet projet = projetRepository.findById(request.getProjetId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Projet", request.getProjetId()));
+
+                Utilisateur utilisateur = utilisateurRepository.findById(request.getUtilisateurId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", request.getUtilisateurId()));
+
+                // 2. Vérification KYC (Plafond et Investissement)
+                boolean requiresKyc = request.getAmount().compareTo(new BigDecimal(500000)) > 0 
+                                || TypeFinancement.LOAN.equals(projet.getTypeFinancement()) 
+                                || TypeFinancement.EQUITY.equals(projet.getTypeFinancement());
+
+                if (requiresKyc && !"APPROVED".equals(utilisateur.getKycStatus())) {
+                        throw new BadRequestException("Veuillez valider votre profil KYC pour investir en capital/prêt ou plus de 500,000 XAF.");
+                }
+
+                // 3. Création enregistrement PENDING
+                Contribution contribution = contributionMapper.toEntity(request);
+                contribution.setProjet(projet);
+                contribution.setUtilisateur(utilisateur);
+                contribution.setStatus(ContribStatus.PENDING);
+                contribution.setAmount(request.getAmount()); // Directement en XAF
+                
+                contribution = contributionRepository.save(contribution);
+
+                // 4. Simulation Paiement selon le type
+                Map<String, String> paymentData = new HashMap<>();
+                if (PaiementType.STRIPE.equals(request.getPaiementType())) {
+                        paymentData = stripeService.createPaymentIntent(request.getAmount(), contribution.getId(), utilisateur.getEmail());
+                } else if (PaiementType.MOBILE_MONEY.equals(request.getPaiementType())) {
+                        paymentData = cinetPayService.initiateMobileMoneyPayment(request.getAmount(), contribution.getId(), utilisateur.getTelephone());
+                }
+
+                ContributionResponseDTO response = contributionMapper.toResponseDTO(contribution);
+                response.setPaymentMetadata(paymentData); // Besoin d'ajouter ce champ au DTO
+                return response;
+        }
+
+        @Override
+        @Transactional
         public void recordSuccessfulContribution(Long contributionId) {
                 Contribution contribution = contributionRepository.findById(contributionId)
                                 .orElseThrow(() -> new ResourceNotFoundException("Contribution", contributionId));
 
                 if (contribution.getStatus() != ContribStatus.PENDING) {
-                        log.warn("Contribution {} is already processed (status: {})", contributionId,
-                                        contribution.getStatus());
                         return;
                 }
 
-                // 1. Mark as completed
                 contribution.setStatus(ContribStatus.COMPLETED);
                 contributionRepository.save(contribution);
 
-                // 2. Update Project Total
+                // Mettre à jour le projet parent
                 Projet projet = contribution.getProjet();
-                BigDecimal current = projet.getMontantActuel() != null ? projet.getMontantActuel() : BigDecimal.ZERO;
-                projet.setMontantActuel(current.add(contribution.getAmount()));
+                projet.setMontantActuel(projet.getMontantActuel().add(contribution.getAmount()));
+                projet.setNombreContributeurs(projet.getNombreContributeurs() + 1);
                 projetRepository.save(projet);
 
-                // 3. Record Transaction
-                Transaction transaction = new Transaction();
-                transaction.setUtilisateur(contribution.getUtilisateur());
-                transaction.setAmount(contribution.getAmount()); // XAF
-                transaction.setSourceAmount(contribution.getSourceAmount());
-                transaction.setSourceCurrency(contribution.getSourceCurrency());
-                transaction.setType(PaiementType.INVESTISSEMENT);
-                transaction.setStatus(StatutTransaction.CONFIRMER);
-                transactionRepository.save(transaction);
-
-                // 4. Generate PDF Receipt (simulation of generation)
-                byte[] receipt = pdfGeneratorService.generateDonationReceipt(
-                                contribution.getUtilisateur().getNom(),
-                                projet.getTitre(),
-                                contribution.getAmount()
-                );
-                log.info("PDF Receipt generated for contribution {} ({} bytes)", contributionId, receipt.length);
-                
-                // TODO: Store PDF or send by email
-                
-                log.info("Successfully recorded contribution {} for project {}", contributionId, projet.getId());
+                // Transaction Historique
+                Transaction trans = new Transaction();
+                trans.setUtilisateur(contribution.getUtilisateur());
+                trans.setAmount(contribution.getAmount());
+                trans.setType(contribution.getPaiementType());
+                trans.setStatus(StatutTransaction.CONFIRMER);
+                transactionRepository.save(trans);
         }
 }
 

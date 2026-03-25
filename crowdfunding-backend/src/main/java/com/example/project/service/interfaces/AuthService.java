@@ -44,4 +44,12 @@ public interface AuthService {
      * @param request contains old and new passwords.
      */
     void changePassword(ChangePasswordRequest request);
+
+    /**
+     * Generates an authentication response (JWT) for a given user.
+     *
+     * @param user the user entity.
+     * @return the authentication response.
+     */
+    AuthResponse generateAuthResponse(com.example.project.entity.Utilisateur user);
 }

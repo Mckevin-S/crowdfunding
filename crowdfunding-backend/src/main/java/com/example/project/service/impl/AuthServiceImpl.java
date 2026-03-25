@@ -70,15 +70,27 @@ public class AuthServiceImpl implements AuthService {
         utilisateur.setStatut(UserStatus.ACTIVE);
 
         utilisateur = utilisateurRepository.save(utilisateur);
+        createWalletForUser(utilisateur);
 
-        // Create a wallet for the new user automatically
-        Wallet wallet = new Wallet();
-        wallet.setUtilisateur(utilisateur);
-        walletRepository.save(wallet);
+        return generateAuthResponse(utilisateur);
+    }
 
+    @Override
+    public AuthResponse login(LoginRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(request.getEmail())
+                .orElseThrow();
+
+        return generateAuthResponse(utilisateur);
+    }
+
+    @Override
+    public AuthResponse generateAuthResponse(Utilisateur utilisateur) {
         UserDetails userDetails = User.builder()
                 .username(utilisateur.getEmail())
-                .password(utilisateur.getMotsDePasse())
+                .password(utilisateur.getMotsDePasse() != null ? utilisateur.getMotsDePasse() : "")
                 .roles(utilisateur.getRole().name())
                 .build();
 
@@ -94,30 +106,13 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-    @Override
-    public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-        Utilisateur utilisateur = utilisateurRepository.findByEmail(request.getEmail())
-                .orElseThrow(); // AuthenticationManager ensures this exists implicitly
-
-        UserDetails userDetails = User.builder()
-                .username(utilisateur.getEmail())
-                .password(utilisateur.getMotsDePasse())
-                .roles(utilisateur.getRole().name())
-                .build();
-
-        String jwtToken = jwtUtil.generateToken(userDetails);
-
-        return AuthResponse.builder()
-                .token(jwtToken)
-                .id(utilisateur.getId())
-                .email(utilisateur.getEmail())
-                .role(utilisateur.getRole().name())
-                .nom(utilisateur.getNom())
-                .prenom(utilisateur.getPrenom())
-                .build();
+    private void createWalletForUser(Utilisateur utilisateur) {
+        if (!walletRepository.existsByUtilisateur(utilisateur)) {
+            Wallet wallet = new Wallet();
+            wallet.setUtilisateur(utilisateur);
+            walletRepository.save(wallet);
+            log.info("WALLET_CREATED: Portefeuille créé pour {}", utilisateur.getEmail());
+        }
     }
 
     @Override

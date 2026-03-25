@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private final com.example.project.service.GoogleAuthService googleAuthService;
 
     /**
      * Registers a new user.
@@ -53,6 +54,23 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         log.info("USER_LOGIN: Tentative de connexion pour l'email: {}", request.getEmail());
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    /**
+     * Authenticates a user via Google ID Token.
+     *
+     * @param idToken the Google ID token string.
+     * @return the authentication response containing the JWT token.
+     */
+    @PostMapping("/google")
+    @Operation(summary = "Connecter via Google", description = "Vérifie le token Google et retourne un token JWT local.")
+    @ApiResponse(responseCode = "200", description = "Connexion Google réussie")
+    @ApiResponse(responseCode = "401", description = "Token Google invalide")
+    public ResponseEntity<AuthResponse> googleLogin(@RequestBody String idToken) {
+        log.info("GOOGLE_LOGIN: Tentative de connexion via Google");
+        return googleAuthService.verifyGoogleToken(idToken)
+                .map(user -> ResponseEntity.ok(authService.generateAuthResponse(user)))
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
     /**

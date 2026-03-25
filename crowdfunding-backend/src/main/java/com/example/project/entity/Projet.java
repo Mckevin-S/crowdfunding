@@ -42,6 +42,12 @@ public class Projet {
     @Column(name = "funding_type")
     private TypeFinancement typeFinancement;
     
+    @Column(name = "interest_rate", precision = 5, scale = 2)
+    private BigDecimal tauxInteret;
+
+    @Column(name = "equity_percentage", precision = 5, scale = 2)
+    private BigDecimal partCapitalOuverte;
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatutProjet statut;
@@ -64,6 +70,12 @@ public class Projet {
 
     @Column(length = 100)
     private String localisation;
+
+    @Column(name = "cover_image")
+    private String imageCouverture;
+
+    @Column(name = "investors_count")
+    private Integer nombreContributeurs = 0;
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Etapes> etapes;

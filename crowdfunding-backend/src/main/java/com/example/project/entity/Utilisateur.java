@@ -26,8 +26,14 @@ public class Utilisateur {
     @Column(nullable = false, unique = true, length = 150)
     private String email;
     
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = true)
     private String motsDePasse;
+
+    @Column(name = "google_id", unique = true)
+    private String googleId;
+
+    @Column(name = "avatar_url")
+    private String avatarUrl;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -61,4 +67,7 @@ public class Utilisateur {
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime dateCreation;
+
+    @Column(name = "kyc_status", length = 20)
+    private String kycStatus = "PENDING";
 }

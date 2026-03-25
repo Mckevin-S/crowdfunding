@@ -1,0 +1,203 @@
+# 🎨 INFOGRAPHIE - Vue d'Ensemble Audit
+
+## 📊 Dashboard Visuel de l'Audit
+
+```
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   AUDIT COMMUNICATION BACKEND-FRONTEND                         ║
+║                        Crowdfunding Platform                                   ║
+║                          25 Mars 2026                                          ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                         ENDPOINTS ET SERVICES                                   │
+├─────────────────────────────────────┬────────────────────────────────────────┤
+│ BACKEND                             │ FRONTEND                               │
+├─────────────────────────────────────┼────────────────────────────────────────┤
+│ 17 Contrôleurs                      │ 10 Services                            │
+│ 72+ Endpoints                       │ 4 Corrects ✅                          │
+│                                     │ 5 À Corriger 🔴                       │
+│ ├─ Auth (8 eps) ✅                  │ ├─ authService ✅                      │
+│ ├─ Projects (8 eps) ✅              │ ├─ projectService ✅                   │
+│ ├─ Users (5 eps) ✅                 │ ├─ contributionService ✅              │
+│ ├─ Contributions (8 eps) ✅          │ ├─ messageService ✅                   │
+│ ├─ Messages (5 eps) ✅              │ ├─ kycService 🔴                       │
+│ ├─ KYC-Docs (4 eps) ✅              │ ├─ userService 🔴                      │
+│ ├─ Wallets (3 eps) ✅               │ ├─ paymentService 🔴                   │
+│ ├─ Rewards (7 eps) ✅               │ ├─ fileService 🔴                      │
+│ ├─ Notifications (3 eps) ✅          │ ├─ uploadService ✅                    │
+│ ├─ Stripe (2 eps) ✅                │ └─ 9 Services ❌ Manquants             │
+│ ├─ Files (1 ep) ✅                  │                                        │
+│ ├─ Transactions (2 eps) ✅           │    walletService ❌                    │
+│ ├─ Etapes (5 eps) ✅                │    rewardService ❌                    │
+│ ├─ Loans (4 eps) ✅                 │    notificationService ❌              │
+│ ├─ Equity (4 eps) ✅                │    transactionService ❌               │
+│ ├─ AI Analysis (3 eps) ✅            │    etapesService ❌                    │
+│ └─ Recommendations (3 eps) ✅         │    loanService ❌                      │
+│                                     │    equityService ❌                    │
+│                                     │    analyseService ❌                   │
+│                                     │    recommendationService ❌            │
+└─────────────────────────────────────┴────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                        PROBLÈMES CRITIQUES                                     ║
+╠════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                ║
+║ 1️⃣  GET /auth/me                   │ MANQUANT      │ Frontend appelé          ║
+║ 2️⃣  POST /kyc                      │ BAD ROUTE    │ Devrait être /kyc-docs   ║
+║ 3️⃣  GET /users/profile             │ BAD ROUTE    │ Devrait être /util/{id}  ║
+║ 4️⃣  POST /payments                 │ BAD ROUTE    │ Devrait être /stripe/..  ║
+║ 5️⃣  POST /files/upload             │ DOUBLONNÉ    │ Conflite avec upload Svc  ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                         TAUX DE COUVERTURE                                      │
+├──────────────────────┬──────────────────────┬──────────────────────┐
+│   MÉTRIQUES          │    CHIFFRES           │     STATUT           │
+├──────────────────────┼──────────────────────┼──────────────────────┤
+│ Services Corrects    │   4/10  (40%)  ▓█░░░░░░░░ │ 🟡 INSUFFISANT  │
+│ Services Incorrects  │   5/10  (50%)  ▓▓▓▓▓░░░░░░ │ 🔴 À CORRIGER   │
+│ Services Manquants   │   9/19  (47%)  ▓▓▓▓▓░░░░░░ │ 🔴 À CRÉER      │
+│ Endpoints Corrects   │  28/72  (39%)  ▓█░░░░░░░░ │ 🟡 FAIBLE      │
+│ Endpoints Manquants  │   1/72  (1%)   ░░░░░░░░░░ │ 🔴 CRITIQUE     │
+└──────────────────────┴──────────────────────┴──────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    CONFIGURATION RÉSEAU                                        ║
+╠════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                ║
+║ Vite Proxy:          ✅ http://localhost:8080          PORT: 5173             ║
+║ API Base URL:        ✅ /api/v1                        VERSIONING: OK         ║
+║ Variables d'Env:     🟡 CONFLIT - Utilise multiples noms                      ║
+║ CORS:                ✅ localhost:5173 autorisé         HEADERS: OK            ║
+║ JWT:                 ✅ Bearer token implémenté         AUTH: OK               ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+📅 TIMELINE DE CORRECTION
+
+  JOU 1         JOU 2-3        JOU 4
+  ┌───┐         ┌─────┐        ┌───┐
+  │Fix│────────>│Créer│───────>│Test│
+  │5  │  (6h)   │ 9   │ (9h)   │&DOC│(6h)
+  │svc│         │svc  │        │    │
+  └───┘         └─────┘        └───┘
+   🔴            🟡             🟢
+  URGENT        IMPORTANT      FINAL
+  
+  TOTAL: 14-21 HEURES
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    FICHIERS À MODIFIER / CRÉER                                 ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+BACKEND (1 fichier à modifier)
+└─ AuthController.java
+   └─ Ajouter: GET /api/v1/auth/me
+
+FRONTEND - À CORRIGER (5 services)
+├─ authService.js
+├─ kycService.js ← PRIORITÉ 1
+├─ userService.js ← PRIORITÉ 1
+├─ paymentService.js ← PRIORITÉ 1
+├─ fileService.js ← PRIORITÉ 1
+└─ .env, .env.example, .env.local
+
+FRONTEND - À CRÉER (9 services)
+├─ walletService.js
+├─ rewardService.js
+├─ notificationService.js
+├─ transactionService.js
+├─ etapesService.js
+├─ loanService.js
+├─ equityService.js
+├─ analyseService.js
+└─ recommendationService.js
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                        IMPACTE SUR LES UTILISATEURS                            ║
+╠════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                ║
+║ Fonctionnalité           │ Statut       │ Usersimpactés                       ║
+║ ─────────────────────────┼──────────────┼─────────────────                    ║
+║ Login/Logout             │ ✅ OK        │ Tous - PRIORITAIRE                  ║
+║ Récupérer usager courant │ 🔴 CASSÉ    │ Tous - CRITIQUE                     ║
+║ Voir profil utilisateur  │ 🔴 CASSÉ    │ Tous - IMPORTANT                    ║
+║ KYC Verification         │ 🔴 CASSÉ    │ Porteurs - CRITIQUE                 ║
+║ Paiements/Contributions  │ 🔴 CASSÉ    │ Contributeurs - CRITIQUE            ║
+║ Messagerie               │ ✅ OK        │ Tous - FONCTIONNEL                  ║
+║ Voir Projets             │ ✅ OK        │ Tous - FONCTIONNEL                  ║
+║ Portefeuille             │ 🔴 CASSÉ    │ Porteurs - IMPORTANT                ║
+║ Récompenses              │ 🔴 CASSÉ    │ Contributeurs - IMPORTANT           ║
+║ Notifications            │ 🔴 CASSÉ    │ Tous - IMPORTANT                    ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+🎯 RECOMMANDATION PRIORITAIRE
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ STOPPER TOUT LE DÉVELOPPEMENT FRONTEND JUSQU'À RÉSOLUTION                      │
+│                                                                                │
+│ 40% des fonctionnalités sont CASSÉES ou INACCESSIBLES                          │
+│                                                                                │
+│ Suivre le GUIDE_CORRECTIONS.md pour appliquer les fixes rapidement            │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+📈 MATRICE DE RISQUE
+
+            PROBABILITÉ
+            │
+      HAUTE │   🔴
+            │   Paiements cassés
+            │   
+      MOYEN │   🟡 Wallets
+            │   Notifications
+      BASSE │   🟢 Messages OK
+            │   Projects OK
+            └──────────────────────
+                BASSE  MOYEN  HAUTE
+                        IMPACT
+
+🔴 CRITIQUE: Impact haut + Probabilité haute = FIX IMMÉDIATEMENT
+🟡 IMPORTANT: Impact moyens ou impact haut mais moins probable = FIX RAPIDEMENT
+🟢 ACCEPTABLE: Impact bas = FIX BIENTÔT
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    DOCUMENTS DE RÉFÉRENCE                                      ║
+╠════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                ║
+║ Pour comprendre rapidement:                                                   ║
+║    ➜ RÉSUMÉ_EXECUTIF.md                                                        ║
+║                                                                                ║
+║ Pour avoir tous les détails:                                                  ║
+║    ➜ RAPPORT_COMMUNICATION_BACKEND_FRONTEND.md                                 ║
+║                                                                                ║
+║ Pour implémenter les fixes:                                                   ║
+║    ➜ GUIDE_CORRECTIONS.md                                                      ║
+║                                                                                ║
+║ Pour une vue d'ensemble:                                                      ║
+║    ➜ TABLEAU_CORRESPONDANCE_COMPLETE.md                                        ║
+║                                                                                ║
+║ Pour naviguer tous les rapports:                                              ║
+║    ➜ INDEX_RAPPORTS.md                                                         ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+✅ RÉSULTAT FINAL ATTENDU (Après corrections)
+
+    Services: 10/10 corrects ✅
+    Endpoints: 72/72 accessibles ✅
+    Configuration: Harmonisée ✅
+    Tests: Tous passants ✅
+    Documentation: À jour ✅
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Audit généré le: 25 Mars 2026
+Status: ⚠️ AUDIT TERMINÉ - PROBLÈMES IDENTIFIÉS
+Action requise: ✅ OUI - URGENT
+Effort estimé: 14-21 heures
+Complexité: 🟡 MOYEN
+
+═══════════════════════════════════════════════════════════════════════════════

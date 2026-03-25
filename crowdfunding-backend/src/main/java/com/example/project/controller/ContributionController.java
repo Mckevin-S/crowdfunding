@@ -109,4 +109,27 @@ public class ContributionController {
     public ResponseEntity<BigDecimal> getTotalAmountForProjet(@PathVariable Long projetId) {
         return ResponseEntity.ok(contributionService.getTotalAmountForProjet(projetId));
     }
+
+    /**
+     * Initiates a payment process.
+     */
+    @PostMapping("/initiate")
+    @Operation(summary = "Initier un paiement", description = "Crée une intention de paiement et retourne les métadonnées (Stripe/CinetPay).")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<ContributionResponseDTO> initiate(@Valid @RequestBody ContributionRequestDTO request) {
+        log.info("INITIATE_PAYMENT: Initiation don de {} XAF pour projet {}", request.getAmount(), request.getProjetId());
+        return ResponseEntity.ok(contributionService.initiateContribution(request));
+    }
+
+    /**
+     * Confirms a payment (Simulation mode).
+     */
+    @PostMapping("/{id}/confirm")
+    @Operation(summary = "Confirmer un paiement (SIMULATION)", description = "SIMULATION: Marque une contribution comme réussie sans attendre de webhook réel.")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Void> confirm(@PathVariable Long id) {
+        log.info("CONFIRM_PAYMENT_SIMULATION: Confirmation forcée de la contribution {}", id);
+        contributionService.recordSuccessfulContribution(id);
+        return ResponseEntity.ok().build();
+    }
 }

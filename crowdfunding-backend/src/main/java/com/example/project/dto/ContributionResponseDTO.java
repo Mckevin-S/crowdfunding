@@ -35,4 +35,7 @@ public class ContributionResponseDTO {
     
     @Schema(description = "Date et heure de la contribution", example = "2026-03-17T12:00:00")
     private LocalDateTime dateContribution;
+
+    @Schema(description = "Métadonnées de paiement (pour Stripe/CinetPay)")
+    private java.util.Map<String, String> paymentMetadata;
 }
