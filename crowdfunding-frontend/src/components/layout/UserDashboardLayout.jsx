@@ -44,8 +44,8 @@ const UserDashboardLayout = () => {
 
   const investisseurNavigation = [
     { name: 'Dashboard', href: '/investisseur/dashboard', icon: LayoutDashboard },
-    { name: 'Explorer', href: '/projects', icon: Compass },
-    { name: 'Mes Contributions', href: '/profile', icon: Wallet },
+    { name: 'Explorer', href: '/investisseur/explorer', icon: Compass },
+    { name: 'Mes Contributions', href: '/investisseur/mes-contributions', icon: Wallet },
     { name: 'Messages', href: '/messages', icon: MessageSquare },
     { name: 'Mon Profil', href: '/profile', icon: User },
     { name: 'Paramètres', href: '/profile/edit', icon: Settings },

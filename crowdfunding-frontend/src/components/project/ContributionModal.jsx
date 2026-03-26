@@ -1,241 +1,256 @@
-import React, { useState, useEffect } from 'react';
-import { X, CreditCard, Smartphone, Check, AlertCircle, Loader2 } from 'lucide-react';
-import Button from '@components/common/Button';
-import Input from '@components/common/Input';
+import React, { useState } from 'react';
+import { 
+  X, 
+  Wallet, 
+  CreditCard, 
+  Smartphone, 
+  CheckCircle2, 
+  Loader2, 
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Gift
+} from 'lucide-react';
+import Button from '../common/Button';
+import Badge from '../common/Badge';
+import { formatCurrency } from '@utils/formatters';
 import contributionService from '@services/contributionService';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
-const ContributionModal = ({ isOpen, onClose, project, user }) => {
-  const [amount, setAmount] = useState('25000');
-  const [paymentMethod, setPaymentMethod] = useState('STRIPE'); // STRIPE or MOBILE_MONEY
+const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) => {
+  const [amount, setAmount] = useState(10000);
+  const [paymentMethod, setPaymentMethod] = useState('MOBILE_MONEY');
+  const [step, setStep] = useState('AMOUNT'); // AMOUNT -> PAYMENT -> PROCESSING -> SUCCESS
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1); // 1: Amount, 2: Payment, 3: Processing
-  const navigate = useNavigate();
-
-  const suggestedAmounts = ['10000', '25000', '50000', '100000'];
+  const [contributionId, setContributionId] = useState(null);
 
   if (!isOpen) return null;
 
-  const calculateFees = () => {
-    const amt = parseFloat(amount) || 0;
-    if (paymentMethod === 'STRIPE') {
-      return (amt * 0.029) + 100;
-    } else {
-      return (amt * 0.02) + 200;
-    }
-  };
-
-  const total = parseFloat(amount) + calculateFees();
+  const quickAmounts = [5000, 10000, 25000, 50000, 100000];
 
   const handleInitiate = async () => {
-    if (!amount || parseFloat(amount) < 500) {
-      toast.error('Le montant minimum est de 500 XAF');
-      return;
-    }
-
-    const requiresKyc = parseFloat(amount) > 500000 || project.typeFinancement === 'LOAN' || project.typeFinancement === 'EQUITY';
-
-    if (requiresKyc && user?.kycStatus !== 'APPROVED') {
-      toast.warning('Veuillez valider votre profil KYC pour investir en capital/prêt ou plus de 500,000 XAF.');
-      onClose();
-      navigate('/kyc');
-      return;
-    }
-
     setLoading(true);
     try {
-      // Simulation pour tous les modes de paiement comme demandé par l'utilisateur
-      setStep(3); // Étape de chargement/simulation
+      const { data } = await contributionService.initiateContribution({
+        projetId: project.id,
+        utilisateurId: user?.id,
+        amount: amount,
+        paiementType: paymentMethod,
+        currency: 'XAF'
+      });
+      setContributionId(data.id);
+      setStep('PROCESSING');
       
-      // Delai de simulation (2.5 secondes)
+      // Simulate real payment processing (Mobile Money / Stripe)
       setTimeout(async () => {
-        try {
-          // On notifie tout de même le backend pour créer une trace de contribution (si besoin)
-          const data = {
-            projetId: project.id,
-            utilisateurId: user.id,
-            amount: parseFloat(amount),
-            paiementType: paymentMethod,
-            currency: 'XAF'
-          };
-          
-          await contributionService.initiate(data);
-          
-          toast.success('Paiement simulé avec succès !');
-          onClose();
-          navigate(`/payment/success?status=simulated&amount=${amount}`);
-        } catch (err) {
-          // Même en simulation, on gère les erreurs potentielles du backend
-          toast.error('Simulation échouée (erreur serveur)');
-          setStep(2);
-        } finally {
-          setLoading(false);
-        }
-      }, 2500);
-
-    } catch (error) {
-      toast.error('Une erreur est survenue pendant la simulation');
+        await handleConfirm(data.id);
+      }, 3000);
+      
+    } catch (err) {
+      console.error('Erreur initiation:', err);
+      toast.error(err.response?.data?.message || 'Erreur lors de l’initiation du paiement');
       setLoading(false);
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-neutral-rich/80 backdrop-blur-sm">
-      <div className="bg-white w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-300">
-        
-        {/* Header */}
-        <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-          <div>
-            <h3 className="text-xl font-display font-black text-neutral-rich">
-              {project.typeFinancement === 'DON' || project.typeFinancement === 'REWARD' ? 'Soutenir ce projet' : 'Investir dans ce projet'}
-            </h3>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">{project.titre}</p>
-          </div>
-          <button onClick={onClose} className="p-2 hover:bg-white rounded-full transition-colors shadow-sm">
-            <X size={20} className="text-gray-400" />
-          </button>
-        </div>
+  const handleConfirm = async (id) => {
+    try {
+      await contributionService.confirmContribution(id);
+      setStep('SUCCESS');
+      toast.success('Contribution confirmée ! Merci pour votre soutien.');
+    } catch (err) {
+      console.error('Erreur confirmation:', err);
+      toast.error('Erreur lors de la confirmation du paiement');
+      setStep('AMOUNT');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        <div className="p-8">
-          {step === 1 && (
-            <div className="space-y-6">
-              <div>
-                <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-4">
-                  {project.typeFinancement === 'DON' || project.typeFinancement === 'REWARD' ? 'Montant de votre don (XAF)' : 'Montant de votre investissement (XAF)'}
-                </label>
-                <div className="relative">
-                  <Input 
+  const renderStep = () => {
+    switch (step) {
+      case 'AMOUNT':
+        return (
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="mb-8">
+               <label className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 block underline decoration-emerald-500/30">
+                 Montant de votre impact
+               </label>
+               <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                    <span className="text-2xl font-black text-slate-300 group-focus-within:text-emerald-500">FCFA</span>
+                  </div>
+                  <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="text-2xl font-black h-16 pl-8"
-                    placeholder="0"
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-[2rem] py-6 pl-24 pr-8 text-3xl font-black text-slate-900 focus:border-emerald-500 focus:ring-0 transition-all shadow-inner"
                   />
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 font-black text-gray-300">FCFA</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {suggestedAmounts.map((amt) => (
-                  <button
-                    key={amt}
-                    onClick={() => setAmount(amt)}
-                    className={`py-3 rounded-2xl border-2 font-black text-sm transition-all ${
-                      amount === amt 
-                      ? 'border-primary-500 bg-primary-50 text-primary-600' 
-                      : 'border-gray-100 hover:border-primary-200 text-gray-400'
-                    }`}
-                  >
-                    {parseInt(amt).toLocaleString()}
-                  </button>
-                ))}
-              </div>
-
-              <div className="bg-emerald-50 rounded-2xl p-4 flex gap-3 border border-emerald-100">
-                <AlertCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                <p className="text-xs font-medium text-emerald-800 leading-relaxed">
-                  100% de votre don est versé directement au porteur du projet. Les frais de transaction sont calculés séparément.
-                </p>
-              </div>
-
-              <Button fullWidth className="h-14 mt-4" onClick={() => setStep(2)}>Continuer</Button>
+               </div>
             </div>
-          )}
 
-          {step === 2 && (
-            <div className="space-y-6">
-              <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Moyen de paiement</label>
-              
-              <div className="space-y-3">
-                <button 
-                  onClick={() => setPaymentMethod('STRIPE')}
-                  className={`w-full p-6 rounded-[2rem] border-2 flex items-center justify-between transition-all ${
-                    paymentMethod === 'STRIPE' ? 'border-primary-500 bg-primary-50/50' : 'border-gray-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-xl ${paymentMethod === 'STRIPE' ? 'bg-primary-500 text-white' : 'bg-gray-100 text-gray-400'}`}>
-                      <CreditCard size={24} />
-                    </div>
-                    <div className="text-left">
-                      <p className="font-bold text-neutral-rich">Carte Bancaire</p>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Visa / Mastercard (Stripe)</p>
-                    </div>
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-10">
+               {quickAmounts.map(val => (
+                 <button
+                   key={val}
+                   onClick={() => setAmount(val)}
+                   className={`py-3 rounded-2xl text-[10px] font-black uppercase tracking-tighter transition-all ${
+                     amount === val ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 scale-105' : 'bg-white border border-slate-100 text-slate-500 hover:border-emerald-200'
+                   }`}
+                 >
+                   {val / 1000}k
+                 </button>
+               ))}
+            </div>
+
+            <div className="bg-slate-50 rounded-[2rem] p-6 mb-8 border border-white/50">
+               <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 bg-amber-50 rounded-2xl">
+                     <Gift className="w-5 h-5 text-amber-600" />
                   </div>
-                  {paymentMethod === 'STRIPE' && <Check className="text-primary-500" />}
-                </button>
-
-                <button 
-                  onClick={() => setPaymentMethod('MOBILE_MONEY')}
-                  className={`w-full p-6 rounded-[2rem] border-2 flex items-center justify-between transition-all ${
-                    paymentMethod === 'MOBILE_MONEY' ? 'border-primary-500 bg-primary-50/50' : 'border-gray-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-xl ${paymentMethod === 'MOBILE_MONEY' ? 'bg-primary-500 text-white' : 'bg-gray-100 text-gray-400'}`}>
-                      <Smartphone size={24} />
-                    </div>
-                    <div className="text-left">
-                      <p className="font-bold text-neutral-rich">Mobile Money</p>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Orange / MTN Money</p>
-                    </div>
+                  <div>
+                     <p className="text-sm font-black text-slate-900">Récompense Éligible</p>
+                     <p className="text-xs text-slate-500 font-medium">Pour {formatCurrency(amount)}, vous recevrez :</p>
                   </div>
-                  {paymentMethod === 'MOBILE_MONEY' && <Check className="text-primary-500" />}
-                </button>
-              </div>
-
-              {/* Summary */}
-              <div className="bg-gray-50 rounded-[2rem] p-6 space-y-3">
-                <div className="flex justify-between text-sm font-medium">
-                  <span className="text-gray-400">
-                    {project.typeFinancement === 'DON' || project.typeFinancement === 'REWARD' ? 'Montant du don' : 'Montant investi'}
-                  </span>
-                  <span className="text-neutral-rich font-bold">{parseFloat(amount).toLocaleString()} XAF</span>
-                </div>
-                <div className="flex justify-between text-sm font-medium">
-                  <span className="text-gray-400">Frais de traitement</span>
-                  <span className="text-neutral-rich font-bold">{calculateFees().toLocaleString()} XAF</span>
-                </div>
-                <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
-                  <span className="font-black text-neutral-rich">TOTAL</span>
-                  <span className="text-xl font-black text-primary-600">{total.toLocaleString()} XAF</span>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Button variant="outline" className="flex-1 h-14" onClick={() => setStep(1)}>Retour</Button>
-                <Button className="flex-[2] h-14" onClick={handleInitiate} loading={loading}>
-                  Confirmer le paiement
-                </Button>
-              </div>
+               </div>
+               <div className="bg-white p-4 rounded-xl border border-slate-100">
+                  <p className="text-sm font-bold text-slate-700 italic">"Remerciements sur nos réseaux sociaux et accès anticipé au produit."</p>
+               </div>
             </div>
-          )}
 
-          {step === 3 && (
-            <div className="py-12 flex flex-col items-center text-center space-y-6">
-              <div className="w-20 h-20 bg-primary-50 rounded-full flex items-center justify-center relative">
-                <Loader2 className="w-10 h-10 text-primary-500 animate-spin" />
-              </div>
-              <div>
-                <h4 className="text-xl font-display font-black text-neutral-rich">Traitement en cours...</h4>
-                <p className="text-sm text-gray-400 font-medium mt-2 max-w-xs">
-                  {paymentMethod === 'STRIPE' 
-                    ? "Connexion sécurisée avec Stripe..." 
-                    : "Veuillez confirmer la transaction sur votre mobile."}
-                </p>
-              </div>
-              <div className="w-full max-w-[200px] h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                <div className="h-full bg-primary-500 animate-progress-fast" />
-              </div>
+            <Button 
+              variant="emerald" 
+              className="w-full py-5 rounded-[1.8rem] text-lg font-black shadow-xl shadow-emerald-500/20 group"
+              onClick={() => setStep('PAYMENT')}
+            >
+              Continuer vers le paiement <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        );
+
+      case 'PAYMENT':
+        return (
+          <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 underline decoration-emerald-500/30">Choisir un mode sécurisé</h3>
+            
+            <div className="space-y-4 mb-10">
+               {[
+                 { id: 'MOBILE_MONEY', name: 'Mobile Money', icon: Smartphone, desc: 'Orange, MTN, Wave (Partout en Afrique)' },
+                 { id: 'STRIPE', name: 'Carte Bancaire', icon: CreditCard, desc: 'Visa, Mastercard (Frais Stripe applicables)' },
+                 { id: 'CRYPTO', name: 'Crypto Assets', icon: Zap, desc: 'USDT, BTC (Via CryptoPay Africa)' }
+               ].map(method => (
+                 <button
+                   key={method.id}
+                   onClick={() => setPaymentMethod(method.id)}
+                   className={`w-full flex items-center gap-4 p-5 rounded-[1.8rem] border-2 transition-all ${
+                     paymentMethod === method.id ? 'border-emerald-500 bg-emerald-50/50 shadow-lg' : 'border-slate-100 bg-white hover:border-slate-200'
+                   }`}
+                 >
+                   <div className={`p-4 rounded-2xl ${paymentMethod === method.id ? 'bg-emerald-600 text-white' : 'bg-slate-50 text-slate-400'}`}>
+                      <method.icon className="w-6 h-6" />
+                   </div>
+                   <div className="text-left">
+                      <p className="text-sm font-black text-slate-900">{method.name}</p>
+                      <p className="text-[10px] font-bold text-slate-400">{method.desc}</p>
+                   </div>
+                   {paymentMethod === method.id && <CheckCircle2 className="w-5 h-5 text-emerald-600 ml-auto" />}
+                 </button>
+               ))}
             </div>
-          )}
+
+            <div className="flex gap-4">
+              <Button variant="outline" className="flex-1 py-4 rounded-2xl font-bold" onClick={() => setStep('AMOUNT')}>Retour</Button>
+              <Button 
+                variant="emerald" 
+                className="flex-[2] py-4 rounded-2xl font-black shadow-lg shadow-emerald-500/20"
+                onClick={handleInitiate}
+                disabled={loading}
+              >
+                {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : `Confirmer ${formatCurrency(amount)}`}
+              </Button>
+            </div>
+          </div>
+        );
+
+      case 'PROCESSING':
+        return (
+          <div className="py-16 text-center animate-in zoom-in duration-500">
+             <div className="relative w-32 h-32 mx-auto mb-10">
+                <div className="absolute inset-0 rounded-full border-4 border-emerald-100 border-t-emerald-600 animate-spin" />
+                <div className="absolute inset-4 rounded-full bg-emerald-50 flex items-center justify-center">
+                   <ShieldCheck className="w-10 h-10 text-emerald-600" />
+                </div>
+             </div>
+             <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">Sécurisation du transfert...</h3>
+             <p className="text-slate-500 font-medium italic mb-2">Simulation du flux {paymentMethod === 'MOBILE_MONEY' ? 'USSD' : 'Stripe Gateway'}.</p>
+             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest animate-pulse">Ne fermez pas cette fenêtre</p>
+          </div>
+        );
+
+      case 'SUCCESS':
+        return (
+          <div className="py-10 text-center animate-in zoom-in duration-700">
+             <div className="w-24 h-24 bg-emerald-100 rounded-[2rem] flex items-center justify-center mx-auto mb-10 shadow-2xl shadow-emerald-200">
+                <CheckCircle2 className="w-12 h-12 text-emerald-600" />
+             </div>
+             <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tighter">Contribution Réussie ! 🎉</h3>
+             <p className="text-slate-500 font-medium mb-10 max-w-xs mx-auto text-lg leading-relaxed">
+               Vous venez de soutenir <span className="text-slate-900 font-black">"{project.titre}"</span> à hauteur de <span className="text-emerald-600 font-black">{formatCurrency(amount)}</span>.
+             </p>
+             <div className="bg-slate-50 p-6 rounded-[2rem] mb-10 border border-white">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Numéro de Reçu</p>
+                <p className="text-sm font-black text-slate-900 font-mono">IA-{contributionId}-2026</p>
+             </div>
+             <Button variant="emerald" className="w-full py-4 rounded-2xl font-black" onClick={() => {
+               onClose();
+               window.location.reload(); // Quick refresh to update stats
+             }}>
+               Retour au projet
+             </Button>
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+      <div 
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-500" 
+        onClick={onClose} 
+      />
+      
+      <div className="relative bg-white w-full max-w-xl rounded-[3rem] shadow-2xl border border-white overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+        {/* Header decoration */}
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-br from-emerald-600 to-teal-700 -z-10" />
+        
+        <div className="p-8 pb-4 flex items-center justify-between">
+           <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                 <Wallet className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-lg font-black text-white tracking-tight">Soutenir ce Projet</h2>
+           </div>
+           <button 
+             onClick={onClose}
+             className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors text-white"
+           >
+             <X className="w-5 h-5" />
+           </button>
         </div>
 
-        {/* Footer info */}
-        <div className="px-8 pb-8 flex items-center justify-center gap-2">
-            <CreditCard size={14} className="text-gray-300" />
-            <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Paiement 100% sécurisé via passerelle cryptée</span>
+        <div className="p-8 pt-6">
+           {renderStep()}
+        </div>
+
+        <div className="bg-slate-50/80 p-6 border-t border-slate-100 flex items-center justify-center gap-6">
+           <div className="flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 transition-all cursor-crosshair">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span className="text-[9px] font-black uppercase tracking-tighter text-slate-500">Paiement 100% Sécurisé</span>
+           </div>
+           <div className="h-4 w-px bg-slate-200" />
+           <div className="flex items-center gap-2 opacity-50">
+              <Badge variant="outline" className="!text-[8px] px-2 py-0.5 !rounded-lg border-slate-200">MODE SIMULATION</Badge>
+           </div>
         </div>
       </div>
     </div>

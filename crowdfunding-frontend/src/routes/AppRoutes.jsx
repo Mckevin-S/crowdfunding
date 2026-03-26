@@ -24,6 +24,7 @@ const Contact = lazy(() => import('@pages/Contact'));
 const Messages = lazy(() => import('@pages/Messages'));
 const KYCVerification = lazy(() => import('@pages/KYC/KYCVerification'));
 const PaymentSuccess = lazy(() => import('@pages/Payments/PaymentSuccess'));
+const MyContributions = lazy(() => import('@pages/User/MyContributions'));
 
 const AdminLayout = lazy(() => import('@components/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('@pages/Admin/AdminDashboard'));
@@ -55,6 +56,8 @@ const AppRoutes = () => {
               <Route path="/porteur/dashboard" element={<DashboardPorteur />} />
               <Route path="/porteur/mes-projets" element={<MyProjects />} />
               <Route path="/investisseur/dashboard" element={<DashboardInvestisseur />} />
+              <Route path="/investisseur/mes-contributions" element={<MyContributions />} />
+              <Route path="/investisseur/explorer" element={<ProjectsExplore />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/kyc" element={<KYCVerification />} />
               <Route path="/projects/create" element={<PrivateRoute roles={['PORTEUR_PROJET', 'ADMIN']}><CreateProject /></PrivateRoute>} />

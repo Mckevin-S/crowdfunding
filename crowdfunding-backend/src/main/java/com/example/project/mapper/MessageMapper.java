@@ -18,7 +18,7 @@ public interface MessageMapper {
     Message toEntity(MessageRequestDTO dto);
 
     @Mapping(target = "expediteurId", source = "expediteur.id")
-    @Mapping(target = "expediteurNomPrenom", expression = "java(entity.getExpediteur().getPrenom() + ' ' + entity.getExpediteur().getNom())")
+    @Mapping(target = "expediteurNomPrenom", expression = "java(entity.getExpediteur() != null ? entity.getExpediteur().getPrenom() + ' ' + entity.getExpediteur().getNom() : 'Utilisateur Inconnu')")
     @Mapping(target = "expediteurAvatarUrl", source = "expediteur.avatarUrl")
     @Mapping(target = "destinataireId", source = "destinataire.id")
     @Mapping(target = "projetId", source = "projet.id")

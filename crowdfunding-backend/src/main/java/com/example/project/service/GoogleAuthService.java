@@ -13,6 +13,7 @@ import com.google.api.client.json.gson.GsonFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class GoogleAuthService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final WalletRepository walletRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<Utilisateur> verifyGoogleToken(String idTokenString) {
         try {
@@ -73,6 +75,9 @@ public class GoogleAuthService {
                     newUser.setPrenom(givenName);
                     newUser.setRole(UserRole.CONTRIBUTEUR); // Rôle par défaut
                     newUser.setStatut(UserStatus.ACTIVE);
+                    // On définit un mot de passe aléatoire pour les futurs logins standard facultatifs
+                    newUser.setMotsDePasse(passwordEncoder.encode(java.util.UUID.randomUUID().toString()));
+                    
                     Utilisateur savedUser = utilisateurRepository.save(newUser);
                     
                     // Création du wallet

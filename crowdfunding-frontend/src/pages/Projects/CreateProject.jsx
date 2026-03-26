@@ -83,7 +83,7 @@ const CreateProject = () => {
         const result = await dispatch(createProject(payload));
         if (createProject.fulfilled.match(result)) {
           toast.success('Félicitations ! Votre projet est en cours de révision.');
-          navigate('/dashboard');
+          navigate('/porteur/dashboard');
         }
       } catch (err) {
         toast.error('Erreur lors de la création du projet.');

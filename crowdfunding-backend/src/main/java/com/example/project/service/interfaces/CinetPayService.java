@@ -9,7 +9,7 @@ public interface CinetPayService {
      * Generates a payment link to redirect the user to CinetPay's secure portal.
      *
      * @param contributionId the contribution ID to be paid.
-     * @param amount the amount to charge.
+     * @param amount         the amount to charge.
      * @return the generated URL.
      */
     String generatePaymentLink(Long contributionId, java.math.BigDecimal amount);
@@ -20,4 +20,9 @@ public interface CinetPayService {
      * @param transactionId the CinetPay transaction ID.
      */
     void handleNotify(String transactionId);
+
+    /**
+     * Initiates a simulated Mobile Money payment for testing.
+     */
+    java.util.Map<String, String> initiateSimulatedPayment(java.math.BigDecimal amount, Long contributionId, String phoneNumber);
 }

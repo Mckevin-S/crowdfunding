@@ -22,6 +22,8 @@ import com.example.project.service.interfaces.NotificationService;
 import com.example.project.dto.NotificationRequestDTO;
 import com.example.project.service.interfaces.ContributionService;
 import com.example.project.util.PdfGeneratorService;
+import com.example.project.service.interfaces.StripePaymentService;
+import com.example.project.service.interfaces.CinetPayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,7 +52,7 @@ public class ContributionServiceImpl implements ContributionService {
         private final ContributionMapper contributionMapper;
         private final PdfGeneratorService pdfGeneratorService;
         private final CurrencyService currencyService;
-        private final StripeService stripeService;
+        private final StripePaymentService stripePaymentService;
         private final CinetPayService cinetPayService;
         private final NotificationService notificationService;
 
@@ -128,20 +130,25 @@ public class ContributionServiceImpl implements ContributionService {
         @Override
         @Transactional
         public ContributionResponseDTO initiateContribution(ContributionRequestDTO request) {
+                log.info("INITIATE_START: Request={}", request);
                 // 1. Validations de base
                 Projet projet = projetRepository.findById(request.getProjetId())
                                 .orElseThrow(() -> new ResourceNotFoundException("Projet", request.getProjetId()));
 
                 Utilisateur utilisateur = utilisateurRepository.findById(request.getUtilisateurId())
-                                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", request.getUtilisateurId()));
+                                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur",
+                                                request.getUtilisateurId()));
+
+                log.info("INITIATE_VAL: Projet={}, Utilisateur={}", projet.getTitre(), utilisateur.getEmail());
 
                 // 2. Vérification KYC (Plafond et Investissement)
-                boolean requiresKyc = request.getAmount().compareTo(new BigDecimal(500000)) > 0 
-                                || TypeFinancement.LOAN.equals(projet.getTypeFinancement()) 
+                boolean requiresKyc = request.getAmount().compareTo(new BigDecimal(500000)) > 0
+                                || TypeFinancement.LOAN.equals(projet.getTypeFinancement())
                                 || TypeFinancement.EQUITY.equals(projet.getTypeFinancement());
 
                 if (requiresKyc && !"APPROVED".equals(utilisateur.getKycStatus())) {
-                        throw new BadRequestException("Veuillez valider votre profil KYC pour investir en capital/prêt ou plus de 500,000 XAF.");
+                        throw new BadRequestException(
+                                        "Veuillez valider votre profil KYC pour investir en capital/prêt ou plus de 500,000 XAF.");
                 }
 
                 // 3. Création enregistrement PENDING
@@ -150,19 +157,27 @@ public class ContributionServiceImpl implements ContributionService {
                 contribution.setUtilisateur(utilisateur);
                 contribution.setStatus(ContribStatus.PENDING);
                 contribution.setAmount(request.getAmount()); // Directement en XAF
-                
+
+                log.info("INITIATE_SAVE_PRE");
                 contribution = contributionRepository.save(contribution);
+                log.info("INITIATE_SAVE_POST: ID={}", contribution.getId());
 
                 // 4. Simulation Paiement selon le type
                 Map<String, String> paymentData = new HashMap<>();
                 if (PaiementType.STRIPE.equals(request.getPaiementType())) {
-                        paymentData = stripeService.createPaymentIntent(request.getAmount(), contribution.getId(), utilisateur.getEmail());
+                        log.info("INITIATE_STRIPE");
+                        paymentData = stripePaymentService.createSimulatedPaymentIntent(request.getAmount(),
+                                        contribution.getId(), utilisateur.getEmail());
                 } else if (PaiementType.MOBILE_MONEY.equals(request.getPaiementType())) {
-                        paymentData = cinetPayService.initiateMobileMoneyPayment(request.getAmount(), contribution.getId(), utilisateur.getTelephone());
+                        log.info("INITIATE_MOBILE");
+                        paymentData = cinetPayService.initiateSimulatedPayment(request.getAmount(),
+                                        contribution.getId(), utilisateur.getTelephone());
                 }
 
+                log.info("INITIATE_MAP_PRE");
                 ContributionResponseDTO response = contributionMapper.toResponseDTO(contribution);
-                response.setPaymentMetadata(paymentData); // Besoin d'ajouter ce champ au DTO
+                log.info("INITIATE_MAP_POST");
+                response.setPaymentMetadata(paymentData);
                 return response;
         }
 
@@ -192,25 +207,24 @@ public class ContributionServiceImpl implements ContributionService {
                 trans.setType(contribution.getPaiementType());
                 trans.setStatus(StatutTransaction.CONFIRMER);
                 transactionRepository.save(trans);
- 
+
                 // --- NOTIFICATIONS ---
                 try {
                         // Notify Owner
-                        String ownerMsg = String.format("🎉 Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.", 
-                            contribution.getAmount().toString(), projet.getTitre());
-                        notificationService.createNotification(new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, false));
-                        
+                        String ownerMsg = String.format(
+                                        "🎉 Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.",
+                                        contribution.getAmount().toString(), projet.getTitre());
+                        notificationService.createNotification(
+                                        new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, false));
+
                         // Notify Contributor
-                        String contribMsg = String.format("✔️ Merci ! Votre contribution de %s XAF pour le projet '%s' est confirmée.", 
-                            contribution.getAmount().toString(), projet.getTitre());
-                        notificationService.createNotification(new NotificationRequestDTO(contribution.getUtilisateur().getId(), contribMsg, false));
+                        String contribMsg = String.format(
+                                        "✔️ Merci ! Votre contribution de %s XAF pour le projet '%s' est confirmée.",
+                                        contribution.getAmount().toString(), projet.getTitre());
+                        notificationService.createNotification(new NotificationRequestDTO(
+                                        contribution.getUtilisateur().getId(), contribMsg, false));
                 } catch (Exception e) {
                         // Log but don't fail transaction
                 }
         }
 }
-
-
-                
-
-                

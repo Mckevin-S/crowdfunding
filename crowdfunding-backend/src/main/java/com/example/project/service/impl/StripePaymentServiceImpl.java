@@ -30,6 +30,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,11 +38,11 @@ import java.math.BigDecimal;
 
 /**
  * Implementation of {@link StripePaymentService}.
- * Manages the full Stripe payment lifecycle: creating PaymentIntents, tracking contributions, 
+ * Manages the full Stripe payment lifecycle: creating PaymentIntents, tracking
+ * contributions,
  * and processing secure webhook events for successful or failed charges.
  */
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class StripePaymentServiceImpl implements StripePaymentService {
 
@@ -54,10 +55,24 @@ public class StripePaymentServiceImpl implements StripePaymentService {
     @Value("${stripe.webhook.secret}")
     private String endpointSecret;
 
+    public StripePaymentServiceImpl(
+            ContributionRepository contributionRepository,
+            ProjetRepository projetRepository,
+            UtilisateurRepository utilisateurRepository,
+            TransactionRepository transactionRepository,
+            @Lazy ContributionService contributionService) {
+        this.contributionRepository = contributionRepository;
+        this.projetRepository = projetRepository;
+        this.utilisateurRepository = utilisateurRepository;
+        this.transactionRepository = transactionRepository;
+        this.contributionService = contributionService;
+    }
+
     @Override
     @Transactional
     public StripePaymentIntentResponseDTO createPaymentIntent(StripePaymentIntentRequestDTO dto) {
-        log.info("STRIPE_PAYMENT_START: Création d'une intention de paiement pour le projet ID: {}, Utilisateur ID: {}, Montant: {}", 
+        log.info(
+                "STRIPE_PAYMENT_START: Création d'une intention de paiement pour le projet ID: {}, Utilisateur ID: {}, Montant: {}",
                 dto.getProjetId(), dto.getUtilisateurId(), dto.getAmount());
 
         Projet projet = projetRepository.findById(dto.getProjetId())
@@ -120,6 +135,25 @@ public class StripePaymentServiceImpl implements StripePaymentService {
             log.error("Failed to create Stripe PaymentIntent: {}", e.getMessage(), e);
             throw new PaymentException("Erreur de communication avec Stripe: " + e.getMessage());
         }
+    }
+
+    @Override
+    public java.util.Map<String, String> createSimulatedPaymentIntent(java.math.BigDecimal amount, Long contributionId, String userEmail) {
+        log.info("[SIMULATION] Création d'un PaymentIntent fictif pour la contribution ID: {}", contributionId);
+        
+        java.util.Map<String, String> response = new java.util.HashMap<>();
+        response.put("clientSecret", "pi_simulated_secret_" + contributionId);
+        response.put("id", "pi_simulated_" + contributionId);
+        response.put("status", "succeeded"); 
+        
+        // Update contribution with simulated intent ID in the same way real one does
+        Contribution contribution = contributionRepository.findById(contributionId).orElse(null);
+        if (contribution != null) {
+            contribution.setStripePaymentIntentId("pi_simulated_" + contributionId);
+            contributionRepository.save(contribution);
+        }
+        
+        return response;
     }
 
     @Override

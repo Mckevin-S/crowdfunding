@@ -68,7 +68,9 @@ public class AuthController {
     @ApiResponse(responseCode = "401", description = "Token Google invalide")
     public ResponseEntity<AuthResponse> googleLogin(@RequestBody String idToken) {
         log.info("GOOGLE_LOGIN: Tentative de connexion via Google");
-        return googleAuthService.verifyGoogleToken(idToken)
+        // Nettoyage si le token arrive avec des guillemets (cas JSON brut)
+        String cleanedToken = idToken != null ? idToken.replace("\"", "") : "";
+        return googleAuthService.verifyGoogleToken(cleanedToken)
                 .map(user -> ResponseEntity.ok(authService.generateAuthResponse(user)))
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }

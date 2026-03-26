@@ -5,7 +5,8 @@ import com.example.project.dto.StripePaymentIntentResponseDTO;
 
 /**
  * Service interface for processing payments via Stripe.
- * Manages Payment Intent creation and webhook processing for asynchronous payment events.
+ * Manages Payment Intent creation and webhook processing for asynchronous
+ * payment events.
  */
 public interface StripePaymentService {
     /**
@@ -19,8 +20,13 @@ public interface StripePaymentService {
     /**
      * Handles incoming Stripe webhooks for payment state updates.
      *
-     * @param payload the raw request body payload.
+     * @param payload   the raw request body payload.
      * @param sigHeader the Stripe-Signature header.
      */
     void handleWebhook(String payload, String sigHeader);
+
+    /**
+     * Creates a simulated Payment Intent for testing without calling Stripe API.
+     */
+    java.util.Map<String, String> createSimulatedPaymentIntent(java.math.BigDecimal amount, Long contributionId, String userEmail);
 }

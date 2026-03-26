@@ -24,6 +24,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     /**
      * Find recent messages (distinct conversations preview) by user.
      */
-    @Query("SELECT m FROM Message m WHERE m.id IN (SELECT MAX(m2.id) FROM Message m2 WHERE m2.expediteur = :user OR m2.destinataire = :user GROUP BY CASE WHEN m2.expediteur = :user THEN m2.destinataire ELSE m2.expediteur END) ORDER BY m.dateEnvoi DESC")
+    @Query("SELECT m FROM Message m WHERE m.id IN (SELECT MAX(m1.id) FROM Message m1 WHERE m1.expediteur = :user OR m1.destinataire = :user GROUP BY (CASE WHEN m1.expediteur = :user THEN m1.destinataire.id ELSE m1.expediteur.id END)) ORDER BY m.dateEnvoi DESC")
     List<Message> findRecentConversationsByUser(@Param("user") Utilisateur user);
 }

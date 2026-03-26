@@ -129,9 +129,15 @@ const Register = () => {
                 onSuccess={credentialResponse => {
                   dispatch(googleLogin(credentialResponse.credential))
                     .unwrap()
-                    .then(() => {
+                    .then((payload) => {
                       toast.success('Bienvenue !');
-                      navigate('/dashboard');
+                      if (payload.role === 'ADMIN') {
+                        navigate('/admin/dashboard');
+                      } else if (payload.role === 'PORTEUR_PROJET') {
+                        navigate('/porteur/dashboard');
+                      } else {
+                        navigate('/investisseur/dashboard');
+                      }
                     });
                 }}
                 onError={() => toast.error('Échec de la connexion Google')}
