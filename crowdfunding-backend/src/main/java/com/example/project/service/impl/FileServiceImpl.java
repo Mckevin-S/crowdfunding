@@ -37,13 +37,13 @@ public class FileServiceImpl implements FileService {
             throw new IllegalArgumentException("Cannot upload empty file");
         }
 
+        String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             // Create target directory if it does not exist
             Path targetLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
             Files.createDirectories(targetLocation);
 
             // Generate unique filename
-            String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
             String newFileName = UUID.randomUUID().toString() + ".jpg"; // Always convert to JPG
             Path targetPath = targetLocation.resolve(newFileName);
 
@@ -57,7 +57,7 @@ public class FileServiceImpl implements FileService {
             return fileDownloadUri;
         } catch (Exception ex) {
             log.error("Could not store image. Please try again!", ex);
-            throw new RuntimeException("Could not store file " + file.getOriginalFilename() + ". Please try again!", ex);
+            throw new RuntimeException("Could not store file " + originalFileName + ". Please try again!", ex);
         }
     }
 

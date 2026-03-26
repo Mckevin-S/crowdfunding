@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { Search, Filter, SlidersHorizontal } from 'lucide-react';
+import { Search, Filter, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchProjects } from '@store/slices/projectSlice';
 import ProjectCard from '@components/project/ProjectCard';
 import Loader from '@components/common/Loader';
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
+
+const ITEMS_PER_PAGE = 12;
 
 const ProjectsExplore = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const ProjectsExplore = () => {
   const { projects, loading, error } = useSelector(state => state.project);
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const categories = ['All', 'Don', 'Récompense', 'Prêt', 'Capital'];
   const sortOptions = [
@@ -24,12 +27,63 @@ const ProjectsExplore = () => {
   ];
   const [selectedSort, setSelectedSort] = useState('newest');
 
+  const typeMap = {
+    All: null,
+    Don: 'DON',
+    Récompense: 'REWARD',
+    Prêt: 'LOAN',
+    Capital: 'EQUITY',
+  };
+
+  const filteredProjects = useMemo(() => {
+    if (!projects) return [];
+
+    let filtered = [...projects];
+
+    // Filtrer par type (local client-side) en cas de backend non supporté
+    const typeFilter = typeMap[selectedCategory];
+    if (typeFilter) {
+      filtered = filtered.filter((project) => project.typeFinancement === typeFilter);
+    }
+
+    // Recherche
+    if (searchTerm.trim()) {
+      const lowerQuery = searchTerm.trim().toLowerCase();
+      filtered = filtered.filter((project) =>
+        (project.titre || '').toLowerCase().includes(lowerQuery) ||
+        (project.description || '').toLowerCase().includes(lowerQuery)
+      );
+    }
+
+    // Tri simple
+    if (selectedSort === 'newest') {
+      filtered.sort((a, b) => new Date(b.dateDebut) - new Date(a.dateDebut));
+    } else if (selectedSort === 'popular') {
+      filtered.sort((a, b) => (b.nombreContributeurs || 0) - (a.nombreContributeurs || 0));
+    } else if (selectedSort === 'ending_soon') {
+      filtered.sort((a, b) => new Date(a.dateFin) - new Date(b.dateFin));
+    } else if (selectedSort === 'goal') {
+      filtered.sort((a, b) => (a.objectifFinancier || 0) - (b.objectifFinancier || 0));
+    }
+
+    return filtered;
+  }, [projects, searchTerm, selectedCategory, selectedSort]);
+
+  const paginatedProjects = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredProjects.slice(startIndex, endIndex);
+  }, [filteredProjects, currentPage]);
+
+  const totalPages = Math.ceil((filteredProjects.length || 0) / ITEMS_PER_PAGE);
+
   useEffect(() => {
     const params = {};
     if (searchTerm) params.q = searchTerm;
     if (selectedCategory !== 'All') params.category = selectedCategory;
-    
+
     dispatch(fetchProjects(params));
+    setCurrentPage(1); // Reset to first page on filter change
   }, [dispatch, searchTerm, selectedCategory]);
 
   const handleCategoryChange = (cat) => {
@@ -38,6 +92,16 @@ const ProjectsExplore = () => {
     if (cat === 'All') newParams.delete('category');
     else newParams.set('category', cat);
     setSearchParams(newParams);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(prev => Math.max(1, prev - 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(prev => Math.min(totalPages, prev + 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -109,32 +173,99 @@ const ProjectsExplore = () => {
         <>
           <div className="flex items-center gap-2 mb-8">
             <span className="text-lg font-bold text-neutral-rich">
-              {projects?.length || 0}
+              {filteredProjects?.length || 0}
             </span>
             <span className="text-gray-500">projets trouvés pour votre recherche</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects && projects.length > 0 ? (
-              projects.map(project => (
-                <ProjectCard key={project.id} project={project} />
-              ))
-            ) : (
-              <div className="col-span-full py-24 text-center bg-gray-50/50 rounded-[2rem]">
-                <p className="text-xl text-gray-500 font-medium">Bientôt de nouveaux projets ici. Revenez vite !</p>
-                <Button 
-                  variant="outline" 
-                  className="mt-6 rounded-full"
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedCategory('All');
-                  }}
-                >
-                  Effacer les filtres
-                </Button>
+          {projects && projects.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {paginatedProjects.map(project => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
               </div>
-            )}
-          </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-gray-50 rounded-xl p-6">
+                  <div className="text-sm text-gray-600">
+                    Affichage de <strong>{(currentPage - 1) * ITEMS_PER_PAGE + 1}</strong> à <strong>{Math.min(currentPage * ITEMS_PER_PAGE, projects.length)}</strong> sur <strong>{projects.length}</strong> projets
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={handlePreviousPage}
+                      disabled={currentPage === 1}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
+                        currentPage === 1 
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                          : 'bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-600'
+                      }`}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Précédent
+                    </button>
+
+                    <div className="flex items-center gap-2">
+                      {Array.from({ length: Math.min(5, totalPages) }).map((_, i) => {
+                        const pageNum = i + 1;
+                        const isActive = pageNum === currentPage;
+                        return (
+                          <button
+                            key={pageNum}
+                            onClick={() => {
+                              setCurrentPage(pageNum);
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            className={`w-10 h-10 rounded-lg font-semibold transition-all ${
+                              isActive 
+                                ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' 
+                                : 'bg-white border border-gray-200 text-gray-700 hover:border-primary-500'
+                            }`}
+                          >
+                            {pageNum}
+                          </button>
+                        );
+                      })}
+                      {totalPages > 5 && <span className="text-gray-500">...</span>}
+                    </div>
+
+                    <button
+                      onClick={handleNextPage}
+                      disabled={currentPage === totalPages}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
+                        currentPage === totalPages 
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                          : 'bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-600'
+                      }`}
+                    >
+                      Suivant
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <div className="text-sm font-semibold text-gray-700">
+                    Page <strong>{currentPage}</strong> sur <strong>{totalPages}</strong>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="col-span-full py-24 text-center bg-gray-50/50 rounded-[2rem]">
+              <p className="text-xl text-gray-500 font-medium">Bientôt de nouveaux projets ici. Revenez vite !</p>
+              <Button 
+                variant="outline" 
+                className="mt-6 rounded-full"
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedCategory('All');
+                }}
+              >
+                Effacer les filtres
+              </Button>
+            </div>
+          )}
         </>
       )}
     </div>

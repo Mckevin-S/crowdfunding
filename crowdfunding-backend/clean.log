@@ -1,0 +1,15 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.example:project >-------------------------
+[INFO] Building project 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ project ---
+[INFO] Deleting C:\Users\Mc-kevin\mck\tutoree\crowdfunding\crowdfunding-backend\target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.098 s
+[INFO] Finished at: 2026-03-25T05:38:11-08:00
+[INFO] ------------------------------------------------------------------------

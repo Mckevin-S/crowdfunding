@@ -165,144 +165,144 @@ const Dashboard = () => {
   ) || [];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Top Navigation */}
-      <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-8">
-              <h1 className="text-xl font-bold text-primary-900">Tableau de bord</h1>
-              <div className="hidden md:flex gap-1">
-                {['overview', 'projects', 'investments', 'rewards'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === tab
-                        ? 'bg-primary-50 text-primary-700'
-                        : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
-                      }`}
-                  >
-                    {tab === 'overview' && 'Aperçu'}
-                    {tab === 'projects' && 'Mes projets'}
-                    {tab === 'investments' && 'Investissements'}
-                    {tab === 'rewards' && 'Récompenses'}
-                  </button>
-                ))}
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      {/* Premium Top Navigation Bar */}
+      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg">
+              <BarChart3 className="w-5.5 h-5.5 text-white" />
             </div>
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors"
-              >
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-              </button>
-              <Link
-                to="/settings"
-                className="p-2 text-slate-400 hover:text-slate-600 transition-colors"
-              >
-                <Settings className="w-5 h-5" />
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="p-2 text-slate-400 hover:text-red-500 transition-colors"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
+            <h1 className="font-bold text-lg text-primary-900">Tableau de bord</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="relative p-2.5 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-200"
+            >
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full shadow-lg animate-pulse" />
+            </button>
+            <Link
+              to="/profile"
+              className="p-2.5 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all duration-200"
+              title="Mon Profil"
+            >
+              <Eye className="w-5 h-5" />
+            </Link>
+            <Link
+              to="/settings"
+              className="p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-all duration-200"
+              title="Paramètres"
+            >
+              <Settings className="w-5 h-5" />
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200"
+              title="Déconnexion"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8">
-        {/* Welcome Header */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="container mx-auto px-6 py-12">
+        {/* Welcome Section - Professional Header */}
+        <div className="mb-12">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">
-                Bonjour, {user?.prenom || 'Utilisateur'} !
+              <h1 className="text-4xl font-bold text-slate-900 mb-4">
+                Bienvenue, <span className="bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent">{user?.prenom}</span>
               </h1>
-              <div className="flex items-center gap-3">
-                <Badge variant="secondary" className="bg-primary-100 text-primary-700 font-semibold">
-                  {user?.role === 'ADMIN' ? 'Administrateur' : user?.role === 'PORTEUR_PROJET' ? 'Porteur de projet' : 'Investisseur'}
+              <div className="flex flex-wrap items-center gap-4">
+                <Badge variant="secondary" className="bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 font-bold border border-primary-200 px-4 py-1.5 rounded-full shadow-sm">
+                  {user?.role === 'ADMIN' ? ' Administrateur' : user?.role === 'PORTEUR_PROJET' ? ' Porteur de projet' : ' Investisseur'}
                 </Badge>
-                <span className="text-sm text-slate-500">
-                  Membre depuis {user?.createdAt ? formatDate(user.createdAt) : 'récemment'}
+                <span className="text-sm text-slate-500 font-medium">
+                  Membre depuis <span className="font-bold text-slate-700">{user?.createdAt ? formatDate(user.createdAt) : 'récemment'}</span>
                 </span>
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 w-full lg:w-auto">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => navigate('/projects')}
+                className="border-gray-200 text-slate-600 hover:border-primary-200 hover:text-primary-600 hover:bg-primary-50 flex-1 lg:flex-none"
               >
-                Explorer
+                Découvrir
               </Button>
               {(user?.role === 'PORTEUR_PROJET' || user?.role === 'ADMIN') && (
                 <Button
                   size="sm"
                   onClick={() => navigate('/projects/create')}
                   leftIcon={<PlusCircle className="w-4 h-4" />}
+                  className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transition-all flex-1 lg:flex-none"
                 >
                   Nouveau projet
                 </Button>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, idx) => (
-            <Card key={idx} className="p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start justify-between mb-3">
-                <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center">
-                  {stat.icon}
+          {/* Statistics Grid - Premium Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all">
+                    <div className="text-2xl">{stat.icon}</div>
+                  </div>
+                  <span className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full transition-all ${stat.trendUp
+                      ? 'text-emerald-600 bg-emerald-50 border border-emerald-100'
+                      : 'text-slate-500 bg-slate-50 border border-slate-100'
+                    }`}>
+                    <ArrowUpRight className={`w-3.5 h-3.5 ${!stat.trendUp && 'rotate-90'}`} />
+                    {stat.trend}
+                  </span>
                 </div>
-                <span className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full ${stat.trendUp
-                    ? 'text-green-600 bg-green-50'
-                    : 'text-slate-500 bg-slate-50'
-                  }`}>
-                  <ArrowUpRight className={`w-3 h-3 ${!stat.trendUp && 'rotate-90'}`} />
-                  {stat.trend}
-                </span>
+                <p className="text-3xl font-bold text-slate-900 mb-2">{stat.value}</p>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                  {stat.label}
+                </p>
+                {stat.description && (
+                  <p className="text-xs text-slate-400 font-medium">{stat.description}</p>
+                )}
               </div>
-              <p className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</p>
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                {stat.label}
-              </p>
-              {stat.description && (
-                <p className="text-xs text-slate-400 mt-1">{stat.description}</p>
-              )}
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Main Content */}
+        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Projects/Investments */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Active Projects Section */}
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-primary-500" />
+            {/* Active Projects Section - Premium */}
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+              <div className="flex justify-between items-center mb-6 pb-6 border-b border-gray-100">
+                <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-primary-600" />
+                  </div>
                   {user?.role === 'PORTEUR_PROJET' ? 'Mes projets actifs' : 'Recommandés pour vous'}
                 </h2>
-                <Link to="/projects" className="text-sm font-medium text-primary-600 hover:text-primary-700">
-                  Voir tout
+                <Link to="/projects" className="text-sm font-bold text-primary-600 hover:text-primary-700 hover:bg-primary-50 px-3 py-1.5 rounded-xl transition-all">
+                  Voir tout →
                 </Link>
               </div>
 
               {projectsLoading || contribsLoading ? (
                 <div className="space-y-4">
                   {[1, 2].map(i => (
-                    <div key={i} className="bg-white rounded-xl p-6 animate-pulse">
-                      <div className="h-4 bg-slate-200 rounded w-1/4 mb-3" />
-                      <div className="h-6 bg-slate-200 rounded w-3/4 mb-2" />
-                      <div className="h-4 bg-slate-200 rounded w-full" />
+                    <div key={i} className="bg-slate-100 rounded-2xl p-6 animate-pulse">
+                      <div className="h-4 bg-slate-200 rounded-xl w-1/4 mb-3" />
+                      <div className="h-6 bg-slate-200 rounded-xl w-3/4 mb-2" />
+                      <div className="h-4 bg-slate-200 rounded-xl w-full" />
                     </div>
                   ))}
                 </div>
@@ -313,26 +313,34 @@ const Dashboard = () => {
                       <div
                         key={project.id}
                         onClick={() => navigate(`/projects/${project.id}`)}
-                        className="bg-white rounded-xl p-6 border border-slate-100 hover:shadow-md transition-all cursor-pointer"
+                        className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border border-gray-100 hover:border-primary-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <Badge variant="secondary" className="bg-primary-50 text-primary-700">
+                        <div className="flex items-start justify-between mb-4">
+                          <Badge variant="secondary" className="bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 font-semibold border border-primary-200">
                             {project.categorie}
                           </Badge>
-                          <Badge variant={project.statut === 'ACTIVE' ? 'success' : 'secondary'}>
-                            {project.statut === 'ACTIVE' ? 'En cours' : project.statut}
+                          <Badge variant={project.statut === 'ACTIVE' ? 'success' : 'secondary'} className={project.statut === 'ACTIVE' ? 'bg-gradient-to-r from-emerald-50 to-emerald-100 text-emerald-700 border border-emerald-200' : ''}>
+                            {project.statut === 'ACTIVE' ? '✓ En cours' : project.statut}
                           </Badge>
                         </div>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-2">{project.titre}</h3>
-                        <p className="text-sm text-slate-500 mb-4 line-clamp-2">{project.description}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4 text-sm">
-                            <span className="text-emerald-600 font-semibold">
-                              {formatCurrency(project.montantActuel || 0)}
-                            </span>
-                            <span className="text-slate-400">/ {formatCurrency(project.objectifFinancier)}</span>
+                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">{project.titre}</h3>
+                        <p className="text-sm text-slate-500 mb-5 line-clamp-2 font-medium">{project.description}</p>
+                        <div className="space-y-3">
+                          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500"
+                              style={{ width: `${Math.min((project.montantActuel / project.objectifFinancier) * 100, 100)}%` }}
+                            />
                           </div>
-                          <ArrowUpRight className="w-5 h-5 text-slate-400 group-hover:text-primary-500" />
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                              <span className="text-emerald-600 font-bold text-sm">
+                                {formatCurrency(project.montantActuel || 0)}
+                              </span>
+                              <span className="text-slate-400 text-sm">/ {formatCurrency(project.objectifFinancier)}</span>
+                            </div>
+                            <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-primary-500 transition-colors" />
+                          </div>
                         </div>
                       </div>
                     ))
@@ -340,18 +348,18 @@ const Dashboard = () => {
                     contributions.slice(0, 3).map((contribution) => (
                       <div
                         key={contribution.id}
-                        className="bg-white rounded-xl p-6 border border-slate-100"
+                        className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 hover:shadow-xl transition-all duration-300 group"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 border border-emerald-200">
+                            <CheckCircle2 className="w-6 h-6 text-emerald-600" />
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-semibold text-slate-900 mb-1">
+                            <h3 className="font-bold text-slate-900 mb-1">
                               Investissement de {formatCurrency(contribution.amount)}
                             </h3>
-                            <p className="text-sm text-slate-500">Projet #{contribution.projetId}</p>
-                            <p className="text-xs text-slate-400 mt-2">
+                            <p className="text-sm text-slate-500 font-medium">Projet #{contribution.projetId}</p>
+                            <p className="text-xs text-slate-400 mt-2 font-medium">
                               {formatDate(contribution.createdAt)}
                             </p>
                           </div>
@@ -359,14 +367,16 @@ const Dashboard = () => {
                       </div>
                     ))
                   ) : (
-                    <div className="bg-white rounded-xl p-12 text-center border border-dashed border-slate-200">
-                      <PlusCircle className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                      <p className="text-slate-500 mb-2">Aucun projet pour le moment</p>
+                    <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-12 text-center border-2 border-dashed border-slate-200 hover:border-primary-200 transition-all">
+                      <PlusCircle className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                      <p className="text-slate-500 mb-2 font-semibold">Aucun projet pour le moment</p>
+                      <p className="text-slate-400 text-sm mb-6">Commencez votre aventure dans le financement participatif</p>
                       {(user?.role === 'PORTEUR_PROJET' || user?.role === 'ADMIN') && (
                         <Button
                           variant="outline"
                           size="sm"
                           onClick={() => navigate('/projects/create')}
+                          className="border-primary-200 text-primary-600 hover:bg-primary-50"
                         >
                           Créer mon premier projet
                         </Button>
@@ -377,24 +387,26 @@ const Dashboard = () => {
               )}
             </div>
 
-            {/* Recent Activity */}
+            {/* Recent Activity - Premium */}
             {recentActivities.length > 0 && (
-              <div>
-                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-slate-500" />
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-gray-100 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center">
+                    <Activity className="w-5 h-5 text-amber-600" />
+                  </div>
                   Activité récente
                 </h2>
                 <div className="space-y-3">
                   {recentActivities.map((activity) => (
-                    <div key={activity.id} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100">
-                      <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-500">
+                    <div key={activity.id} className="flex items-center gap-4 p-4 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all group">
+                      <div className="w-11 h-11 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center text-slate-500 flex-shrink-0 border border-amber-200 group-hover:shadow-md transition-all">
                         {activity.icon}
                       </div>
-                      <div className="flex-1">
-                        <p className="font-medium text-slate-900">{activity.title}</p>
-                        <p className="text-sm text-slate-500">{activity.description}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-slate-900">{activity.title}</p>
+                        <p className="text-sm text-slate-500 font-medium">{activity.description}</p>
                       </div>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-slate-400 font-semibold whitespace-nowrap">
                         {formatDate(activity.date)}
                       </span>
                     </div>
@@ -406,30 +418,32 @@ const Dashboard = () => {
 
           {/* Right Column - Urgent & Tips */}
           <div className="space-y-8">
-            {/* Ending Soon */}
+            {/* Ending Soon - Premium */}
             {endingSoonProjects.length > 0 && (
-              <div className="bg-gradient-to-br from-primary-900 to-primary-800 rounded-2xl p-6 text-white">
-                <div className="flex items-center gap-2 mb-4">
-                  <Rocket className="w-5 h-5 text-primary-300" />
-                  <h3 className="font-bold">Se termine bientôt</h3>
+              <div className="rounded-3xl p-8 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white border border-primary-700/50 shadow-2xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
+                    <Rocket className="w-5 h-5 text-primary-300" />
+                  </div>
+                  <h3 className="font-bold text-lg">Se termine bientôt</h3>
                 </div>
                 <div className="space-y-4">
                   {endingSoonProjects.slice(0, 2).map((project) => (
                     <div
                       key={project.id}
                       onClick={() => navigate(`/projects/${project.id}`)}
-                      className="p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors cursor-pointer"
+                      className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 hover:border-white/30 transition-all cursor-pointer group"
                     >
-                      <p className="font-semibold mb-2">{project.titre}</p>
-                      <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden mb-2">
+                      <p className="font-bold mb-3 text-white group-hover:text-primary-100">{project.titre}</p>
+                      <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mb-3">
                         <div
-                          className="h-full bg-primary-400 rounded-full"
-                          style={{ width: `${(project.montantActuel / project.objectifFinancier) * 100}%` }}
+                          className="h-full bg-gradient-to-r from-primary-300 to-primary-200 rounded-full transition-all duration-500"
+                          style={{ width: `${Math.min((project.montantActuel / project.objectifFinancier) * 100, 100)}%` }}
                         />
                       </div>
-                      <div className="flex justify-between text-xs text-primary-200">
-                        <span>{formatCurrency(project.montantActuel)}</span>
-                        <span>{formatCurrency(project.objectifFinancier)}</span>
+                      <div className="flex justify-between text-xs text-primary-100">
+                        <span className="font-semibold">{formatCurrency(project.montantActuel)}</span>
+                        <span className="font-medium">{formatCurrency(project.objectifFinancier)}</span>
                       </div>
                     </div>
                   ))}
@@ -437,13 +451,15 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* Tips Card */}
-            <div className="bg-amber-50 rounded-2xl p-6 border border-amber-100">
-              <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-5 h-5 text-amber-600" />
-                <h3 className="font-bold text-amber-900">Conseil IA du jour</h3>
+            {/* Tips Card - Premium */}
+            <div className="bg-gradient-to-br from-amber-50 to-amber-50/50 rounded-3xl p-8 border border-amber-200 shadow-lg hover:shadow-xl transition-all">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-200 to-amber-300 rounded-xl flex items-center justify-center shadow-md">
+                  <Zap className="w-5 h-5 text-amber-700" />
+                </div>
+                <h3 className="font-bold text-lg text-amber-900">Conseil IA du jour</h3>
               </div>
-              <p className="text-sm text-amber-800 mb-3">
+              <p className="text-sm text-amber-800 mb-4 font-medium leading-relaxed">
                 {user?.role === 'PORTEUR_PROJET'
                   ? "Les projets avec des vidéos de présentation ont 40% plus de chances d'atteindre leur objectif."
                   : "Diversifiez vos investissements pour maximiser vos rendements et réduire les risques."}
@@ -451,28 +467,27 @@ const Dashboard = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-amber-200 text-amber-700 hover:bg-amber-100"
-                fullWidth
+                className="border-amber-300 text-amber-700 hover:bg-amber-100 w-full font-semibold"
               >
                 En savoir plus
               </Button>
             </div>
 
-            {/* Quick Stats */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4">En un coup d'œil</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-500">Projets suivis</span>
-                  <span className="font-semibold text-slate-900">12</span>
+            {/* Quick Stats - Premium */}
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-xl transition-all">
+              <h3 className="font-bold text-lg text-slate-900 mb-6 pb-4 border-b border-gray-100">En un coup d'œil</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-3 bg-gradient-to-r from-slate-50 to-transparent rounded-xl hover:bg-gradient-to-r hover:from-primary-50 hover:to-transparent transition-all">
+                  <span className="text-sm font-medium text-slate-600">Projets suivis</span>
+                  <span className="font-bold text-lg text-slate-900">12</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-500">Notifications</span>
-                  <span className="font-semibold text-slate-900">3 non lues</span>
+                <div className="flex justify-between items-center p-3 bg-gradient-to-r from-slate-50 to-transparent rounded-xl hover:bg-gradient-to-r hover:from-red-50 hover:to-transparent transition-all">
+                  <span className="text-sm font-medium text-slate-600">Notifications</span>
+                  <span className="font-bold text-lg text-red-600">3 non lues</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-500">Prochaine échéance</span>
-                  <span className="font-semibold text-slate-900">Dans 5 jours</span>
+                <div className="flex justify-between items-center p-3 bg-gradient-to-r from-slate-50 to-transparent rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-transparent transition-all">
+                  <span className="text-sm font-medium text-slate-600">Prochaine échéance</span>
+                  <span className="font-bold text-lg text-emerald-600">Dans 5 jours</span>
                 </div>
               </div>
             </div>

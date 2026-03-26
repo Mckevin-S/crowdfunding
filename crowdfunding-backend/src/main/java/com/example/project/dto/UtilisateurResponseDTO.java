@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * Data Transfer Object for user response data.
  * Sent back to clients to represent a user's public or private profile.
@@ -38,9 +40,27 @@ public class UtilisateurResponseDTO {
     @Schema(description = "Adresse physique", example = "Cocody, Abidjan")
     private String address;
     
+    @Schema(description = "Ville", example = "Abidjan")
+    private String ville;
+    
+    @Schema(description = "Catégorie préférée", example = "Technologie")
+    private String categoriePreferee;
+    
+    @Schema(description = "URL de l'avatar", example = "https://example.com/avatar.jpg")
+    private String avatarUrl;
+    
+    @Schema(description = "ID Google (si connexion via Google)", example = "123456789")
+    private String googleId;
+    
     @Schema(description = "Rôle de l'utilisateur", example = "PORTEUR_PROJET")
     private UserRole role;
     
     @Schema(description = "Statut du compte", example = "ACTIF")
     private UserStatus statut;
+    
+    @Schema(description = "Statut KYC", example = "PENDING")
+    private String kycStatus;
+    
+    @Schema(description = "Date de création du compte", example = "2024-01-15T10:30:00")
+    private LocalDateTime dateCreation;
 }

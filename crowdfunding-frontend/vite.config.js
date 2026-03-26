@@ -28,16 +28,59 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundle
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
-          'ui-vendor': ['@headlessui/react', '@heroicons/react'],
-        },
+        manualChunks: (id) => {
+          // Core React vendor
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+          // Redux vendor
+          if (id.includes('node_modules/@reduxjs/toolkit') || id.includes('node_modules/react-redux')) {
+            return 'redux-vendor';
+          }
+          // UI Components
+          if (id.includes('node_modules/@headlessui/react') || id.includes('node_modules/@heroicons/react')) {
+            return 'ui-vendor';
+          }
+          // Heavy charts library - lazy load
+          if (id.includes('node_modules/recharts')) {
+            return 'charts-vendor';
+          }
+          // Payment library - lazy load
+          if (id.includes('node_modules/@stripe')) {
+            return 'stripe-vendor';
+          }
+          // Form validation - lazy load
+          if (id.includes('node_modules/formik') || id.includes('node_modules/yup')) {
+            return 'forms-vendor';
+          }
+          // Icons - lazy load
+          if (id.includes('node_modules/lucide-react')) {
+            return 'icons-vendor';
+          }
+          // Router
+          if (id.includes('node_modules/react-router-dom')) {
+            return 'router-vendor';
+          }
+          // Utilities
+          if (id.includes('node_modules/axios') || id.includes('node_modules/react-toastify')) {
+            return 'utils-vendor';
+          }
+        }
+      }
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false,
       },
     },
   },
 })
+

@@ -84,6 +84,9 @@ const Header = () => {
                     Administration
                   </Link>
                 )}
+               <Link to="/profile" className="text-sm font-black text-slate-800 hover:text-primary-600 transition-colors uppercase tracking-widest">
+                 Mon Profil
+               </Link>
                <Link to="/dashboard" className="text-sm font-black text-slate-800 hover:text-primary-600 transition-colors uppercase tracking-widest">
                  Mon Espace
                </Link>

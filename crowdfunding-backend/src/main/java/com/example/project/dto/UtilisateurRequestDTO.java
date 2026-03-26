@@ -24,7 +24,7 @@ public class UtilisateurRequestDTO {
     private String email;
     
     @Schema(description = "Mot de passe", example = "Password123!")
-    @NotBlank(message = "Le mot de passe ne doit pas être vide")
+    // Sur mise à jour, mot de passe optionnel (ne pas forcer si non changé)
     private String motsDePasse;
     
     @Schema(description = "Prénom", example = "John")
@@ -43,6 +43,12 @@ public class UtilisateurRequestDTO {
     
     @Schema(description = "Adresse physique", example = "Cocody, Abidjan")
     private String address;
+    
+    @Schema(description = "Ville", example = "Abidjan")
+    private String ville;
+    
+    @Schema(description = "Catégorie préférée", example = "Technologie")
+    private String categoriePreferee;
     
     @Schema(description = "Rôle assigné", example = "CONTRIBUTEUR")
     private UserRole role;

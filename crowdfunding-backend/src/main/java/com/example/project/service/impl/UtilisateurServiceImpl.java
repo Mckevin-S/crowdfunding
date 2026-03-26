@@ -48,6 +48,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             user.setBio(request.getBio());
         if (request.getAddress() != null)
             user.setAddress(request.getAddress());
+        if (request.getVille() != null)
+            user.setVille(request.getVille());
+        if (request.getCategoriePreferee() != null)
+            user.setCategoriePreferee(request.getCategoriePreferee());
 
         return utilisateurMapper.toResponseDTO(utilisateurRepository.save(user));
     }
