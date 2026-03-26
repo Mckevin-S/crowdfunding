@@ -24,4 +24,7 @@ public class NotificationRequestDTO {
     @Schema(description = "Contenu du message de notification", example = "Votre projet a été validé !")
     @NotBlank(message = "Le message ne doit pas être vide")
     private String message;
+
+    @Schema(description = "Envoyer également un email ?", example = "false")
+    private boolean sendEmail = false;
 }

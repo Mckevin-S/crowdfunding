@@ -10,6 +10,15 @@ import org.mapstruct.Mapping;
 public interface ProjetMapper {
 
     @Mapping(target = "porteur", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "montantActuel", ignore = true)
+    @Mapping(target = "adminNotes", ignore = true)
+    @Mapping(target = "suspensionDeadline", ignore = true)
+    @Mapping(target = "dateCreation", ignore = true)
+    @Mapping(target = "localisation", ignore = true)
+    @Mapping(target = "nombreContributeurs", ignore = true)
+    @Mapping(target = "etapes", ignore = true)
+    @Mapping(target = "rewards", ignore = true)
     Projet toEntity(ProjetRequestDTO dto);
 
     @Mapping(target = "porteurId", source = "porteur.id")

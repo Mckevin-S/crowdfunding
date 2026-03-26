@@ -2,6 +2,7 @@ package com.example.project.service.interfaces;
 
 import com.example.project.dto.ProjetRequestDTO;
 import com.example.project.dto.ProjetResponseDTO;
+import com.example.project.dto.AdminProjectReviewDTO;
 import com.example.project.enums.StatutProjet;
 
 import java.util.List;
@@ -72,7 +73,7 @@ public interface ProjetService {
      * @param nouveauStatut the new status to apply.
      * @return the updated project response.
      */
-    ProjetResponseDTO updateStatut(Long id, StatutProjet nouveauStatut);
+    ProjetResponseDTO updateStatut(Long id, AdminProjectReviewDTO review);
 
     /**
      * Periodically closes projects that have reached their end date.

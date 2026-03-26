@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight, Heart, MessageCircle } from 'lucide-react';
+import socialService from '../../services/socialService';
+import { useSelector } from 'react-redux';
 import Card from '../common/Card';
 import ProjectProgress from './ProjectProgress';
 import Button from '../common/Button';
@@ -8,7 +10,7 @@ import clsx from 'clsx';
 
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
-
+  const { user } = useSelector(state => state.auth);
   const {
     id,
     titre = 'Sans titre',
@@ -20,6 +22,20 @@ const ProjectCard = ({ project }) => {
     nombreContributeurs = 0,
     programmeIA = true,
   } = project;
+
+  const [socialStats, setSocialStats] = useState({ likesCount: 0, commentsCount: 0, isLikedByCurrentUser: false });
+
+  useEffect(() => {
+    const fetchSocialData = async () => {
+      try {
+        const stats = await socialService.getSocialStats(id, user?.id);
+        setSocialStats(stats);
+      } catch (err) {
+        console.error('Error fetching social stats', err);
+      }
+    };
+    if (id) fetchSocialData();
+  }, [id, user?.id]);
 
   const imageCouverture = _imageCouverture;
   const categorie = _categorie || 'INNOVATION';
@@ -82,9 +98,21 @@ const ProjectCard = ({ project }) => {
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-display font-black text-slate-900 mb-2 line-clamp-2 leading-tight group-hover:text-primary-600 transition-colors">
-          {titre}
-        </h3>
+        <div className="flex justify-between items-start mb-2">
+            <h3 className="text-xl font-display font-black text-slate-900 line-clamp-2 leading-tight group-hover:text-primary-600 transition-colors flex-1">
+                {titre}
+            </h3>
+            <div className="flex flex-col items-end gap-1 ml-4 transition-opacity">
+                <div className="flex items-center gap-1.5 text-xs font-black text-slate-400">
+                    <Heart className={clsx("w-3.5 h-3.5", socialStats.isLikedByCurrentUser ? "fill-red-500 text-red-500" : "")} />
+                    <span>{socialStats.likesCount}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs font-black text-slate-400">
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>{socialStats.commentsCount}</span>
+                </div>
+            </div>
+        </div>
         
         <div className="mt-4 mb-6">
           <div className="flex justify-between items-end mb-2">
@@ -113,9 +141,17 @@ const ProjectCard = ({ project }) => {
             <ShieldCheck className="w-4 h-4 fill-emerald-50" />
             <span className="text-[10px] font-black uppercase tracking-widest">Voir Profil</span>
           </button>
-          <button className="text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-primary-600 transition-all flex items-center gap-1">
-            Détails <ArrowUpRight className="w-3 h-3" />
-          </button>
+          <div className="flex items-center gap-3">
+              <button 
+                onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/projects/${id}`);
+                }}
+                className="text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-primary-600 transition-all flex items-center gap-1"
+              >
+                  Détails <ArrowUpRight className="w-3 h-3" />
+              </button>
+          </div>
         </div>
       </div>
     </Card>

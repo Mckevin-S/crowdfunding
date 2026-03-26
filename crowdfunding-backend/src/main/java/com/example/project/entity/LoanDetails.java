@@ -36,10 +36,12 @@ public class LoanDetails {
     private Integer dureeEnMois;
 
     /** Période de grâce en mois (pas de remboursement pendant cette période) */
+    @Builder.Default
     @Column(name = "grace_period_months")
     private Integer periodeGrace = 0;
 
     /** Fréquence de remboursement: MONTHLY, QUARTERLY, ANNUALLY */
+    @Builder.Default
     @Column(name = "repayment_frequency", length = 20)
     private String frequenceRemboursement = "MONTHLY";
 
@@ -60,10 +62,12 @@ public class LoanDetails {
     private String garanties;
 
     /** Taux de pénalité en cas de retard (% additionnel) */
+    @Builder.Default
     @Column(name = "penalty_rate", precision = 5, scale = 2)
     private BigDecimal tauxPenalite = BigDecimal.valueOf(2.0);
 
     /** Seuil de jours avant déclenchement du contentieux */
+    @Builder.Default
     @Column(name = "default_threshold_days")
     private Integer seuilDefautJours = 90;
 }

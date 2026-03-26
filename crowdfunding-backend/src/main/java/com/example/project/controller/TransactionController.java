@@ -46,4 +46,14 @@ public class TransactionController {
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction", id));
     }
+
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<TransactionResponseDTO>> getAllTransactions() {
+        List<TransactionResponseDTO> transactions = transactionRepository.findAll()
+                .stream()
+                .map(transactionMapper::toResponseDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(transactions);
+    }
 }

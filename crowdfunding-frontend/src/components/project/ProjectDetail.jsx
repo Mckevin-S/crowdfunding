@@ -11,7 +11,9 @@ import {
   ArrowLeft,
   CheckCircle2,
   TrendingUp,
-  MessageCircle
+  MessageCircle,
+  Send,
+  Trash2
 } from 'lucide-react';
 import Button from '@components/common/Button';
 import Card from '@components/common/Card';
@@ -19,14 +21,22 @@ import Badge from '@components/common/Badge';
 import ProjectProgress from '@components/project/ProjectProgress';
 import clsx from 'clsx';
 import ContributionModal from './ContributionModal';
+import socialService from '../../services/socialService';
+import { toast } from 'react-toastify';
+import { formatDistanceToNow } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 const ProjectDetail = ({ project }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('histoire');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const [comments, setComments] = useState([]);
+  const [socialStats, setSocialStats] = useState({ likesCount: 0, commentsCount: 0, sharesCount: 0, isLikedByCurrentUser: false });
+  const [loadingComments, setLoadingComments] = useState(false);
   
   const { isAuthenticated, user: activeUser } = useSelector(state => state.auth);
-
+  
   const {
     id,
     titre,
@@ -38,7 +48,78 @@ const ProjectDetail = ({ project }) => {
     imageCouverture,
     categorie = 'AGRICULTURE',
     createurNom = 'InvestAFRIKA Partner',
-  } = project;
+    porteurId
+  } = project || {};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const stats = await socialService.getSocialStats(id, activeUser?.id);
+        setSocialStats(stats);
+        
+        setLoadingComments(true);
+        const fetchedComments = await socialService.getCommentsByProject(id);
+        setComments(fetchedComments);
+      } catch (err) {
+        console.error('Error fetching social data', err);
+      } finally {
+        setLoadingComments(false);
+      }
+    };
+    if (id) fetchData();
+  }, [id, activeUser?.id]);
+
+  const handleLike = async () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    try {
+      await socialService.toggleLike(id, activeUser.id);
+      const newStats = await socialService.getSocialStats(id, activeUser.id);
+      setSocialStats(newStats);
+      if (!socialStats.isLikedByCurrentUser) {
+        toast.success('Pépites aimée !');
+      }
+    } catch (err) {
+      toast.error('Erreur lors de l\'interaction');
+    }
+  };
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    if (!commentText.trim()) return;
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    try {
+      await socialService.addComment({
+        projetId: id,
+        utilisateurId: activeUser.id,
+        contenu: commentText
+      });
+      setCommentText('');
+      const updatedComments = await socialService.getCommentsByProject(id);
+      setComments(updatedComments);
+      toast.success('Commentaire publié !');
+    } catch (err) {
+      toast.error('Erreur lors de la publication');
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      if (isAuthenticated) {
+        await socialService.trackShare(id, activeUser.id);
+      }
+      toast.success('Lien du projet copié !');
+    } catch (err) {
+      toast.error('Impossible de copier le lien');
+    }
+  };
+
 
   const percentage = Math.min(Math.round((montantActuel / objectifFinancier) * 100), 100);
   const daysLeft = Math.ceil((new Date(dateFin) - new Date()) / (1000 * 60 * 60 * 24)) || 0;
@@ -46,7 +127,7 @@ const ProjectDetail = ({ project }) => {
   const tabs = [
     { id: 'histoire', label: 'L\'Histoire' },
     { id: 'actualites', label: 'Actualités' },
-    { id: 'commentaires', label: 'Commentaires' },
+    { id: 'commentaires', label: `Commentaires (${comments.length})` },
   ];
 
   return (
@@ -108,9 +189,65 @@ const ProjectDetail = ({ project }) => {
               </div>
             )}
             {activeTab === 'commentaires' && (
-              <div className="text-center py-20 bg-gray-50 rounded-[2rem] border border-dashed border-gray-200">
-                <MessageCircle className="w-10 h-10 text-gray-200 mx-auto mb-4" />
-                <p className="text-gray-400 italic font-bold">Soyez le premier à commenter !</p>
+              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                {/* Formulaire de commentaire */}
+                <form onSubmit={handleComment} className="bg-gray-50 rounded-3xl p-6 border border-gray-100">
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-bold flex-shrink-0">
+                      {activeUser?.prenom?.[0] || '?'}
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <textarea
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        placeholder="Qu'en pensez-vous ?"
+                        className="w-full bg-white border border-gray-100 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all min-h-[100px] resize-none"
+                      />
+                      <div className="flex justify-end">
+                        <Button 
+                          type="submit" 
+                          size="sm" 
+                          disabled={!commentText.trim()}
+                        >
+                          Publier
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                {/* Liste des commentaires */}
+                <div className="space-y-6">
+                  {loadingComments ? (
+                    <p className="text-center text-gray-400 italic">Chargement des avis...</p>
+                  ) : comments.length > 0 ? (
+                    comments.map(comment => (
+                      <div key={comment.id} className="flex gap-4 group">
+                        <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold flex-shrink-0">
+                          {comment.utilisateurNom?.[0] || '?'}
+                        </div>
+                        <div className="flex-1">
+                          <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm group-hover:shadow-md transition-all">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="font-bold text-slate-900 text-sm">{comment.utilisateurNom}</span>
+                              <span className="text-[10px] font-bold text-slate-400">
+                                {formatDistanceToNow(new Date(comment.dateCreation), { addSuffix: true, locale: fr })}
+                              </span>
+                            </div>
+                            <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                              {comment.contenu}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-10 bg-gray-50 rounded-[2rem] border border-dashed border-gray-200">
+                      <MessageCircle className="w-8 h-8 text-gray-200 mx-auto mb-3" />
+                      <p className="text-gray-400 italic font-bold">Soyez le premier à commenter !</p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -175,11 +312,20 @@ const ProjectDetail = ({ project }) => {
               </Button>
 
               <div className="flex items-center gap-4">
-                 <button className="flex-1 h-12 rounded-xl border border-white/10 flex items-center justify-center gap-2 text-xs font-bold hover:bg-white/5 transition-all">
+                 <button 
+                  onClick={handleShare}
+                  className="flex-1 h-12 rounded-xl border border-white/10 flex items-center justify-center gap-2 text-xs font-bold hover:bg-white/5 transition-all text-white/90"
+                 >
                     <Share2 className="w-4 h-4" /> Partager
                  </button>
-                 <button className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all">
-                    <Heart className="w-4 h-4" />
+                 <button 
+                  onClick={handleLike}
+                  className={clsx(
+                    "w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center transition-all",
+                    socialStats.isLikedByCurrentUser ? "bg-red-500/20 text-red-500 border-red-500/30" : "hover:bg-white/5"
+                  )}
+                 >
+                    <Heart className={clsx("w-4 h-4", socialStats.isLikedByCurrentUser ? "fill-current" : "")} />
                  </button>
               </div>
 

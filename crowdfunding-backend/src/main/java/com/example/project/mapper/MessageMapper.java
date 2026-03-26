@@ -12,6 +12,9 @@ public interface MessageMapper {
     @Mapping(target = "expediteur", ignore = true)
     @Mapping(target = "destinataire", ignore = true)
     @Mapping(target = "projet", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "lu", ignore = true)
+    @Mapping(target = "dateEnvoi", ignore = true)
     Message toEntity(MessageRequestDTO dto);
 
     @Mapping(target = "expediteurId", source = "expediteur.id")

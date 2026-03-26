@@ -30,7 +30,13 @@ const LoginForm = () => {
       const result = await dispatch(loginUser(values));
       if (loginUser.fulfilled.match(result)) {
         toast.success('Bon retour parmi nous !');
-        navigate('/dashboard');
+        if (result.payload.role === 'ADMIN') {
+          navigate('/admin/dashboard');
+        } else if (result.payload.role === 'PORTEUR_PROJET') {
+          navigate('/porteur/dashboard');
+        } else {
+          navigate('/investisseur/dashboard');
+        }
       }
     },
   });

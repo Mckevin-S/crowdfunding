@@ -45,34 +45,37 @@ const ContributionModal = ({ isOpen, onClose, project, user }) => {
 
     setLoading(true);
     try {
-      const data = {
-        projetId: project.id,
-        utilisateurId: user.id,
-        amount: parseFloat(amount),
-        paiementType: paymentMethod,
-        currency: 'XAF'
-      };
-
-      const initiation = await contributionService.initiate(data);
-      setStep(3); // Go to processing (simulation)
+      // Simulation pour tous les modes de paiement comme demandé par l'utilisateur
+      setStep(3); // Étape de chargement/simulation
       
-      // Simulation delay
+      // Delai de simulation (2.5 secondes)
       setTimeout(async () => {
         try {
-          await contributionService.confirm(initiation.id);
-          toast.success('Paiement réussi !');
+          // On notifie tout de même le backend pour créer une trace de contribution (si besoin)
+          const data = {
+            projetId: project.id,
+            utilisateurId: user.id,
+            amount: parseFloat(amount),
+            paiementType: paymentMethod,
+            currency: 'XAF'
+          };
+          
+          await contributionService.initiate(data);
+          
+          toast.success('Paiement simulé avec succès !');
           onClose();
-          navigate(`/payment/success?id=${initiation.id}`);
+          navigate(`/payment/success?status=simulated&amount=${amount}`);
         } catch (err) {
-          toast.error('Erreur lors de la confirmation du paiement');
+          // Même en simulation, on gère les erreurs potentielles du backend
+          toast.error('Simulation échouée (erreur serveur)');
           setStep(2);
         } finally {
           setLoading(false);
         }
-      }, 2000);
+      }, 2500);
 
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Erreur lors de l\'initiation du paiement');
+      toast.error('Une erreur est survenue pendant la simulation');
       setLoading(false);
     }
   };

@@ -1,0 +1,9 @@
+-- V20260305__create_audit_log.sql
+CREATE TABLE audit_logs (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  action VARCHAR(255) NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  ip VARCHAR(45),
+  details JSON
+);

@@ -51,6 +51,13 @@ public class Projet {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatutProjet statut;
+
+    // Admin specific fields
+    @Column(name = "admin_notes", columnDefinition = "TEXT")
+    private String adminNotes;
+
+    @Column(name = "suspension_deadline")
+    private LocalDateTime suspensionDeadline;
     
     @Column(name = "start_date")
     private LocalDate dateDebut;

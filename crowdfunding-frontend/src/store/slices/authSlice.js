@@ -8,6 +8,7 @@ export const loginUser = createAsyncThunk(
       const response = await authService.login(credentials);
       const data = response.data;
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Identifiants invalides');
@@ -22,6 +23,7 @@ export const registerUser = createAsyncThunk(
       const response = await authService.register(userData);
       const data = response.data;
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Erreur lors de l\'inscription');
@@ -36,6 +38,7 @@ export const googleLogin = createAsyncThunk(
       const response = await authService.googleLogin(idToken);
       const data = response.data;
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Échec de la connexion Google');
@@ -46,7 +49,7 @@ export const googleLogin = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     token: localStorage.getItem('token'),
     isAuthenticated: !!localStorage.getItem('token'),
     loading: false,
@@ -58,6 +61,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
     },
     clearError: (state) => {
       state.error = null;

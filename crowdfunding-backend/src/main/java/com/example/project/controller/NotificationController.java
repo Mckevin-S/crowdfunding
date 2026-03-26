@@ -49,12 +49,10 @@ public class NotificationController {
     }
 
     /**
-     * Lists all notifications for a specific user.
-     *
      * @param utilisateurId the user ID.
      * @return a list of notifications.
      */
-    @GetMapping("/utilisateur/{utilisateurId}")
+    @GetMapping("/user/{utilisateurId}")
     @PreAuthorize("hasRole('ADMIN') or @securityService.isCurrentUser(#utilisateurId)")
     @Operation(summary = "Lister les notifications d'un utilisateur", description = "Affiche toutes les notifications reçues par un utilisateur spécifique.")
     @SecurityRequirement(name = "bearerAuth")

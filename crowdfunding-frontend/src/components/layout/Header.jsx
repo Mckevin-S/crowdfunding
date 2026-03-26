@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Menu, X, Rocket } from 'lucide-react';
 import Button from '../common/Button';
+import NotificationDropdown from '../common/NotificationDropdown';
 import clsx from 'clsx';
 
 const Header = () => {
@@ -87,9 +88,13 @@ const Header = () => {
                <Link to="/profile" className="text-sm font-black text-slate-800 hover:text-primary-600 transition-colors uppercase tracking-widest">
                  Mon Profil
                </Link>
-               <Link to="/dashboard" className="text-sm font-black text-slate-800 hover:text-primary-600 transition-colors uppercase tracking-widest">
+               <Link 
+                 to={user?.role === 'ADMIN' ? '/admin/dashboard' : user?.role === 'PORTEUR_PROJET' ? '/porteur/dashboard' : '/investisseur/dashboard'} 
+                 className="text-sm font-black text-slate-800 hover:text-primary-600 transition-colors uppercase tracking-widest"
+               >
                  Mon Espace
                </Link>
+               <NotificationDropdown />
                <Button 
                  variant="outline" 
                  size="sm" 

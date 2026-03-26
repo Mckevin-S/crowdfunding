@@ -7,11 +7,16 @@ import com.example.project.entity.Utilisateur;
 import com.example.project.enums.StatutProjet;
 import com.example.project.exception.BadRequestException;
 import com.example.project.exception.ResourceNotFoundException;
+import com.example.project.dto.AdminProjectReviewDTO;
 import com.example.project.mapper.ProjetMapper;
 import com.example.project.repository.ProjetRepository;
 import com.example.project.repository.UtilisateurRepository;
+import com.example.project.service.interfaces.AuditLogService;
+import com.example.project.service.interfaces.NotificationService;
+import com.example.project.dto.NotificationRequestDTO;
 import com.example.project.service.interfaces.ProjetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +36,8 @@ public class ProjetServiceImpl implements ProjetService {
     private final ProjetRepository projetRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final ProjetMapper projetMapper;
+    private final AuditLogService auditLogService;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional
@@ -109,10 +116,56 @@ public class ProjetServiceImpl implements ProjetService {
 
     @Override
     @Transactional
-    public ProjetResponseDTO updateStatut(Long id, StatutProjet nouveauStatut) {
+    public ProjetResponseDTO updateStatut(Long id, AdminProjectReviewDTO review) {
         Projet projet = getProjetById(id);
-        projet.setStatut(nouveauStatut);
-        return projetMapper.toResponseDTO(projetRepository.save(projet));
+        projet.setStatut(review.getStatut());
+        
+        // Admin notes et suspension deadline s'ils sont applicables (rejet, suspension)
+        if (review.getAdminNotes() != null) {
+            projet.setAdminNotes(review.getAdminNotes());
+        }
+        if (review.getSuspensionDeadline() != null) {
+            projet.setSuspensionDeadline(review.getSuspensionDeadline());
+        }
+        
+        Projet updatedProjet = projetRepository.save(projet);
+        
+        // Audit logging
+        try {
+            String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+            Utilisateur admin = utilisateurRepository.findByEmail(currentUserEmail).orElse(null);
+            if (admin != null) {
+                String actionDetails = String.format("{\"projetId\": %d, \"nouveauStatut\": \"%s\", \"notes\": \"%s\"}", 
+                    id, review.getStatut().name(), review.getAdminNotes() != null ? review.getAdminNotes() : "");
+                auditLogService.logAction(admin.getId(), "PROJET_STATUS_UPDATE", null, actionDetails);
+            }
+        } catch (Exception e) {
+            // Ne pas bloquer la transaction en cas d'erreur de journalisation
+        }
+        
+        // --- NOTIFICATION ---
+        try {
+            String message = "";
+            boolean isCritical = false;
+            if (updatedProjet.getStatut() == StatutProjet.EN_COURS) {
+                message = "Félicitations ! Votre projet '" + updatedProjet.getTitre() + "' a été validé par l'administration.";
+            } else if (updatedProjet.getStatut() == StatutProjet.REJETE) {
+                message = "Votre projet '" + updatedProjet.getTitre() + "' a été rejeté. Motif : " + updatedProjet.getAdminNotes();
+                isCritical = true;
+            }
+            
+            if (!message.isEmpty()) {
+                notificationService.createNotification(new NotificationRequestDTO(
+                    updatedProjet.getPorteur().getId(),
+                    message,
+                    isCritical
+                ));
+            }
+        } catch (Exception e) {
+            // Log but don't fail project status update
+        }
+        
+        return projetMapper.toResponseDTO(updatedProjet);
     }
 
     @Override

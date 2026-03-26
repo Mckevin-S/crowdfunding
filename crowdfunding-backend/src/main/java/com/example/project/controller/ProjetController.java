@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import com.example.project.dto.ProjetRequestDTO;
 import com.example.project.dto.ProjetResponseDTO;
+import com.example.project.dto.AdminProjectReviewDTO;
 import com.example.project.enums.StatutProjet;
 import com.example.project.service.interfaces.ProjetService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -141,8 +142,8 @@ public class ProjetController {
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<ProjetResponseDTO> updateStatut(
             @PathVariable Long id, 
-            @RequestParam StatutProjet statut) {
-        log.info("UPDATE_STATUT_PROJET: Changement de statut pour le projet ID: {} vers {}", id, statut);
-        return ResponseEntity.ok(projetService.updateStatut(id, statut));
+            @Valid @RequestBody AdminProjectReviewDTO review) {
+        log.info("UPDATE_STATUT_PROJET: Changement de statut pour le projet ID: {} vers {}", id, review.getStatut());
+        return ResponseEntity.ok(projetService.updateStatut(id, review));
     }
 }

@@ -1,9 +1,20 @@
 import api from './api';
 
 export const notificationService = {
-  getNotifications: (params) => api.get('/notifications', { params }),
-  markAsRead: (notificationId) => api.patch(`/notifications/${notificationId}/read`),
-  deleteNotification: (notificationId) => api.delete(`/notifications/${notificationId}`),
-  getUnreadCount: () => api.get('/notifications/unread/count'),
-  markAllAsRead: () => api.patch('/notifications/mark-all-read'),
+  // Récupérer les notifications de l'utilisateur actuel
+  getNotificationsByUser: (userId) => {
+    return api.get(`/notifications/user/${userId}`);
+  },
+
+  // Marquer une notification comme lue
+  markAsRead: (id) => {
+    return api.put(`/notifications/${id}/read`);
+  },
+
+  // Créer une notification (principalement pour l'admin ou usage système)
+  createNotification: (data) => {
+    return api.post('/notifications', data);
+  }
 };
+
+export default notificationService;

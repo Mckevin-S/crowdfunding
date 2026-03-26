@@ -10,6 +10,8 @@ import com.example.project.mapper.KycDocumentMapper;
 import com.example.project.repository.KycDocumentRepository;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.service.interfaces.KycDocumentService;
+import com.example.project.service.interfaces.NotificationService;
+import com.example.project.dto.NotificationRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class KycDocumentServiceImpl implements KycDocumentService {
     private final KycDocumentRepository kycDocumentRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final KycDocumentMapper kycDocumentMapper;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional
@@ -50,6 +53,13 @@ public class KycDocumentServiceImpl implements KycDocumentService {
     }
 
     @Override
+    public List<KycDocumentResponseDTO> getAllDocuments() {
+        return kycDocumentRepository.findAll().stream()
+                .map(kycDocumentMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<KycDocumentResponseDTO> getDocumentsByUser(Long utilisateurId) {
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", utilisateurId));
@@ -68,6 +78,28 @@ public class KycDocumentServiceImpl implements KycDocumentService {
         document.setStatut(status);
         document.setRejectionReason(reason);
 
-        kycDocumentRepository.save(document);
+        KycDocument updatedDoc = kycDocumentRepository.save(document);
+
+        // --- NOTIFICATION ---
+        try {
+            String msg = "";
+            boolean isCritical = false;
+            if (status == StatutDocument.APPROUVE) {
+                msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été approuvé.";
+            } else if (status == StatutDocument.REJETE) {
+                msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été rejeté. Motif : " + reason;
+                isCritical = true;
+            }
+
+            if (!msg.isEmpty()) {
+                notificationService.createNotification(new NotificationRequestDTO(
+                    updatedDoc.getUtilisateur().getId(),
+                    msg,
+                    isCritical
+                ));
+            }
+        } catch (Exception e) {
+            // Log but don't fail status update
+        }
     }
 }

@@ -11,6 +11,7 @@ public interface RecommendationMapper {
 
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "projet", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Recommendation toEntity(RecommendationRequestDTO dto);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")

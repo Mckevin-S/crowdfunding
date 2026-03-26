@@ -29,6 +29,13 @@ public interface KycDocumentService {
     KycDocumentResponseDTO getDocument(Long id);
 
     /**
+     * Lists all KYC documents.
+     *
+     * @return a list of all documents.
+     */
+    List<KycDocumentResponseDTO> getAllDocuments();
+
+    /**
      * Lists all KYC documents for a specific user.
      *
      * @param utilisateurId the user ID.

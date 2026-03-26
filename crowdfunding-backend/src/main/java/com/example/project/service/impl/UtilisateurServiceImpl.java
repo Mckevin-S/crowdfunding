@@ -8,6 +8,8 @@ import com.example.project.exception.ResourceNotFoundException;
 import com.example.project.mapper.UtilisateurMapper;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.service.interfaces.UtilisateurService;
+import com.example.project.service.interfaces.NotificationService;
+import com.example.project.dto.NotificationRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final UtilisateurMapper utilisateurMapper;
+    private final NotificationService notificationService;
 
     @Override
     public UtilisateurResponseDTO getProfil(Long id) {
@@ -69,6 +72,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Utilisateur user = getUtilisateurById(id);
         user.setStatut(UserStatus.BANNED);
         utilisateurRepository.save(user);
+        
+        // --- NOTIFICATION ---
+        try {
+            notificationService.createNotification(new NotificationRequestDTO(
+                id,
+                "Votre compte a été suspendu par l'administration. Veuillez contacter le support pour plus d'informations.",
+                true // Critical (Email)
+            ));
+        } catch (Exception e) {
+            // Log
+        }
     }
 
     @Override
@@ -77,6 +91,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Utilisateur user = getUtilisateurById(id);
         user.setStatut(UserStatus.ACTIVE);
         utilisateurRepository.save(user);
+        
+        // --- NOTIFICATION ---
+        try {
+            notificationService.createNotification(new NotificationRequestDTO(
+                id,
+                "Bonne nouvelle ! Votre compte a été réactivé. Vous pouvez de nouveau accéder à toutes les fonctionnalités.",
+                true // Critical (Email)
+            ));
+        } catch (Exception e) {
+            // Log
+        }
     }
 
     private Utilisateur getUtilisateurById(Long id) {

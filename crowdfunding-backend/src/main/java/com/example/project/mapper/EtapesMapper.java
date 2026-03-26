@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface EtapesMapper {
 
     @Mapping(target = "projet", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Etapes toEntity(EtapesRequestDTO dto);
 
     @Mapping(target = "projetId", source = "projet.id")

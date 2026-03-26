@@ -10,6 +10,11 @@ import org.mapstruct.Mapping;
 public interface RewardMapper {
 
     @Mapping(target = "projet", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "quantiteReservee", ignore = true)
+    @Mapping(target = "dateLivraisonEstimee", ignore = true)
+    @Mapping(target = "statutLivraison", ignore = true)
+    @Mapping(target = "numeroSuivi", ignore = true)
     Reward toEntity(RewardRequestDTO dto);
 
     @Mapping(target = "projetId", source = "projet.id")

@@ -10,6 +10,8 @@ import org.mapstruct.Mapping;
 public interface WalletMapper {
 
     @Mapping(target = "utilisateur", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateCreation", ignore = true)
     Wallet toEntity(WalletRequestDTO dto);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")

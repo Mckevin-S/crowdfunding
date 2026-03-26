@@ -56,6 +56,7 @@ public class EquityDetails {
     private BigDecimal investissementMaximumParInvestisseur;
 
     /** Nombre d'actions déjà distribuées aux investisseurs crowdfunding */
+    @Builder.Default
     @Column(name = "distributed_shares")
     private Long actionsDistribuees = 0L;
 }

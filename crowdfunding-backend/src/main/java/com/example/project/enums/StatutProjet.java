@@ -5,5 +5,6 @@ public enum StatutProjet {
     PUBLIE,
     EN_COURS,
     TERMINE,
-    ECHEC
+    ECHEC,
+    REJETE
 }

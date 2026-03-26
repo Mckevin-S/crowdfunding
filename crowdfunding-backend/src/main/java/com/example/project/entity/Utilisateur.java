@@ -38,6 +38,10 @@ public class Utilisateur {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
+
+    // Admin specific field
+    @Column(name = "admin_notes", columnDefinition = "TEXT")
+    private String adminNotes;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

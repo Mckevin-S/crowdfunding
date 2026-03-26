@@ -43,6 +43,7 @@ public class Reward {
     private Integer quantite;
 
     /** Combien ont déjà été réservés */
+    @Builder.Default
     @Column(name = "reserved_quantity")
     private Integer quantiteReservee = 0;
 
@@ -50,6 +51,7 @@ public class Reward {
     @Column(name = "estimated_delivery")
     private LocalDate dateLivraisonEstimee;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_status")
     private DeliveryStatus statutLivraison = DeliveryStatus.EN_PREPARATION;

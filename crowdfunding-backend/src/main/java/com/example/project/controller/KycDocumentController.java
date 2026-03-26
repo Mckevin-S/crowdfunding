@@ -62,6 +62,19 @@ public class KycDocumentController {
     }
 
     /**
+     * Retrieves all documents (Admin only).
+     *
+     * @return a list of all documents.
+     */
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Lister tous les documents", description = "Récupère la liste de tous les documents KYC (Admin uniquement).")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<List<KycDocumentResponseDTO>> getAllDocuments() {
+        return ResponseEntity.ok(kycDocumentService.getAllDocuments());
+    }
+
+    /**
      * Lists all documents submitted by a specific user.
      *
      * @param utilisateurId the user ID.

@@ -11,6 +11,10 @@ public interface TransactionMapper {
 
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "sourceAmount", ignore = true)
+    @Mapping(target = "sourceCurrency", ignore = true)
+    @Mapping(target = "dateCreation", ignore = true)
     Transaction toEntity(TransactionRequestDTO dto);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")

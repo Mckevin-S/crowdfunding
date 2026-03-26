@@ -11,6 +11,9 @@ public interface KycDocumentMapper {
 
     @Mapping(target = "utilisateur", ignore = true)
     @Mapping(target = "statut", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
+    @Mapping(target = "dateSoumission", ignore = true)
     KycDocument toEntity(KycDocumentRequestDTO dto);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")

@@ -45,9 +45,11 @@ public class Contribution {
     private BigDecimal sourceAmount;
 
     /** Devise d'origine (EUR, USD, XAF, etc.) */
+    @Builder.Default
     @Column(name = "source_currency", length = 3)
     private String sourceCurrency = "XAF";
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ContribStatus status = ContribStatus.PENDING;
@@ -75,6 +77,7 @@ public class Contribution {
     private Long actionsRecues;
 
     /** Note anonyme (true = le contributeur veut rester anonyme) */
+    @Builder.Default
     @Column(name = "anonymous")
     private Boolean anonyme = false;
 

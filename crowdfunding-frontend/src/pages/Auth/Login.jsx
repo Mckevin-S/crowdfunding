@@ -26,14 +26,20 @@ const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [rememberMe, setRememberMe] = useState(false);
-  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated, user } = useSelector((state) => state.auth);
   const from = location.state?.from?.pathname || '/dashboard';
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate(from, { replace: true });
+    // Only redirect if they organically visit /login while already logged in
+    // LoginForm handles explicit login submission routing
+    if (isAuthenticated && user) {
+      if (user.role === 'ADMIN') {
+        navigate('/admin/dashboard', { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
     }
-  }, [isAuthenticated, navigate, from]);
+  }, [isAuthenticated, user, navigate, from]);
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-white">
@@ -199,9 +205,15 @@ const Login = () => {
               onSuccess={credentialResponse => {
                 dispatch(googleLogin(credentialResponse.credential))
                   .unwrap()
-                  .then(() => {
+                  .then((payload) => {
                     toast.success('Bienvenue !');
-                    navigate('/dashboard');
+                    if (payload.role === 'ADMIN') {
+                      navigate('/admin/dashboard');
+                    } else if (payload.role === 'PORTEUR_PROJET') {
+                      navigate('/porteur/dashboard');
+                    } else {
+                      navigate('/investisseur/dashboard');
+                    }
                   });
               }}
               onError={() => toast.error('Échec de la connexion Google')}

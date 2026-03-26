@@ -18,6 +18,8 @@ import com.example.project.enums.TypeFinancement;
 import com.example.project.repository.TransactionRepository;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.service.interfaces.CurrencyService;
+import com.example.project.service.interfaces.NotificationService;
+import com.example.project.dto.NotificationRequestDTO;
 import com.example.project.service.interfaces.ContributionService;
 import com.example.project.util.PdfGeneratorService;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +52,7 @@ public class ContributionServiceImpl implements ContributionService {
         private final CurrencyService currencyService;
         private final StripeService stripeService;
         private final CinetPayService cinetPayService;
+        private final NotificationService notificationService;
 
         @Override
         @Transactional
@@ -189,6 +192,21 @@ public class ContributionServiceImpl implements ContributionService {
                 trans.setType(contribution.getPaiementType());
                 trans.setStatus(StatutTransaction.CONFIRMER);
                 transactionRepository.save(trans);
+ 
+                // --- NOTIFICATIONS ---
+                try {
+                        // Notify Owner
+                        String ownerMsg = String.format("🎉 Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.", 
+                            contribution.getAmount().toString(), projet.getTitre());
+                        notificationService.createNotification(new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, false));
+                        
+                        // Notify Contributor
+                        String contribMsg = String.format("✔️ Merci ! Votre contribution de %s XAF pour le projet '%s' est confirmée.", 
+                            contribution.getAmount().toString(), projet.getTitre());
+                        notificationService.createNotification(new NotificationRequestDTO(contribution.getUtilisateur().getId(), contribMsg, false));
+                } catch (Exception e) {
+                        // Log but don't fail transaction
+                }
         }
 }
 

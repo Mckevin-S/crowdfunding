@@ -43,9 +43,13 @@ public class NotificationServiceImpl implements NotificationService {
 
         notification = notificationRepository.save(notification);
 
-        // Send email in background asynchronously ideally, here synchronous for
-        // simplicity
-        emailService.sendSimpleMessage(utilisateur.getEmail(), "Nouvelle notification", request.getMessage());
+        if (request.isSendEmail()) {
+            try {
+                emailService.sendSimpleMessage(utilisateur.getEmail(), "Nouvelle notification importante", request.getMessage());
+            } catch (Exception e) {
+                // Log but don't fail notification creation
+            }
+        }
 
         return notificationMapper.toResponseDTO(notification);
     }

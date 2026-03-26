@@ -10,6 +10,8 @@ import org.mapstruct.Mapping;
 public interface AnalyseIAMapper {
 
     @Mapping(target = "projet", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateCreation", ignore = true)
     AnalyseIA toEntity(AnalyseIARequestDTO dto);
 
     @Mapping(target = "projetId", source = "projet.id")

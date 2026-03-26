@@ -8,6 +8,7 @@ const projectService = {
   getProjetsByPorteur: (porteurId) => axios.get(`/projets/porteur/${porteurId}`),
   updateProject: (id, data) => axios.put(`/projets/${id}`, data),
   deleteProject: (id) => axios.delete(`/projets/${id}`),
+  updateProjectStatus: (id, data) => axios.patch(`/projets/${id}/statut`, data),
 };
 
 export default projectService;
