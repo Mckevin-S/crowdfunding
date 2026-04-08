@@ -32,6 +32,12 @@ public class KycDocumentResponseDTO {
     
     @Schema(description = "Statut de validation", example = "EN_ATTENTE")
     private StatutDocument statut;
+
+    @Schema(description = "Nom complet de l'utilisateur", example = "Jean Dupont")
+    private String nomComplet;
+
+    @Schema(description = "Email de l'utilisateur", example = "jean.dupont@example.com")
+    private String email;
     
     @Schema(description = "Motif de rejet (si applicable)", example = "Photo floue")
     private String rejectionReason;

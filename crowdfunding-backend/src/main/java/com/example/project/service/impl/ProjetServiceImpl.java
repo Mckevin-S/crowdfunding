@@ -146,12 +146,10 @@ public class ProjetServiceImpl implements ProjetService {
         // --- NOTIFICATION ---
         try {
             String message = "";
-            boolean isCritical = false;
             if (updatedProjet.getStatut() == StatutProjet.EN_COURS) {
                 message = "Félicitations ! Votre projet '" + updatedProjet.getTitre() + "' a été validé par l'administration.";
             } else if (updatedProjet.getStatut() == StatutProjet.REJETE) {
                 message = "Votre projet '" + updatedProjet.getTitre() + "' a été rejeté. Motif : " + updatedProjet.getAdminNotes();
-                isCritical = true;
             }
             
             if (!message.isEmpty()) {

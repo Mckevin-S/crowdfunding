@@ -31,6 +31,23 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/fetchMe',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await authService.getCurrentUser();
+      const data = response.data;
+      // On ne remplace pas le token lors d'un fetch de profil
+      const storedToken = localStorage.getItem('token');
+      const userData = { ...data, token: storedToken };
+      localStorage.setItem('user', JSON.stringify(userData));
+      return userData;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Session expirée');
+    }
+  }
+);
+
 export const googleLogin = createAsyncThunk(
   'auth/google',
   async ({ idToken, role }, { rejectWithValue }) => {
@@ -113,6 +130,10 @@ const authSlice = createSlice({
       .addCase(googleLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      // Fetch Current User
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
   },
 });

@@ -41,6 +41,7 @@ const AdminConfig = lazy(() => import('@pages/Admin/AdminConfig'));
 const AdminProfile = lazy(() => import('@pages/Admin/AdminProfile'));
 
 import UserDashboardLayout from '../components/layout/UserDashboardLayout';
+import GlobalChatbot from '../components/ui/GlobalChatbot';
 
 const AppRoutes = () => {
   return (
@@ -89,6 +90,7 @@ const AppRoutes = () => {
           </Routes>
         </Suspense>
       </Layout>
+      <GlobalChatbot />
     </Router>
   );
 };

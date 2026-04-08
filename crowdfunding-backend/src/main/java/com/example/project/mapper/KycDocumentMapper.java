@@ -17,6 +17,8 @@ public interface KycDocumentMapper {
     KycDocument toEntity(KycDocumentRequestDTO dto);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
+    @Mapping(target = "email", source = "utilisateur.email")
+    @Mapping(target = "nomComplet", expression = "java(entity.getUtilisateur().getPrenom() + \" \" + entity.getUtilisateur().getNom())")
     KycDocumentResponseDTO toResponseDTO(KycDocument entity);
 
     @Mapping(target = "utilisateurId", source = "utilisateur.id")

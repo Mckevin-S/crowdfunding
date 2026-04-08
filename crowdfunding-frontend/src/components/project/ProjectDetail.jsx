@@ -26,6 +26,8 @@ import { toast } from 'react-toastify';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
+import AIAnalysisSection from './AIAnalysisSection';
+
 const ProjectDetail = ({ project }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('histoire');
@@ -34,6 +36,7 @@ const ProjectDetail = ({ project }) => {
   const [comments, setComments] = useState([]);
   const [socialStats, setSocialStats] = useState({ likesCount: 0, commentsCount: 0, sharesCount: 0, isLikedByCurrentUser: false });
   const [loadingComments, setLoadingComments] = useState(false);
+  const [hasContributed, setHasContributed] = useState(false);
   
   const { isAuthenticated, user: activeUser } = useSelector(state => state.auth);
   
@@ -60,6 +63,13 @@ const ProjectDetail = ({ project }) => {
         setLoadingComments(true);
         const fetchedComments = await socialService.getCommentsByProject(id);
         setComments(fetchedComments);
+
+        // Vérifier si l'utilisateur a contribué
+        if (isAuthenticated && activeUser?.id) {
+          const res = await api.get(`/contributions/utilisateur/${activeUser.id}`);
+          const contributed = (res.data || []).some(c => c.projetId === id && c.status === 'COMPLETED');
+          setHasContributed(contributed);
+        }
       } catch (err) {
         console.error('Error fetching social data', err);
       } finally {
@@ -67,7 +77,7 @@ const ProjectDetail = ({ project }) => {
       }
     };
     if (id) fetchData();
-  }, [id, activeUser?.id]);
+  }, [id, activeUser?.id, isAuthenticated]);
 
   const handleLike = async () => {
     if (!isAuthenticated) {
@@ -128,6 +138,7 @@ const ProjectDetail = ({ project }) => {
     { id: 'histoire', label: 'L\'Histoire' },
     { id: 'actualites', label: 'Actualités' },
     { id: 'commentaires', label: `Commentaires (${comments.length})` },
+    { id: 'ia-analyse', label: 'Analyse IA 🤖' },
   ];
 
   return (
@@ -250,6 +261,9 @@ const ProjectDetail = ({ project }) => {
                 </div>
               </div>
             )}
+            {activeTab === 'ia-analyse' && (
+              <AIAnalysisSection project={project} user={activeUser} />
+            )}
           </div>
         </div>
 
@@ -355,18 +369,39 @@ const ProjectDetail = ({ project }) => {
              </div>
              
              {activeUser?.id !== project.porteurId && (
-               <Button 
-                variant="outline" 
-                onClick={() => {
-                  if (!isAuthenticated) {
-                    navigate(`/login?redirect=/projects/${id}`);
-                    return;
-                  }
-                  navigate('/messages');
-                }}
-               >
-                 Contacter
-               </Button>
+               <div className="flex flex-col gap-2 w-full">
+                 <Button 
+                   variant={hasContributed ? "primary" : "outline"}
+                   fullWidth
+                   onClick={() => {
+                     if (!isAuthenticated) {
+                       navigate(`/login?redirect=/projects/${id}`);
+                       return;
+                     }
+                     if (!hasContributed && activeUser?.role !== 'ADMIN') {
+                       toast.info("Soutenez ce projet pour pouvoir contacter le porteur.");
+                       return;
+                     }
+                     navigate('/messages', { 
+                       state: { 
+                         userId: activeUser.id,
+                         partnerId: porteurId, 
+                         partnerName: createurNom, 
+                         projectId: id, 
+                         projectTitle: titre 
+                       } 
+                     });
+                   }}
+                   leftIcon={<MessageCircle className="w-4 h-4" />}
+                 >
+                   {hasContributed ? "Contacter le porteur" : "Contribuer pour contacter"}
+                 </Button>
+                 {!hasContributed && activeUser?.role !== 'ADMIN' && (
+                   <p className="text-[9px] text-center text-slate-400 font-bold uppercase tracking-tighter">
+                     Réservé aux contributeurs du projet
+                   </p>
+                 )}
+               </div>
              )}
           </div>
         </div>

@@ -46,7 +46,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/stripe/webhook").permitAll()
                         .requestMatchers("/api/v1/cinetpay/notify").permitAll()
                         .requestMatchers("/files/images/**").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/projets/**", "/api/v1/projets", "/api/v1/social/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/projets/**", "/api/v1/projets", "/api/v1/social/**", "/api/v1/analyses-ia/**").permitAll()
+                        .requestMatchers("/api/v1/ai/chat").permitAll()
 
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

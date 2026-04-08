@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { FileCheck, Search, Filter, CheckCircle, XCircle, FileText, AlertCircle, Clock, ShieldCheck, ShieldX, Files } from 'lucide-react';
+import { FileCheck, Search, Filter, CheckCircle, XCircle, FileText, AlertCircle, Clock, ShieldCheck, ShieldX, Files, ExternalLink } from 'lucide-react';
 import Card from '../../components/common/Card';
 import Badge from '../../components/common/Badge';
 import { kycService } from '../../services/kycService';
@@ -181,7 +181,7 @@ export default function AdminKYC() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-100 text-xs font-semibold tracking-wide text-slate-500 uppercase">
-                <th className="px-6 py-4">Utilisateur (ID)</th>
+                <th className="px-6 py-4">Utilisateur</th>
                 <th className="px-6 py-4">Type de Document</th>
                 <th className="px-6 py-4">Fichier Soumis</th>
                 <th className="px-6 py-4">Statut</th>
@@ -204,19 +204,22 @@ export default function AdminKYC() {
               ) : (
                 filteredDocs.map((doc) => (
                   <tr key={doc.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-slate-900">
-                      Utilisateur #{doc.utilisateurId}
+                    <td className="px-6 py-4">
+                      <div className="flex flex-col">
+                        <span className="font-bold text-slate-900">{doc.nomComplet || `Utilisateur #${doc.utilisateurId}`}</span>
+                        <span className="text-xs text-slate-500">{doc.email || 'N/A'}</span>
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-slate-700">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 text-sm font-medium">
                         <FileText className="w-4 h-4 text-slate-400" />
                         {doc.typeDocument}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      {doc.fichierUrl ? (
-                         <a href={doc.fichierUrl} target="_blank" rel="noreferrer" className="text-primary-600 font-medium hover:underline flex items-center gap-1.5">
-                            Voir le fichier <AlertCircle className="w-3.5 h-3.5"/>
+                      {doc.documentUrl ? (
+                         <a href={doc.documentUrl} target="_blank" rel="noreferrer" className="text-primary-600 font-bold hover:underline flex items-center gap-1.5 text-sm">
+                            Voir la pièce <ExternalLink className="w-3.5 h-3.5"/>
                          </a>
                       ) : (
                          <span className="text-slate-400 italic">Aucun fichier</span>
@@ -230,7 +233,7 @@ export default function AdminKYC() {
                     <td className="px-6 py-4 text-right">
                        <button
                           onClick={() => setReviewModal({ isOpen: true, document: doc })}
-                          className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 font-medium shadow-sm transition-colors"
+                          className="px-4 py-2 text-sm rounded-xl border border-primary-100 bg-primary-50 text-primary-700 hover:bg-primary-600 hover:text-white font-bold transition-all duration-300 shadow-sm"
                         >
                           Examiner
                         </button>

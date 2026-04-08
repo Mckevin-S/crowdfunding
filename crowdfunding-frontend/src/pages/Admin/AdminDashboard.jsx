@@ -1,18 +1,22 @@
-import React from 'react';
-import {
-  TrendingUp,
-  Users,
-  Briefcase,
-  AlertTriangle,
-  ArrowUpRight,
-  ArrowDownRight
+import { 
+  TrendingUp, 
+  Users, 
+  Briefcase, 
+  AlertTriangle, 
+  ArrowUpRight, 
+  ArrowDownRight,
+  ChevronRight,
+  ShieldCheck
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/common/Card';
+import Badge from '../../components/common/Badge';
 
 import { userService } from '../../services/userService';
 import projectService from '../../services/projectService';
 import { transactionService } from '../../services/transactionService';
+import { kycService } from '../../services/kycService';
 import { printReport, downloadCSV } from '../../utils/exportUtils';
 
 export default function AdminDashboard() {
@@ -28,23 +32,27 @@ export default function AdminDashboard() {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        const [usersRes, projectsRes, txRes] = await Promise.all([
+        const [usersRes, projectsRes, txRes, kycRes] = await Promise.all([
           userService.getAllUsers(),
           projectService.getAllProjects(),
-          transactionService.getAllTransactions()
+          transactionService.getAllTransactions(),
+          kycService.getAllKyc()
         ]);
         
         const users = usersRes.data || [];
         const projects = projectsRes.data || [];
         const transactions = txRes.data || [];
+        const kycDocs = kycRes.data || [];
 
         // Calculate stats
         const activeProjects = projects.filter(p => p.statut === 'EN_COURS' || p.statut === 'ACTIVE').length;
         
-        // Simple metric: users created recently (for demo we just take all users if we don't have created_at filter)
-        // Actually, we'll just show total users or users pending
-        const pendingKYC = users.filter(u => u.statut === 'EN_ATTENTE_VALIDATION').length || 0;
+        // Count users with kycStatus explicitly 'PENDING'
+        const pendingKYCCount = users.filter(u => u.kycStatus === 'PENDING').length;
         
+        // Filter REAL pending docs
+        const pendingKycDocs = kycDocs.filter(d => d.statut === 'EN_ATTENTE' || d.statut === 'PENDING');
+
         const totalVolume = transactions
           .filter(t => t.typeTransaction === 'CONTRIBUTION' && t.statut === 'COMPLETED')
           .reduce((sum, t) => sum + (t.montant || 0), 0);
@@ -53,7 +61,9 @@ export default function AdminDashboard() {
           activeProjects,
           newUsers: users.length,
           totalVolume,
-          pendingKYC
+          pendingKYC: pendingKYCCount,
+          pendingKycDocs: pendingKycDocs.reverse(), // Newest first
+          recentProjects: projects.reverse()
         });
 
       } catch (error) {
@@ -153,15 +163,60 @@ export default function AdminDashboard() {
       {/* Recent Activity placeholder */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="p-6 lg:col-span-2 min-h-[400px]">
-          <h3 className="text-lg font-bold text-slate-800 mb-4">Activité Récente</h3>
-          <div className="flex flex-col items-center justify-center h-48 bg-slate-50 rounded-xl border border-dashed border-slate-200">
-             <p className="text-slate-500">Données en cours de chargement...</p>
+          <h3 className="text-lg font-bold text-slate-800 mb-4">Projets Récents</h3>
+          <div className="overflow-x-auto">
+             <table className="w-full text-left">
+                <thead className="text-[10px] font-black uppercase text-slate-400">
+                   <tr>
+                      <th className="py-3">Projet</th>
+                      <th className="py-3">Objectif</th>
+                      <th className="py-3">Statut</th>
+                   </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                   {loading ? (
+                      <tr><td colSpan="3" className="py-8 text-center text-slate-400">Chargement...</td></tr>
+                   ) : statsData.recentProjects?.slice(0, 5).map(p => (
+                      <tr key={p.id}>
+                         <td className="py-4 font-bold text-slate-700">{p.titre}</td>
+                         <td className="py-4 font-medium text-slate-500">{p.objectifFinancier?.toLocaleString()} XAF</td>
+                         <td className="py-4">
+                            <Badge variant={p.statut === 'ACTIVE' ? 'success' : 'warning'}>{p.statut}</Badge>
+                         </td>
+                      </tr>
+                   ))}
+                </tbody>
+             </table>
           </div>
         </Card>
         <Card className="p-6 min-h-[400px]">
           <h3 className="text-lg font-bold text-slate-800 mb-4">À Valider (KYC)</h3>
-          <div className="flex flex-col items-center justify-center h-48 bg-slate-50 rounded-xl border border-dashed border-slate-200">
-             <p className="text-slate-500">Aucun document en attente</p>
+          <div className="space-y-4">
+             {loading ? (
+                <p className="text-slate-400 text-sm">Chargement...</p>
+             ) : statsData.pendingKycDocs?.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                   <ShieldCheck className="w-10 h-10 text-emerald-500 mb-2 opacity-20" />
+                   <p className="text-slate-400 text-sm italic">Aucun document en attente</p>
+                </div>
+             ) : (
+                statsData.pendingKycDocs?.slice(0, 5).map(doc => (
+                   <div key={doc.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100 hover:bg-white hover:shadow-md transition-all group">
+                      <div className="flex flex-col">
+                         <span className="text-sm font-bold text-slate-900 line-clamp-1">{doc.nomComplet || `ID: ${doc.utilisateurId}`}</span>
+                         <span className="text-[10px] text-slate-500 font-medium uppercase tracking-tighter">{doc.typeDocument}</span>
+                      </div>
+                      <Link to="/admin/kyc" className="p-2 bg-white text-primary-600 rounded-lg shadow-sm border border-slate-100 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                         <ChevronRight className="w-4 h-4" />
+                      </Link>
+                   </div>
+                ))
+             )}
+             {statsData.pendingKycDocs?.length > 0 && (
+                <Link to="/admin/kyc" className="block text-center text-xs font-bold text-primary-600 hover:underline pt-2">
+                   Voir tous les dossiers ({statsData.pendingKycDocs.length})
+                </Link>
+             )}
           </div>
         </Card>
       </div>

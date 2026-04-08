@@ -83,12 +83,10 @@ public class KycDocumentServiceImpl implements KycDocumentService {
         // --- NOTIFICATION ---
         try {
             String msg = "";
-            boolean isCritical = false;
             if (status == StatutDocument.APPROUVE) {
                 msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été approuvé.";
             } else if (status == StatutDocument.REJETE) {
                 msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été rejeté. Motif : " + reason;
-                isCritical = true;
             }
 
             if (!msg.isEmpty()) {

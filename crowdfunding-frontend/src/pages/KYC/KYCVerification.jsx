@@ -40,7 +40,7 @@ const KYCVerification = () => {
       await api.post('/kyc-documents', payload);
       
       toast.success('Document soumis avec succès. En attente de validation.');
-      navigate('/dashboard');
+      navigate(-1);
     } catch (error) {
       console.error(error);
       toast.error('Erreur lors de la soumission du document KYC.');

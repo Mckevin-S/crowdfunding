@@ -1,271 +1,256 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-  BarChart3,
-  Users,
-  Wallet,
-  ArrowUpRight,
-  PlusCircle,
-  CheckCircle2,
-  TrendingUp,
-  Award,
-  Bell,
-  Settings,
-  LogOut,
-  Eye,
-  Zap,
-  Activity
+import { 
+  TrendingUp, 
+  Wallet, 
+  Briefcase, 
+  Clock, 
+  ShieldCheck, 
+  ShieldAlert, 
+  ArrowUpRight, 
+  ExternalLink,
+  ChevronRight,
+  Target
 } from 'lucide-react';
-import Button from '@components/common/Button';
-import { fetchUserContributions } from '@store/slices/contributionSlice';
-import { logoutUser } from '@store/slices/authSlice';
-import { formatDate, formatCurrency } from '@utils/formatters';
+import { Link, useNavigate } from 'react-router-dom';
+import Card from '../components/common/Card';
+import Button from '../components/common/Button';
+import Badge from '../components/common/Badge';
+import { contributionService } from '../services/contributionService';
+import { toast } from 'react-toastify';
+
+import { fetchCurrentUser } from '../store/slices/authSlice';
 
 const DashboardInvestisseur = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.auth);
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const { contributions, loading } = useSelector((state) => state.contribution);
-
-  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
+    // Synchroniser le profil au montage (pour KYC et autres)
     if (user?.id) {
-      dispatch(fetchUserContributions(user.id));
+       dispatch(fetchCurrentUser());
     }
-  }, [dispatch, user, isAuthenticated, navigate]);
+  }, []);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate('/');
-  };
+  const [contributions, setContributions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    totalInvested: 0,
+    projectCount: 0,
+    pendingAmount: 0
+  });
 
-  const totalInvested = contributions?.reduce((acc, c) => acc + (c.amount || 0), 0) || 0;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await contributionService.getUserContributions(user.id);
+        const data = res.data || [];
+        setContributions(data);
+        
+        // Calculate stats
+        const completed = data.filter(c => c.status === 'COMPLETED');
+        const total = completed.reduce((sum, c) => sum + (c.amount || 0), 0);
+        const uniqueProjects = new Set(data.map(c => c.projetId)).size;
+        
+        setStats({
+          totalInvested: total,
+          projectCount: uniqueProjects,
+          pendingAmount: data.filter(c => c.status === 'PENDING').length
+        });
+      } catch (error) {
+        console.error('Error fetching dashboard data', error);
+        toast.error('Impossible de charger vos statistiques');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const stats = [
-    {
-      label: 'Total Investi',
-      value: formatCurrency(totalInvested),
-      icon: <Wallet className="text-emerald-600" />,
-      trend: '+12%',
-      trendUp: true,
-      description: 'Portefeuille'
-    },
-    {
-      label: 'Projets Soutenus',
-      value: contributions?.length.toString() || '0',
-      icon: <Users className="text-primary-600" />,
-      trend: contributions?.length > 0 ? 'Actif' : '0',
-      trendUp: contributions?.length > 0,
-      description: 'Investissements'
-    },
-    {
-      label: 'Rendement Estimé',
-      value: '8.5%',
-      icon: <TrendingUp className="text-green-600" />,
-      trend: '+1.2%',
-      trendUp: true,
-      description: 'Projection IA'
-    },
-    {
-      label: 'Récompenses',
-      value: '3',
-      icon: <Award className="text-amber-600" />,
-      trend: 'À venir',
-      trendUp: false,
-      description: 'Prochainement'
-    },
-  ];
+    if (user?.id) fetchData();
+  }, [user?.id]);
 
-  const recentActivities = contributions?.slice(0, 3).map((contribution) => ({
-    id: contribution.id,
-    type: 'contribution',
-    title: `Investissement de ${formatCurrency(contribution.amount)}`,
-    description: `Projet #${contribution.projetId}`,
-    date: new Date(contribution.createdAt),
-    icon: <CheckCircle2 className="w-4 h-4" />,
-    amount: contribution.amount
-  })) || [];
+  const kycStatus = user?.kycStatus || 'PENDING';
 
   return (
-    <div className="bg-transparent">
-
-      <div className="container mx-auto px-6 py-12">
-        <div className="mb-12">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-8">
-            <div>
-              <h1 className="text-4xl font-bold text-slate-900 mb-4">
-                Bienvenue, <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{user?.prenom}</span>
-              </h1>
-              <div className="flex flex-wrap items-center gap-4">
-                <span className="bg-gradient-to-r from-emerald-50 to-emerald-100 text-emerald-700 font-bold border border-emerald-200 px-4 py-1.5 rounded-full shadow-sm text-sm">
-                  Investisseur
-                </span>
-                <span className="text-sm text-slate-500 font-medium">Membre depuis <span className="font-bold text-slate-700">{user?.createdAt ? formatDate(user.createdAt) : 'récemment'}</span></span>
-              </div>
-            </div>
-            <div className="flex gap-3 w-full lg:w-auto">
-              <Button
-                size="sm"
-                onClick={() => navigate('/projects')}
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg hover:shadow-xl transition-all flex-1 lg:flex-none"
-              >
-                Explorer des projets
-              </Button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all">
-                    <div className="text-2xl">{stat.icon}</div>
-                  </div>
-                  <span className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full transition-all ${stat.trendUp ? 'text-emerald-600 bg-emerald-50 border border-emerald-100' : 'text-slate-500 bg-slate-50 border border-slate-100'}`}>
-                    <ArrowUpRight className={`w-3.5 h-3.5 ${!stat.trendUp && 'rotate-90'}`} />
-                    {stat.trend}
-                  </span>
-                </div>
-                <p className="text-3xl font-bold text-slate-900 mb-2">{stat.value}</p>
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">{stat.label}</p>
-                <p className="text-xs text-slate-400 font-medium">{stat.description}</p>
-              </div>
-            ))}
-          </div>
+    <div className="space-y-8 animate-in fade-in duration-700">
+      {/* Header & Welcome */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-display font-black text-slate-900 tracking-tight">
+            Bonjour, {user?.prenom || 'Investisseur'} 👋
+          </h1>
+          <p className="text-slate-500 font-medium mt-1">
+            Voici l'aperçu de votre impact et de vos investissements.
+          </p>
         </div>
+        <div className="flex items-center gap-3">
+          <Link to="/projects">
+            <Button variant="primary" size="sm" className="rounded-xl shadow-lg shadow-primary-500/20" rightIcon={<ChevronRight className="w-4 h-4"/>}>
+              Découvrir des projets
+            </Button>
+          </Link>
+        </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
-              <div className="flex justify-between items-center mb-6 pb-6 border-b border-gray-100">
-                <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-2xl flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  Projets Soutenus
-                </h2>
-                <Link to="/projects" className="text-sm font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-1.5 rounded-xl transition-all">
-                  Découvrir plus →
-                </Link>
+      {/* KYC Status Banner */}
+      {kycStatus !== 'APPROVED' && (
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-amber-500 to-orange-600 p-8 text-white shadow-xl shadow-amber-500/20 group">
+          <div className="absolute -right-12 -top-12 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-6 text-center md:text-left">
+              <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shrink-0 border border-white/30">
+                <ShieldAlert className="w-8 h-8" />
               </div>
-
-              {loading ? (
-                <div className="space-y-4">
-                  {[1, 2].map(i => (
-                    <div key={i} className="bg-slate-100 rounded-2xl p-6 animate-pulse">
-                      <div className="h-4 bg-slate-200 rounded-xl w-1/4 mb-3" />
-                      <div className="h-6 bg-slate-200 rounded-xl w-3/4 mb-2" />
-                      <div className="h-4 bg-slate-200 rounded-xl w-full" />
-                    </div>
-                  ))}
-                </div>
-              ) : contributions?.length > 0 ? (
-                <div className="space-y-4">
-                  {contributions.slice(0, 3).map((contribution) => (
-                    <div
-                      key={contribution.id}
-                      onClick={() => navigate(`/projects/${contribution.projetId}`)}
-                      className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 border border-emerald-200">
-                          <CheckCircle2 className="w-6 h-6 text-emerald-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">
-                            Investissement de {formatCurrency(contribution.amount)}
-                          </h3>
-                          <p className="text-sm text-slate-500 font-medium">Projet #{contribution.projetId}</p>
-                          <p className="text-xs text-slate-400 mt-2 font-medium">
-                            {formatDate(contribution.createdAt)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-12 text-center border-2 border-dashed border-slate-200 hover:border-emerald-200 transition-all">
-                  <PlusCircle className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-                  <p className="text-slate-500 mb-2 font-semibold">Vous n'avez pas encore investi</p>
-                  <p className="text-slate-400 text-sm mb-6">Explorez notre catalogue et participez à l'innovation</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigate('/projects')}
-                    className="border-emerald-200 text-emerald-600 hover:bg-emerald-50"
-                  >
-                    Voir les projets
-                  </Button>
-                </div>
-              )}
+              <div>
+                <h3 className="text-xl font-bold">Vérifiez votre identité</h3>
+                <p className="text-amber-50/80 font-medium mt-1 max-w-xl">
+                  {kycStatus === 'PENDING' 
+                    ? "Soumettez vos documents KYC pour débloquer les investissements au-delà de 500,000 XAF et participer aux projets en Capital/Prêt."
+                    : "Votre demande de vérification est en cours d'examen par nos équipes. Vous serez notifié par email."}
+                </p>
+              </div>
             </div>
-
-            {recentActivities.length > 0 && (
-              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-gray-100 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center">
-                    <Activity className="w-5 h-5 text-amber-600" />
-                  </div>
-                  Transactions récentes
-                </h2>
-                <div className="space-y-3">
-                  {recentActivities.map((activity) => (
-                    <div key={activity.id} className="flex items-center gap-4 p-4 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all group">
-                      <div className="w-11 h-11 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center text-slate-500 flex-shrink-0 border border-amber-200 group-hover:shadow-md transition-all">
-                        {activity.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-bold text-slate-900">{activity.title}</p>
-                        <p className="text-sm text-slate-500 font-medium">{activity.description}</p>
-                      </div>
-                      <span className="text-xs text-slate-400 font-semibold whitespace-nowrap">
-                        {formatDate(activity.date)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {kycStatus === 'PENDING' ? (
+              <Button 
+                onClick={() => navigate('/kyc')}
+                className="bg-white text-orange-600 hover:bg-orange-50 font-bold px-8 py-4 rounded-xl shadow-lg"
+              >
+                Vérifier maintenant
+              </Button>
+            ) : (
+              <Badge variant="warning" className="bg-white/20 text-white border-white/30 px-6 py-2 text-sm">
+                En attente de validation
+              </Badge>
             )}
           </div>
+        </div>
+      )}
 
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-emerald-50 to-teal-50/50 rounded-3xl p-8 border border-emerald-200 shadow-lg hover:shadow-xl transition-all">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-emerald-200 to-emerald-300 rounded-xl flex items-center justify-center shadow-md">
-                  <Zap className="w-5 h-5 text-emerald-700" />
-                </div>
-                <h3 className="font-bold text-lg text-emerald-900">Conseil IA du jour</h3>
-              </div>
-              <p className="text-sm text-emerald-800 mb-4 font-medium leading-relaxed">
-                Diversifiez vos investissements pour maximiser vos rendements et réduire les risques.
-              </p>
-              <Button variant="outline" size="sm" className="border-emerald-300 text-emerald-700 hover:bg-emerald-100 w-full font-semibold">
-                Stratégies d'investissement
-              </Button>
-            </div>
-            
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg hover:shadow-xl transition-all">
-              <h3 className="font-bold text-lg text-slate-900 mb-6 pb-4 border-b border-gray-100">En un coup d'œil</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-3 bg-gradient-to-r from-slate-50 to-transparent rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-transparent transition-all">
-                  <span className="text-sm font-medium text-slate-600">Investissements Réussis</span>
-                  <span className="font-bold text-lg text-emerald-600">{contributions?.length || 0}</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-gradient-to-r from-slate-50 to-transparent rounded-xl hover:bg-gradient-to-r hover:from-red-50 hover:to-transparent transition-all">
-                  <span className="text-sm font-medium text-slate-600">Rappels en attente</span>
-                  <span className="font-bold text-lg text-red-600">0</span>
-                </div>
-              </div>
-            </div>
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="p-6 relative group overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute right-0 top-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Wallet className="w-24 h-24" />
           </div>
-          
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Total Investi</p>
+          <p className="text-3xl font-black text-slate-900 mt-2">
+            {stats.totalInvested.toLocaleString()} <span className="text-lg text-slate-400 font-bold ml-1">XAF</span>
+          </p>
+          <div className="flex items-center gap-1 text-emerald-600 text-xs font-bold mt-4 bg-emerald-50 w-fit px-2 py-1 rounded-lg">
+            <ArrowUpRight className="w-3 h-3" />
+            +12.5% ce mois
+          </div>
+        </Card>
+
+        <Card className="p-6 relative group overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute right-0 top-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Briefcase className="w-24 h-24" />
+          </div>
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Projets Soutenus</p>
+          <p className="text-3xl font-black text-slate-900 mt-2">{stats.projectCount}</p>
+          <p className="text-xs text-slate-500 font-medium mt-4">Dans {new Set(contributions.map(c => c.categorie)).size || 0} catégories différentes</p>
+        </Card>
+
+        <Card className="p-6 relative group overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute right-0 top-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Clock className="w-24 h-24" />
+          </div>
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">En Attente</p>
+          <p className="text-3xl font-black text-slate-900 mt-2">{stats.pendingAmount}</p>
+          <Link to="/profile" className="text-xs text-primary-600 font-bold mt-4 flex items-center gap-1 hover:underline">
+            Voir les détails <ExternalLink className="w-3 h-3"/>
+          </Link>
+        </Card>
+      </div>
+
+      {/* Main Content Sections */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Recent Contributions */}
+        <div className="lg:col-span-2">
+          <Card className="p-0 border-none shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm">
+            <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+              <h3 className="font-display font-black text-xl text-slate-900">Contributions Récentes</h3>
+              <Link to="/investisseur/mes-contributions" className="text-sm font-bold text-primary-600 hover:text-primary-700">
+                Voir tout
+              </Link>
+            </div>
+            <div className="overflow-x-auto">
+              {loading ? (
+                <div className="p-12 text-center text-slate-400">Chargement...</div>
+              ) : contributions.length === 0 ? (
+                <div className="p-12 text-center text-slate-400">
+                  <Target className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                  <p className="font-medium italic">Vous n'avez pas encore contribué à des projets.</p>
+                  <Link to="/projects">
+                    <Button variant="outline" size="sm" className="mt-4">Explorer les projets</Button>
+                  </Link>
+                </div>
+              ) : (
+                <table className="w-full text-left">
+                  <thead className="bg-slate-50/50 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    <tr>
+                      <th className="px-6 py-4">Projet</th>
+                      <th className="px-6 py-4">Montant</th>
+                      <th className="px-6 py-4">Date</th>
+                      <th className="px-6 py-4">Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {contributions.slice(0, 5).map((contribution) => (
+                      <tr key={contribution.id} className="hover:bg-slate-50/50 transition-colors group">
+                        <td className="px-6 py-4">
+                          <div className="flex flex-col">
+                            <span className="font-bold text-slate-900 group-hover:text-primary-600 transition-colors">
+                              Projet #{contribution.projetId}
+                            </span>
+                            <span className="text-xs text-slate-400 uppercase font-bold tracking-tighter">ID: {contribution.id}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 font-bold text-slate-700">
+                          {contribution.amount?.toLocaleString()} XAF
+                        </td>
+                        <td className="px-6 py-4 text-sm text-slate-500 font-medium">
+                          {new Date(contribution.dateContribution || contribution.dateCreation).toLocaleDateString('fr-FR')}
+                        </td>
+                        <td className="px-6 py-4">
+                          <Badge variant={contribution.status === 'COMPLETED' ? 'success' : 'warning'}>
+                            {contribution.status === 'COMPLETED' ? 'Confirmé' : 'En attente'}
+                          </Badge>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </Card>
+        </div>
+
+        {/* Sidebar help/status */}
+        <div className="space-y-6">
+          <Card className="p-6 bg-slate-900 text-white border-none shadow-xl overflow-hidden relative">
+            <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
+            <h3 className="font-display font-black text-xl mb-4">Besoin d'aide ?</h3>
+            <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+              Consultez notre guide de l'investisseur pour comprendre comment fonctionnent les financements participatifs.
+            </p>
+            <Button fullWidth variant="primary" size="sm" className="bg-primary-600 border-none">
+              Consulter le guide
+            </Button>
+          </Card>
+
+          <Card className="p-6 border-none shadow-sm bg-primary-50/30">
+             <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 shadow-sm">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h4 className="font-bold text-slate-900">Engagement Qualité</h4>
+             </div>
+             <p className="text-xs text-slate-600 leading-relaxed font-medium">
+               Tous les projets sur notre plateforme sont analysés par notre IA pour maximiser votre sécurité.
+             </p>
+          </Card>
         </div>
       </div>
     </div>

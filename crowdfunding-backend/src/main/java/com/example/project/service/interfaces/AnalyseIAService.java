@@ -33,4 +33,13 @@ public interface AnalyseIAService {
      * @return a list of analysis responses.
      */
     List<AnalyseIAResponseDTO> getAnalysesByProjet(Long projetId);
+
+    /**
+     * Interacts with the AI for a general chat or project-specific context.
+     *
+     * @param message  The user message.
+     * @param projetId The project ID (optional).
+     * @return The AI's response text.
+     */
+    String chatWithAI(String message, Long projetId);
 }

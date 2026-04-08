@@ -9,11 +9,12 @@ import {
 import { Search, Send, User, ChevronLeft, MoreVertical, Loader2 } from 'lucide-react';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Messages = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useSelector(state => state.auth);
   const { 
     conversations, 
@@ -30,7 +31,31 @@ const Messages = () => {
   // Charger les conversations récentes
   useEffect(() => {
     if (user) {
-      dispatch(getRecentConversations(user.id));
+      dispatch(getRecentConversations(user.id)).unwrap().then((convs) => {
+        // Gérer le cas où on arrive d'une page projet avec l'intention de contacter
+        if (location.state?.partnerId) {
+          const existingConv = convs.find(c => 
+            (c.expediteurId === location.state.partnerId && c.destinataireId === user.id) ||
+            (c.destinataireId === location.state.partnerId && c.expediteurId === user.id)
+          );
+
+          if (existingConv) {
+            handleSelectConversation(existingConv);
+          } else {
+            // Créer un partenaire "virtuel" pour initier la discussion
+            setActivePartner({
+              id: location.state.partnerId,
+              nom: location.state.partnerName || 'Porteur de projet',
+              avatar: null,
+              projetId: location.state.projectId,
+              projetTitre: location.state.projectTitle,
+              isNew: true
+            });
+          }
+          // Nettoyer l'état de navigation pour éviter de réinitialiser au refresh
+          window.history.replaceState({}, document.title);
+        }
+      });
     }
   }, [dispatch, user]);
 
@@ -40,7 +65,7 @@ const Messages = () => {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [currentConversation]);
+  }, [currentConversation, activePartner]);
 
   const handleSelectConversation = (conv) => {
     const partnerId = conv.expediteurId === user.id ? conv.destinataireId : conv.expediteurId;
