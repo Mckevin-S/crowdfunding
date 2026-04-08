@@ -65,7 +65,7 @@ public class Contribution {
 
     /** Référence Mobile Money CinetPay */
     @Column(name = "mobile_money_reference", length = 100)
-    private String mobileMoneReference;
+    private String mobileMoneyReference;
 
     /** Palier de récompense choisi (null si DON ou autre type) */
     @ManyToOne(fetch = FetchType.LAZY)

@@ -16,7 +16,7 @@ public interface ContributionMapper {
     @Mapping(target = "sourceCurrency", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "stripePaymentIntentId", ignore = true)
-    @Mapping(target = "mobileMoneReference", ignore = true)
+    @Mapping(target = "mobileMoneyReference", ignore = true)
     @Mapping(target = "reward", ignore = true)
     @Mapping(target = "actionsRecues", ignore = true)
     @Mapping(target = "anonyme", ignore = true)
@@ -31,6 +31,7 @@ public interface ContributionMapper {
 
     @Mapping(target = "projetId", source = "projet.id")
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
+    @Mapping(target = "rewardId", source = "reward.id")
     @Mapping(target = "currency", ignore = true)
     ContributionRequestDTO toRequestDTO(Contribution entity);
 }

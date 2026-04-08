@@ -37,4 +37,7 @@ public class ContributionRequestDTO {
     @Schema(description = "Type de paiement", example = "STRIPE")
     @NotNull(message = "Le type de paiement est requis")
     private com.example.project.enums.PaiementType paiementType;
+
+    @Schema(description = "ID de la contrepartie choisie (optionnel)", example = "1")
+    private Long rewardId;
 }

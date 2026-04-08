@@ -115,6 +115,7 @@ public class AuthServiceImpl implements AuthService {
                 .role(utilisateur.getRole().name())
                 .nom(utilisateur.getNom())
                 .prenom(utilisateur.getPrenom())
+                .kycStatus(utilisateur.getKycStatus())
                 .build();
     }
 

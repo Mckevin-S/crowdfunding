@@ -34,4 +34,7 @@ public class AuthResponse {
 
     @Schema(description = "Prénom de l'utilisateur", example = "John")
     private String prenom;
+
+    @Schema(description = "Statut KYC de l'utilisateur", example = "APPROVED")
+    private String kycStatus;
 }

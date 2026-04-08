@@ -411,6 +411,7 @@ const ProjectDetail = ({ project }) => {
         <ContributionModal 
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          onSuccess={() => dispatch(fetchProjectById(id))}
           project={project}
           user={activeUser}
         />

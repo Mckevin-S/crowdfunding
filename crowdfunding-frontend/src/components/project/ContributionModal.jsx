@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Wallet, 
@@ -9,20 +9,29 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
-  Gift
+  Gift,
+  Lock,
+  ChevronRight,
+  SmartphoneIcon
 } from 'lucide-react';
 import Button from '../common/Button';
 import Badge from '../common/Badge';
 import { formatCurrency } from '@utils/formatters';
 import contributionService from '@services/contributionService';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) => {
+const ContributionModal = ({ isOpen, onClose, project, user, onSuccess }) => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(10000);
   const [paymentMethod, setPaymentMethod] = useState('MOBILE_MONEY');
-  const [step, setStep] = useState('AMOUNT'); // AMOUNT -> PAYMENT -> PROCESSING -> SUCCESS
+  const [step, setStep] = useState('AMOUNT'); // AMOUNT -> PAYMENT -> SIMULATION -> SUCCESS
   const [loading, setLoading] = useState(false);
   const [contributionId, setContributionId] = useState(null);
+  const [selectedReward, setSelectedReward] = useState(null);
+
+  // Rewards logic
+  const rewards = project?.rewards || [];
 
   if (!isOpen) return null;
 
@@ -31,37 +40,50 @@ const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) =
   const handleInitiate = async () => {
     setLoading(true);
     try {
-      const { data } = await contributionService.initiateContribution({
+      const response = await contributionService.initiateContribution({
         projetId: project.id,
         utilisateurId: user?.id,
         amount: amount,
         paiementType: paymentMethod,
-        currency: 'XAF'
+        currency: 'XAF',
+        rewardId: selectedReward?.id
       });
+      
+      const { data } = response;
       setContributionId(data.id);
-      setStep('PROCESSING');
+      setStep('SIMULATION');
       
-      // Simulate real payment processing (Mobile Money / Stripe)
-      setTimeout(async () => {
-        await handleConfirm(data.id);
-      }, 3000);
-      
+      // Verification logic: 
+      // This is where real integration would happen.
+      // For simulation, we wait for a few seconds.
     } catch (err) {
       console.error('Erreur initiation:', err);
-      toast.error(err.response?.data?.message || 'Erreur lors de l’initiation du paiement');
+      const errorMessage = err.response?.data?.message || 'Erreur lors de l’initiation du paiement';
+      
+      if (errorMessage.includes('KYC')) {
+        toast.warning("Limite d'investissement atteinte. Redirection vers la vérification KYC...");
+        setTimeout(() => {
+          onClose();
+          navigate('/kyc');
+        }, 3000);
+      } else {
+        toast.error(errorMessage);
+      }
       setLoading(false);
     }
   };
 
-  const handleConfirm = async (id) => {
+  const handleConfirmSimulation = async () => {
+    setLoading(true);
     try {
-      await contributionService.confirmContribution(id);
+      await contributionService.confirmContribution(contributionId);
       setStep('SUCCESS');
+      if (onSuccess) onSuccess();
       toast.success('Contribution confirmée ! Merci pour votre soutien.');
     } catch (err) {
       console.error('Erreur confirmation:', err);
-      toast.error('Erreur lors de la confirmation du paiement');
-      setStep('AMOUNT');
+      toast.error('Échec de la simulation de paiement.');
+      setStep('PAYMENT');
     } finally {
       setLoading(false);
     }
@@ -103,19 +125,40 @@ const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) =
                ))}
             </div>
 
+            {/* Reward Display */}
             <div className="bg-slate-50 rounded-[2rem] p-6 mb-8 border border-white/50">
                <div className="flex items-start gap-4 mb-4">
                   <div className="p-3 bg-amber-50 rounded-2xl">
                      <Gift className="w-5 h-5 text-amber-600" />
                   </div>
-                  <div>
-                     <p className="text-sm font-black text-slate-900">Récompense Éligible</p>
-                     <p className="text-xs text-slate-500 font-medium">Pour {formatCurrency(amount)}, vous recevrez :</p>
+                  <div className="flex-1">
+                     <p className="text-sm font-black text-slate-900">Contreparties éligibles</p>
+                     <p className="text-xs text-slate-500 font-medium">Récompense pour votre soutien</p>
                   </div>
                </div>
-               <div className="bg-white p-4 rounded-xl border border-slate-100">
-                  <p className="text-sm font-bold text-slate-700 italic">"Remerciements sur nos réseaux sociaux et accès anticipé au produit."</p>
-               </div>
+               
+               {rewards.length > 0 ? (
+                 <div className="space-y-3">
+                   {rewards.filter(r => amount >= r.montantMinimum).map(r => (
+                     <div key={r.id} className="bg-white p-4 rounded-xl border border-emerald-100 flex items-center justify-between group">
+                        <div className="flex-1">
+                          <p className="text-xs font-black text-slate-900 mb-1">{r.titre}</p>
+                          <p className="text-[10px] text-slate-500 line-clamp-1">{r.description}</p>
+                        </div>
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 opacity-100" />
+                     </div>
+                   ))}
+                   {rewards.filter(r => amount < r.montantMinimum).length > 0 && (
+                     <p className="text-[10px] text-center text-slate-400 font-bold italic">
+                       Augmentez votre don pour débloquer d'autres récompenses.
+                     </p>
+                   )}
+                 </div>
+               ) : (
+                 <div className="bg-white p-4 rounded-xl border border-slate-100">
+                    <p className="text-sm font-bold text-slate-700 italic">"Remerciements sur nos réseaux sociaux et accès anticipé au produit."</p>
+                 </div>
+               )}
             </div>
 
             <Button 
@@ -136,8 +179,7 @@ const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) =
             <div className="space-y-4 mb-10">
                {[
                  { id: 'MOBILE_MONEY', name: 'Mobile Money', icon: Smartphone, desc: 'Orange, MTN, Wave (Partout en Afrique)' },
-                 { id: 'STRIPE', name: 'Carte Bancaire', icon: CreditCard, desc: 'Visa, Mastercard (Frais Stripe applicables)' },
-                 { id: 'CRYPTO', name: 'Crypto Assets', icon: Zap, desc: 'USDT, BTC (Via CryptoPay Africa)' }
+                 { id: 'STRIPE', name: 'Carte Bancaire', icon: CreditCard, desc: 'Visa, Mastercard (Frais Stripe applicables)' }
                ].map(method => (
                  <button
                    key={method.id}
@@ -172,18 +214,72 @@ const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) =
           </div>
         );
 
-      case 'PROCESSING':
+      case 'SIMULATION':
         return (
-          <div className="py-16 text-center animate-in zoom-in duration-500">
-             <div className="relative w-32 h-32 mx-auto mb-10">
-                <div className="absolute inset-0 rounded-full border-4 border-emerald-100 border-t-emerald-600 animate-spin" />
-                <div className="absolute inset-4 rounded-full bg-emerald-50 flex items-center justify-center">
-                   <ShieldCheck className="w-10 h-10 text-emerald-600" />
-                </div>
-             </div>
-             <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">Sécurisation du transfert...</h3>
-             <p className="text-slate-500 font-medium italic mb-2">Simulation du flux {paymentMethod === 'MOBILE_MONEY' ? 'USSD' : 'Stripe Gateway'}.</p>
-             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest animate-pulse">Ne fermez pas cette fenêtre</p>
+          <div className="py-8 text-center animate-in zoom-in duration-500">
+             {paymentMethod === 'MOBILE_MONEY' ? (
+               <div className="space-y-6">
+                  <div className="w-20 h-32 bg-slate-900 rounded-3xl mx-auto border-4 border-slate-800 relative p-4 flex flex-col justify-center items-center gap-2 overflow-hidden shadow-2xl">
+                     <div className="absolute top-1 w-8 h-1 bg-slate-800 rounded-full" />
+                     <SmartphoneIcon className="w-8 h-8 text-emerald-500 animate-bounce" />
+                     <div className="w-full space-y-1">
+                        <div className="h-1 bg-white/20 rounded w-full" />
+                        <div className="h-1 bg-white/20 rounded w-2/3 mx-auto" />
+                     </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black text-slate-900 mb-2">Validation Mobile</h3>
+                    <p className="text-sm text-slate-500 font-medium px-4">
+                      Veuillez valider l'opération de <span className="text-slate-900 font-bold">{formatCurrency(amount)}</span> sur votre téléphone en saisissant votre code secret.
+                    </p>
+                  </div>
+                  <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 flex items-center gap-3 max-w-xs mx-auto">
+                     <Loader2 className="w-5 h-5 text-emerald-600 animate-spin" />
+                     <span className="text-xs font-bold text-emerald-800 uppercase tracking-widest">En attente de validation USSD...</span>
+                  </div>
+                  <Button 
+                    variant="emerald" 
+                    size="sm" 
+                    className="rounded-xl px-10" 
+                    onClick={handleConfirmSimulation}
+                    loading={loading}
+                  >
+                    Simuler Validation (OK)
+                  </Button>
+               </div>
+             ) : (
+               <div className="space-y-6">
+                  <div className="max-w-xs mx-auto bg-gradient-to-br from-slate-800 to-black p-6 rounded-2xl text-white text-left shadow-2xl relative overflow-hidden h-44 flex flex-col justify-between">
+                     <div className="absolute -right-8 -top-8 w-24 h-24 bg-white/10 rounded-full blur-xl" />
+                     <div className="flex justify-between items-start">
+                        <div className="w-10 h-8 bg-amber-400/80 rounded-md" />
+                        <CreditCard className="w-8 h-8 text-white/50" />
+                     </div>
+                     <div className="space-y-1">
+                        <p className="text-sm font-mono tracking-widest">**** **** **** 4242</p>
+                        <div className="flex justify-between text-[8px] uppercase font-bold text-slate-400">
+                           <span>{user?.nom || 'CARD HOLDER'}</span>
+                           <span>12/26</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black text-slate-900 mb-2">Authentification 3D Secure</h3>
+                    <p className="text-sm text-slate-500 font-medium px-4">
+                      Votre banque demande une confirmation pour le paiement par carte.
+                    </p>
+                  </div>
+                  <Button 
+                    variant="emerald" 
+                    size="sm" 
+                    className="rounded-xl px-10" 
+                    onClick={handleConfirmSimulation}
+                    loading={loading}
+                  >
+                    Simuler Succès 3DS
+                  </Button>
+               </div>
+             )}
           </div>
         );
 
@@ -201,11 +297,8 @@ const ContributionModal = ({ isOpen, onClose, project, user, onRewardSelect }) =
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Numéro de Reçu</p>
                 <p className="text-sm font-black text-slate-900 font-mono">IA-{contributionId}-2026</p>
              </div>
-             <Button variant="emerald" className="w-full py-4 rounded-2xl font-black" onClick={() => {
-               onClose();
-               window.location.reload(); // Quick refresh to update stats
-             }}>
-               Retour au projet
+             <Button variant="emerald" className="w-full py-4 rounded-2xl font-black" onClick={onClose}>
+               Fermer l'espace paiement
              </Button>
           </div>
         );

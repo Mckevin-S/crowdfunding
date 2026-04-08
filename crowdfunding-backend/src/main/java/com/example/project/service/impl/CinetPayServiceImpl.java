@@ -126,7 +126,7 @@ public class CinetPayServiceImpl implements CinetPayService {
         // Update contribution with simulated reference
         Contribution contribution = contributionRepository.findById(contributionId).orElse(null);
         if (contribution != null) {
-            contribution.setMobileMoneReference("CP-" + contributionId);
+            contribution.setMobileMoneyReference("CP-" + contributionId);
             contributionRepository.save(contribution);
         }
 

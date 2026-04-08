@@ -78,6 +78,15 @@ public class KycDocumentServiceImpl implements KycDocumentService {
         document.setStatut(status);
         document.setRejectionReason(reason);
 
+        // Synchroniser avec le statut global de l'utilisateur
+        Utilisateur utilisateur = document.getUtilisateur();
+        if (status == StatutDocument.APPROUVE) {
+            utilisateur.setKycStatus("APPROVED");
+        } else if (status == StatutDocument.REJETE) {
+            utilisateur.setKycStatus("REJECTED");
+        }
+        utilisateurRepository.save(utilisateur);
+
         KycDocument updatedDoc = kycDocumentRepository.save(document);
 
         // --- NOTIFICATION ---
