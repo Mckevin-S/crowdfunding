@@ -23,6 +23,7 @@ const trustBadges = [
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [role, setRole] = React.useState('CONTRIBUTEUR');
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -111,7 +112,7 @@ const Register = () => {
             />
           )}
 
-          <RegisterForm />
+          <RegisterForm onRoleChange={setRole} />
 
           {/* Divider */}
           <div className="relative my-8">
@@ -127,7 +128,7 @@ const Register = () => {
           <div className="flex flex-col gap-3">
             <GoogleLogin
                 onSuccess={credentialResponse => {
-                  dispatch(googleLogin(credentialResponse.credential))
+                  dispatch(googleLogin({ idToken: credentialResponse.credential, role }))
                     .unwrap()
                     .then((payload) => {
                       toast.success('Bienvenue !');

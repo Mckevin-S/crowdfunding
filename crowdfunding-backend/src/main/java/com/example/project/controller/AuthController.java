@@ -59,18 +59,16 @@ public class AuthController {
     /**
      * Authenticates a user via Google ID Token.
      *
-     * @param idToken the Google ID token string.
+     * @param request the Google authentication request.
      * @return the authentication response containing the JWT token.
      */
     @PostMapping("/google")
     @Operation(summary = "Connecter via Google", description = "Vérifie le token Google et retourne un token JWT local.")
     @ApiResponse(responseCode = "200", description = "Connexion Google réussie")
     @ApiResponse(responseCode = "401", description = "Token Google invalide")
-    public ResponseEntity<AuthResponse> googleLogin(@RequestBody String idToken) {
+    public ResponseEntity<AuthResponse> googleLogin(@Valid @RequestBody GoogleLoginRequest request) {
         log.info("GOOGLE_LOGIN: Tentative de connexion via Google");
-        // Nettoyage si le token arrive avec des guillemets (cas JSON brut)
-        String cleanedToken = idToken != null ? idToken.replace("\"", "") : "";
-        return googleAuthService.verifyGoogleToken(cleanedToken)
+        return googleAuthService.verifyGoogleToken(request.getIdToken(), request.getRole())
                 .map(user -> ResponseEntity.ok(authService.generateAuthResponse(user)))
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
@@ -101,6 +99,21 @@ public class AuthController {
     @ApiResponse(responseCode = "400", description = "Token invalide ou expiré")
     public ResponseEntity<Void> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         authService.resetPassword(request);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Verifies the reset code.
+     *
+     * @param request the verify code details.
+     * @return 200 OK or 400 Bad Request.
+     */
+    @PostMapping("/verify-code")
+    @Operation(summary = "Vérifier le code de réinitialisation", description = "Vérifie si le code à 6 chiffres est valide pour l'email donné.")
+    @ApiResponse(responseCode = "200", description = "Code valide")
+    @ApiResponse(responseCode = "400", description = "Code invalide ou expiré")
+    public ResponseEntity<Void> verifyCode(@Valid @RequestBody VerifyCodeRequest request) {
+        authService.verifyResetCode(request);
         return ResponseEntity.ok().build();
     }
 

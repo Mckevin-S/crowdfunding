@@ -2,10 +2,10 @@ package com.example.project.service.impl;
 
 import com.example.project.dto.external.cinetpay.CinetPayRequest;
 import com.example.project.dto.external.cinetpay.CinetPayResponse;
+import com.example.project.entity.Contribution;
 import com.example.project.repository.ContributionRepository;
 import com.example.project.service.interfaces.CinetPayService;
 import com.example.project.service.interfaces.ContributionService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -114,21 +114,22 @@ public class CinetPayServiceImpl implements CinetPayService {
     }
 
     @Override
-    public java.util.Map<String, String> initiateSimulatedPayment(java.math.BigDecimal amount, Long contributionId, String phoneNumber) {
+    public java.util.Map<String, String> initiateSimulatedPayment(java.math.BigDecimal amount, Long contributionId,
+            String phoneNumber) {
         log.info("[SIMULATION] Initiation paiement Mobile Money (CinetPay) pour le numéro: {}", phoneNumber);
-        
+
         java.util.Map<String, String> response = new java.util.HashMap<>();
         response.put("payment_url", "https://cinetpay.com/simulated-payment/" + java.util.UUID.randomUUID());
         response.put("transaction_id", "CP-" + contributionId);
         response.put("status", "ACCEPTED");
-        
+
         // Update contribution with simulated reference
         Contribution contribution = contributionRepository.findById(contributionId).orElse(null);
         if (contribution != null) {
             contribution.setMobileMoneReference("CP-" + contributionId);
             contributionRepository.save(contribution);
         }
-        
+
         return response;
     }
 }

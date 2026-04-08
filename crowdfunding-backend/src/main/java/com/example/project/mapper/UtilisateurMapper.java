@@ -4,6 +4,7 @@ import com.example.project.dto.UtilisateurRequestDTO;
 import com.example.project.dto.UtilisateurResponseDTO;
 import com.example.project.entity.Utilisateur;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UtilisateurMapper {

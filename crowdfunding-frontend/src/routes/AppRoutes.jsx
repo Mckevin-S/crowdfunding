@@ -9,6 +9,9 @@ import PublicRoute from './PublicRoute';
 const Home = lazy(() => import('@pages/Home'));
 const Login = lazy(() => import('@pages/Auth/Login'));
 const Register = lazy(() => import('@pages/Auth/Register'));
+const ForgotPassword = lazy(() => import('@pages/Auth/ForgotPassword'));
+const ResetPassword = lazy(() => import('@pages/Auth/ResetPassword'));
+const EmailVerification = lazy(() => import('@pages/Auth/EmailVerification'));
 const ProjectsExplore = lazy(() => import('@pages/Projects/ProjectsExplore'));
 const ProjectDetails = lazy(() => import('@pages/Projects/ProjectDetails'));
 const CreateProject = lazy(() => import('@pages/Projects/CreateProject'));
@@ -50,6 +53,9 @@ const AppRoutes = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
             <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+            <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+            <Route path="/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>} />
+            <Route path="/verify-email" element={<PublicRoute><EmailVerification /></PublicRoute>} />
             <Route path="/projects" element={<ProjectsExplore />} />
             {/* Private Routes with Persistent Dashboard Layout */}
             <Route element={<PrivateRoute><UserDashboardLayout /></PrivateRoute>}>

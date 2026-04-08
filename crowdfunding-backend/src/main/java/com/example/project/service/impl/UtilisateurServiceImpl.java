@@ -70,7 +70,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Transactional
     public void banUtilisateur(Long id) {
         Utilisateur user = getUtilisateurById(id);
-        user.setStatut(UserStatus.BANNED);
+        user.setStatut(UserStatus.SUSPENDED);
         utilisateurRepository.save(user);
         
         // --- NOTIFICATION ---

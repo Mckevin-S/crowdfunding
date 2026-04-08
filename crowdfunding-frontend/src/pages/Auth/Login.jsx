@@ -203,7 +203,7 @@ const Login = () => {
           <div className="flex flex-col gap-3">
             <GoogleLogin
               onSuccess={credentialResponse => {
-                dispatch(googleLogin(credentialResponse.credential))
+                dispatch(googleLogin({ idToken: credentialResponse.credential }))
                   .unwrap()
                   .then((payload) => {
                     toast.success('Bienvenue !');

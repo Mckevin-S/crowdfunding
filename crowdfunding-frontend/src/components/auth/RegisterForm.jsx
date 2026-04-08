@@ -15,7 +15,7 @@ import clsx from 'clsx';
  * Formulaire d'inscription premium InvestAFRIKA.
  * Gère l'inscription avec sélection de rôle (INVESTOR, ENTREPRENEUR).
  */
-const RegisterForm = () => {
+const RegisterForm = ({ onRoleChange }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector(state => state.auth);
@@ -53,7 +53,10 @@ const RegisterForm = () => {
       <div className="grid grid-cols-2 gap-4 mb-2">
         <button
           type="button"
-          onClick={() => formik.setFieldValue('role', 'CONTRIBUTEUR')}
+          onClick={() => {
+            formik.setFieldValue('role', 'CONTRIBUTEUR');
+            if (onRoleChange) onRoleChange('CONTRIBUTEUR');
+          }}
           className={clsx(
             "p-5 rounded-2xl border-2 transition-all flex flex-col items-start gap-1.5 text-left relative overflow-hidden group",
             formik.values.role === 'CONTRIBUTEUR' 
@@ -73,7 +76,10 @@ const RegisterForm = () => {
         
         <button
           type="button"
-          onClick={() => formik.setFieldValue('role', 'PORTEUR_PROJET')}
+          onClick={() => {
+            formik.setFieldValue('role', 'PORTEUR_PROJET');
+            if (onRoleChange) onRoleChange('PORTEUR_PROJET');
+          }}
           className={clsx(
             "p-5 rounded-2xl border-2 transition-all flex flex-col items-start gap-1.5 text-left relative overflow-hidden group",
             formik.values.role === 'PORTEUR_PROJET' 

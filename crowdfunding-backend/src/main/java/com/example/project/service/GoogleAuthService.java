@@ -31,7 +31,7 @@ public class GoogleAuthService {
     private final WalletRepository walletRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Optional<Utilisateur> verifyGoogleToken(String idTokenString) {
+    public Optional<Utilisateur> verifyGoogleToken(String idTokenString, UserRole role) {
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                     .setAudience(Collections.singletonList(clientId))
@@ -48,7 +48,7 @@ public class GoogleAuthService {
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
 
-                return Optional.of(processGoogleUser(email, googleId, name, pictureUrl, familyName, givenName));
+                return Optional.of(processGoogleUser(email, googleId, name, pictureUrl, familyName, givenName, role));
             }
         } catch (Exception e) {
             log.error("GOOGLE_AUTH_ERROR: Erreur lors de la vérification du token Google", e);
@@ -56,7 +56,7 @@ public class GoogleAuthService {
         return Optional.empty();
     }
 
-    private Utilisateur processGoogleUser(String email, String googleId, String name, String pictureUrl, String familyName, String givenName) {
+    private Utilisateur processGoogleUser(String email, String googleId, String name, String pictureUrl, String familyName, String givenName, UserRole role) {
         return utilisateurRepository.findByEmail(email)
                 .map(existingUser -> {
                     if (existingUser.getGoogleId() == null) {
@@ -73,7 +73,7 @@ public class GoogleAuthService {
                     newUser.setAvatarUrl(pictureUrl);
                     newUser.setNom(familyName != null ? familyName : name);
                     newUser.setPrenom(givenName);
-                    newUser.setRole(UserRole.CONTRIBUTEUR); // Rôle par défaut
+                    newUser.setRole(role != null ? role : UserRole.CONTRIBUTEUR); // Rôle spécifié ou par défaut
                     newUser.setStatut(UserStatus.ACTIVE);
                     // On définit un mot de passe aléatoire pour les futurs logins standard facultatifs
                     newUser.setMotsDePasse(passwordEncoder.encode(java.util.UUID.randomUUID().toString()));

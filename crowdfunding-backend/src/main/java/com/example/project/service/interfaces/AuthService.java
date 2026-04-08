@@ -39,6 +39,13 @@ public interface AuthService {
     void resetPassword(ResetPasswordRequest request);
 
     /**
+     * Verifies if the reset code is valid for a given email.
+     *
+     * @param request contains email and code.
+     */
+    void verifyResetCode(VerifyCodeRequest request);
+
+    /**
      * Changes the password for an authenticated user.
      *
      * @param request contains old and new passwords.

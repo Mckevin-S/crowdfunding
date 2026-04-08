@@ -33,9 +33,9 @@ export const registerUser = createAsyncThunk(
 
 export const googleLogin = createAsyncThunk(
   'auth/google',
-  async (idToken, { rejectWithValue }) => {
+  async ({ idToken, role }, { rejectWithValue }) => {
     try {
-      const response = await authService.googleLogin(idToken);
+      const response = await authService.googleLogin(idToken, role);
       const data = response.data;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));

@@ -26,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -121,36 +122,50 @@ public class AuthServiceImpl implements AuthService {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", "email", request.getEmail()));
 
-        // Invalid any previous tokens
-        tokenRepository.deleteByUtilisateur(utilisateur);
-
-        String token = UUID.randomUUID().toString();
-        PasswordResetToken resetToken = PasswordResetToken.builder()
-                .token(token)
-                .utilisateur(utilisateur)
-                .expiryDate(LocalDateTime.now().plusHours(24))
-                .build();
-
+        // Générer un code à 6 chiffres
+        SecureRandom random = new SecureRandom();
+        String code = String.format("%06d", random.nextInt(1000000));
+        
+        // Chercher un token existant ou en créer un nouveau pour éviter les violations de contrainte
+        PasswordResetToken resetToken = tokenRepository.findByUtilisateur(utilisateur)
+                .orElse(new PasswordResetToken());
+        
+        resetToken.setToken(code);
+        resetToken.setUtilisateur(utilisateur);
+        resetToken.setExpiryDate(LocalDateTime.now().plusMinutes(15));
+        
         tokenRepository.save(resetToken);
 
-        String resetLink = "http://localhost:3000/reset-password?token=" + token; // Simplified for dev
         emailService.sendSimpleMessage(
                 utilisateur.getEmail(),
-                "Réinitialisation de votre mot de passe",
-                "Cliquez sur ce lien pour réinitialiser votre mot de passe : " + resetLink
+                "Code de réinitialisation de mot de passe",
+                "Votre code de réinitialisation est : " + code + ". Ce code expirera dans 15 minutes."
         );
-        log.info("FORGOT_PASSWORD: Token généré pour {}", utilisateur.getEmail());
+        log.info("FORGOT_PASSWORD: Code généré pour {}", utilisateur.getEmail());
+    }
+
+    @Override
+    public void verifyResetCode(VerifyCodeRequest request) {
+        PasswordResetToken token = tokenRepository.findByTokenAndUtilisateur_Email(request.getCode(), request.getEmail())
+                .orElseThrow(() -> new BadRequestException("Code invalide pour cet email"));
+
+        if (token.isExpired()) {
+            tokenRepository.delete(token);
+            throw new BadRequestException("Le code a expiré");
+        }
     }
 
     @Override
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
+        // Dans ce flux, le frontend doit renvoyer l'email en plus du token/code pour plus de sécurité
+        // On suppose que le ResetPasswordRequest peut être adapté ou qu'on utilise le token tel quel
         PasswordResetToken token = tokenRepository.findByToken(request.getToken())
-                .orElseThrow(() -> new BadRequestException("Token invalide"));
+                .orElseThrow(() -> new BadRequestException("Code invalide"));
 
         if (token.isExpired()) {
             tokenRepository.delete(token);
-            throw new BadRequestException("Le token a expiré");
+            throw new BadRequestException("Le code a expiré");
         }
 
         Utilisateur utilisateur = token.getUtilisateur();
