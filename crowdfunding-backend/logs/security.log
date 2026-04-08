@@ -250,3 +250,158 @@
 2026-04-08 00:50:36.002 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
 2026-04-08 00:50:36.624 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/contributions/utilisateur/4
 2026-04-08 00:50:37.010 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/contributions/utilisateur/4
+2026-04-08 00:56:24.097 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-04-08 00:56:24.103 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:24.115 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-04-08 00:56:26.334 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-04-08 00:56:26.353 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:26.354 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-04-08 00:56:26.532 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2
+2026-04-08 00:56:26.534 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/1
+2026-04-08 00:56:26.578 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:26.589 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:26.610 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/1
+2026-04-08 00:56:26.611 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2
+2026-04-08 00:56:26.681 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /files/images/a6f0d333-2900-4795-8248-49b647f66474.jpg
+2026-04-08 00:56:26.725 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:26.729 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /files/images/a6f0d333-2900-4795-8248-49b647f66474.jpg
+2026-04-08 00:56:27.455 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2
+2026-04-08 00:56:27.455 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/1
+2026-04-08 00:56:27.460 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:27.463 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:27.468 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2
+2026-04-08 00:56:27.485 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/1
+2026-04-08 00:56:34.658 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/2
+2026-04-08 00:56:34.723 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:34.732 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/2
+2026-04-08 00:56:34.806 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/2
+2026-04-08 00:56:34.816 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:34.824 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/2
+2026-04-08 00:56:34.941 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2
+2026-04-08 00:56:34.987 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:35.001 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2
+2026-04-08 00:56:35.089 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2
+2026-04-08 00:56:35.093 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:35.098 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2
+2026-04-08 00:56:35.103 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/comments/project/2
+2026-04-08 00:56:35.122 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:35.128 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/comments/project/2
+2026-04-08 00:56:35.282 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/comments/project/2
+2026-04-08 00:56:35.283 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 00:56:35.284 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/comments/project/2
+2026-04-08 01:07:28.475 [main] DEBUG c.e.project.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-04-08 01:07:40.236 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@44bc7dc9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@365b1eb5, org.springframework.security.web.context.SecurityContextHolderFilter@57084740, org.springframework.security.web.header.HeaderWriterFilter@6f6ea81b, org.springframework.web.filter.CorsFilter@25a5d43a, org.springframework.web.filter.CorsFilter@22678487, org.springframework.security.web.authentication.logout.LogoutFilter@12ff3bb8, com.example.project.security.JwtAuthFilter@5e8b5e7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@48d54b1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@fefb1c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@512e737, org.springframework.security.web.session.SessionManagementFilter@13bb5b63, org.springframework.security.web.access.ExceptionTranslationFilter@4b6a81ab, org.springframework.security.web.access.intercept.AuthorizationFilter@a547191]
+2026-04-08 01:08:33.549 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/forgot-password
+2026-04-08 01:08:33.607 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/forgot-password
+2026-04-08 01:08:33.968 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 01:08:33.979 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/forgot-password
+2026-04-08 01:09:57.783 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/verify-code
+2026-04-08 01:09:57.801 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/verify-code
+2026-04-08 01:09:57.806 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 01:09:57.809 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/verify-code
+2026-04-08 01:10:09.739 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/reset-password
+2026-04-08 01:10:09.759 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/reset-password
+2026-04-08 01:10:09.764 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 01:10:09.768 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/reset-password
+2026-04-08 01:10:23.241 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/auth/login
+2026-04-08 01:10:23.249 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2026-04-08 01:10:23.252 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 01:10:23.257 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2026-04-08 01:10:23.848 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2026-04-08 01:10:24.362 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:10:24.364 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:10:24.376 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:24.572 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:24.586 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:24.646 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:24.667 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:24.674 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:24.954 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/porteur/2
+2026-04-08 01:10:24.960 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/porteur/2
+2026-04-08 01:10:24.960 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:24.968 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/porteur/2
+2026-04-08 01:10:25.006 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:25.046 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:25.054 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/porteur/2
+2026-04-08 01:10:25.105 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:25.215 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:25.221 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:25.310 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/porteur/2
+2026-04-08 01:10:25.347 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/porteur/2
+2026-04-08 01:10:46.644 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:10:46.649 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:10:46.665 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:46.722 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:46.726 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:46.745 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:10:46.801 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:10:46.833 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets
+2026-04-08 01:10:46.835 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets
+2026-04-08 01:10:46.841 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:10:46.876 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-04-08 01:10:46.938 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-04-08 01:10:46.991 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets
+2026-04-08 01:10:47.019 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets
+2026-04-08 01:10:47.132 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:47.132 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:47.134 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:47.135 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:47.166 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:47.166 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:47.176 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /files/images/a6f0d333-2900-4795-8248-49b647f66474.jpg
+2026-04-08 01:10:47.178 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-08 01:10:47.179 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /files/images/a6f0d333-2900-4795-8248-49b647f66474.jpg
+2026-04-08 01:10:47.210 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:47.218 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:48.656 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:48.657 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:48.687 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/1?utilisateurId=2
+2026-04-08 01:10:48.687 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.432 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/2
+2026-04-08 01:10:54.433 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/2
+2026-04-08 01:10:54.475 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/2
+2026-04-08 01:10:54.551 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/2
+2026-04-08 01:10:54.609 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/2
+2026-04-08 01:10:54.677 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.677 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.702 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.705 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/2
+2026-04-08 01:10:54.744 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.804 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.813 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/comments/project/2
+2026-04-08 01:10:54.820 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/comments/project/2
+2026-04-08 01:10:54.832 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:10:54.840 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/comments/project/2
+2026-04-08 01:10:54.906 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/comments/project/2
+2026-04-08 01:10:54.933 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/comments/project/2
+2026-04-08 01:11:02.114 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/like/project/2/user/2
+2026-04-08 01:11:02.119 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/social/like/project/2/user/2
+2026-04-08 01:11:02.132 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/social/like/project/2/user/2
+2026-04-08 01:11:02.763 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:11:02.767 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:11:02.778 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/2?utilisateurId=2
+2026-04-08 01:11:06.654 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/social/share/project/2/user/2
+2026-04-08 01:11:06.670 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/social/share/project/2/user/2
+2026-04-08 01:11:06.700 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/social/share/project/2/user/2
+2026-04-08 01:11:19.280 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/porteur/2
+2026-04-08 01:11:19.281 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/projets/porteur/2
+2026-04-08 01:11:19.283 [http-nio-0.0.0.0-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:11:19.284 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:11:19.308 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:11:19.308 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/porteur/2
+2026-04-08 01:11:19.336 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:11:19.337 [http-nio-0.0.0.0-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/porteur/2
+2026-04-08 01:11:19.340 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:11:19.359 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:11:19.397 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:11:19.399 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/porteur/2
+2026-04-08 01:11:19.528 [http-nio-0.0.0.0-8080-exec-10] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:11:19.617 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/porteur/2
+2026-04-08 01:12:19.310 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:12:19.317 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:12:19.328 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:12:19.330 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]
+2026-04-08 01:13:19.307 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing OPTIONS /api/v1/notifications/user/2
+2026-04-08 01:13:19.314 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/notifications/user/2
+2026-04-08 01:13:19.329 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/notifications/user/2
+2026-04-08 01:13:19.330 [http-nio-0.0.0.0-8080-exec-6] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.example.project.controller.NotificationController.getNotificationsByUser(java.lang.Long); target is of class [com.example.project.controller.NotificationController]

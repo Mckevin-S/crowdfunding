@@ -95,7 +95,7 @@ public class KycDocumentServiceImpl implements KycDocumentService {
                 notificationService.createNotification(new NotificationRequestDTO(
                     updatedDoc.getUtilisateur().getId(),
                     msg,
-                    isCritical
+                    true // Always send email for KYC updates
                 ));
             }
         } catch (Exception e) {

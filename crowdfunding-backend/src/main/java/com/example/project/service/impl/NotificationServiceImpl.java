@@ -45,7 +45,11 @@ public class NotificationServiceImpl implements NotificationService {
 
         if (request.isSendEmail()) {
             try {
-                emailService.sendSimpleMessage(utilisateur.getEmail(), "Nouvelle notification importante", request.getMessage());
+                emailService.sendHtmlMessage(
+                    utilisateur.getEmail(), 
+                    "Notification Importante - Crowdfunding", 
+                    com.example.project.util.EmailTemplateUtil.getActionTemplate("Notification Importante", request.getMessage())
+                );
             } catch (Exception e) {
                 // Log but don't fail notification creation
             }

@@ -19,6 +19,7 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender emailSender;
 
     @Override
+    @org.springframework.scheduling.annotation.Async
     public void sendSimpleMessage(String to, String subject, String text) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
@@ -29,6 +30,25 @@ public class EmailServiceImpl implements EmailService {
             log.info("Email sent to {}", to);
         } catch (Exception e) {
             log.error("Failed to send email to {}", to, e);
+        }
+    }
+
+    @Override
+    @org.springframework.scheduling.annotation.Async
+    public void sendHtmlMessage(String to, String subject, String htmlBody) {
+        try {
+            jakarta.mail.internet.MimeMessage message = emailSender.createMimeMessage();
+            org.springframework.mail.javamail.MimeMessageHelper helper = 
+                new org.springframework.mail.javamail.MimeMessageHelper(message, true, "UTF-8");
+            
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(htmlBody, true);
+            
+            emailSender.send(message);
+            log.info("HTML Email sent to {}", to);
+        } catch (Exception e) {
+            log.error("Failed to send HTML email to {}", to, e);
         }
     }
 }

@@ -73,6 +73,17 @@ public class AuthServiceImpl implements AuthService {
         utilisateur = utilisateurRepository.save(utilisateur);
         createWalletForUser(utilisateur);
 
+        // Envoi de l'email de bienvenue (Premium)
+        try {
+            emailService.sendHtmlMessage(
+                utilisateur.getEmail(),
+                "Bienvenue sur notre plateforme !",
+                com.example.project.util.EmailTemplateUtil.getWelcomeTemplate(utilisateur.getPrenom())
+            );
+        } catch (Exception e) {
+            log.error("Erreur lors de l'envoi de l'email de bienvenue pour {}", utilisateur.getEmail(), e);
+        }
+
         return generateAuthResponse(utilisateur);
     }
 
@@ -136,10 +147,11 @@ public class AuthServiceImpl implements AuthService {
         
         tokenRepository.save(resetToken);
 
-        emailService.sendSimpleMessage(
+        // Envoi du code stylisé (Premium)
+        emailService.sendHtmlMessage(
                 utilisateur.getEmail(),
                 "Code de réinitialisation de mot de passe",
-                "Votre code de réinitialisation est : " + code + ". Ce code expirera dans 15 minutes."
+                com.example.project.util.EmailTemplateUtil.getPasswordResetTemplate(code)
         );
         log.info("FORGOT_PASSWORD: Code généré pour {}", utilisateur.getEmail());
     }

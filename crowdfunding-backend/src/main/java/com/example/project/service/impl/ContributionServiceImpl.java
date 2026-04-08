@@ -215,14 +215,14 @@ public class ContributionServiceImpl implements ContributionService {
                                         "🎉 Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.",
                                         contribution.getAmount().toString(), projet.getTitre());
                         notificationService.createNotification(
-                                        new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, false));
+                                        new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, true));
 
                         // Notify Contributor
                         String contribMsg = String.format(
                                         "✔️ Merci ! Votre contribution de %s XAF pour le projet '%s' est confirmée.",
                                         contribution.getAmount().toString(), projet.getTitre());
                         notificationService.createNotification(new NotificationRequestDTO(
-                                        contribution.getUtilisateur().getId(), contribMsg, false));
+                                        contribution.getUtilisateur().getId(), contribMsg, true));
                 } catch (Exception e) {
                         // Log but don't fail transaction
                 }
