@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@lombok.extern.slf4j.Slf4j
 public class NotificationWebSocketController {
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -15,6 +16,9 @@ public class NotificationWebSocketController {
     }
 
     public void sendNotificationToUser(Long userId, NotificationResponseDTO notification) {
-        messagingTemplate.convertAndSend("/topic/notifications/" + userId, notification);
+        String destination = "/topic/notifications/" + userId;
+        log.info("[WS] Envoi d'une notification vers {} : {}", destination, notification.getMessage());
+        messagingTemplate.convertAndSend(destination, notification);
     }
 }
+

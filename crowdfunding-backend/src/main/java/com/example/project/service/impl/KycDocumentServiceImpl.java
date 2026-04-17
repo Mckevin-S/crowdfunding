@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@lombok.extern.slf4j.Slf4j
 public class KycDocumentServiceImpl implements KycDocumentService {
 
     private final KycDocumentRepository kycDocumentRepository;
@@ -80,12 +81,18 @@ public class KycDocumentServiceImpl implements KycDocumentService {
 
         // Synchroniser avec le statut global de l'utilisateur
         Utilisateur utilisateur = document.getUtilisateur();
-        if (status == StatutDocument.APPROUVE) {
-            utilisateur.setKycStatus("APPROVED");
-        } else if (status == StatutDocument.REJETE) {
-            utilisateur.setKycStatus("REJECTED");
+        if (utilisateur != null) {
+            log.info("KYC_USER_SYNC: Mise à jour du statut global pour l'utilisateur ID: {} vers {}", 
+                utilisateur.getId(), status);
+            if (status == StatutDocument.APPROUVE) {
+                utilisateur.setKycStatus("APPROVED");
+            } else if (status == StatutDocument.REJETE) {
+                utilisateur.setKycStatus("REJECTED");
+            }
+            utilisateurRepository.save(utilisateur);
+        } else {
+            log.warn("KYC_USER_SYNC: Aucun utilisateur trouvé pour le document ID: {}", documentId);
         }
-        utilisateurRepository.save(utilisateur);
 
         KycDocument updatedDoc = kycDocumentRepository.save(document);
 

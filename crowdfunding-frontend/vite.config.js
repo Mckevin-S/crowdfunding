@@ -4,6 +4,12 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+
+  // Patch pour corriger l'erreur "global is not defined" (requis par sockjs-client)
+  define: {
+    global: 'window',
+  },
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -16,56 +22,62 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
+
+  // Pré-bundler sockjs-client (CommonJS) pour que Vite le resolve correctement en ESM
+  optimizeDeps: {
+    include: ['sockjs-client'],
+  },
+
   server: {
     port: 5173,
     proxy: {
+      // API REST Spring Boot
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
       },
+      // Endpoint WebSocket SockJS (doit matcher avant que le browser tente de se connecter)
+      '/ws-notifications': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
     },
   },
+
   build: {
     outDir: 'dist',
-    sourcemap: false, // Disable sourcemaps in production for smaller bundle
+    sourcemap: false,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Core React vendor
           if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
             return 'react-vendor';
           }
-          // Redux vendor
           if (id.includes('node_modules/@reduxjs/toolkit') || id.includes('node_modules/react-redux')) {
             return 'redux-vendor';
           }
-          // UI Components
           if (id.includes('node_modules/@headlessui/react') || id.includes('node_modules/@heroicons/react')) {
             return 'ui-vendor';
           }
-          // Heavy charts library - lazy load
           if (id.includes('node_modules/recharts')) {
             return 'charts-vendor';
           }
-          // Payment library - lazy load
           if (id.includes('node_modules/@stripe')) {
             return 'stripe-vendor';
           }
-          // Form validation - lazy load
           if (id.includes('node_modules/formik') || id.includes('node_modules/yup')) {
             return 'forms-vendor';
           }
-          // Icons - lazy load
           if (id.includes('node_modules/lucide-react')) {
             return 'icons-vendor';
           }
-          // Router
           if (id.includes('node_modules/react-router-dom')) {
             return 'router-vendor';
           }
-          // Utilities
           if (id.includes('node_modules/axios') || id.includes('node_modules/react-toastify')) {
             return 'utils-vendor';
           }
@@ -83,4 +95,3 @@ export default defineConfig({
     },
   },
 })
-

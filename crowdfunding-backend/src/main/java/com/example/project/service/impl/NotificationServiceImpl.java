@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@lombok.extern.slf4j.Slf4j
 public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
@@ -47,13 +48,21 @@ public class NotificationServiceImpl implements NotificationService {
 
         if (request.isSendEmail()) {
             try {
+                String subject = "ALERTE".equals(request.getCategorie()) 
+                    ? "⚠️ Alerte Importante - Crowdfunding" 
+                    : "🔔 Nouvelle Notification - Crowdfunding";
+                
+                String templateTitle = "ALERTE".equals(request.getCategorie())
+                    ? "Action Requise"
+                    : "Information";
+
                 emailService.sendHtmlMessage(
                     utilisateur.getEmail(), 
-                    "Notification Importante - Crowdfunding", 
-                    com.example.project.util.EmailTemplateUtil.getActionTemplate("Notification Importante", request.getMessage())
+                    subject, 
+                    com.example.project.util.EmailTemplateUtil.getActionTemplate(templateTitle, request.getMessage())
                 );
             } catch (Exception e) {
-                // Log but don't fail notification creation
+                log.error("Erreur lors de l'envoi de l'email de notification", e);
             }
         }
 

@@ -58,6 +58,17 @@ const NotificationDropdown = () => {
       return updated;
     });
     setUnreadCount(prev => prev + 1);
+
+    // Affichage d'un toast visuel
+    toast.info(notif.message, {
+      position: "top-right",
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      icon: <Bell className="text-primary-500 w-5 h-5" />
+    });
   }, []));
 
   useEffect(() => {
@@ -70,7 +81,8 @@ const NotificationDropdown = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleMarkAsRead = async (id) => {
+  const handleMarkAsRead = async (e, id) => {
+    if (e) e.stopPropagation();
     try {
       await notificationService.markAsRead(id);
       setNotifications(notifications.map(n => n.id === id ? { ...n, estLu: true } : n));
@@ -161,7 +173,7 @@ const NotificationDropdown = () => {
                   <div className="flex flex-col gap-1 items-end">
                     {!notification.estLu && (
                       <button 
-                        onClick={() => handleMarkAsRead(notification.id)}
+                        onClick={(e) => handleMarkAsRead(e, notification.id)}
                         className="opacity-0 group-hover:opacity-100 p-1.5 bg-white rounded-lg border border-slate-100 text-primary-600 shadow-sm transition-all hover:scale-110"
                         title="Marquer comme lu"
                       >
@@ -169,7 +181,8 @@ const NotificationDropdown = () => {
                       </button>
                     )}
                     <button
-                      onClick={async () => {
+                      onClick={async (e) => {
+                        e.stopPropagation();
                         try {
                           await notificationService.deleteNotification(notification.id);
                           setNotifications(notifications.filter(n => n.id !== notification.id));

@@ -8,7 +8,7 @@ export const notificationService = {
 
   // Marquer une notification comme lue
   markAsRead: (id) => {
-    return api.put(`/notifications/${id}/read`);
+    return api.patch(`/notifications/${id}/read`);
   },
 
   // Créer une notification (principalement pour l'admin ou usage système)

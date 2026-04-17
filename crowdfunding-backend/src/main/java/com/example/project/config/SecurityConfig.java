@@ -45,7 +45,8 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/v1/stripe/webhook").permitAll()
                         .requestMatchers("/api/v1/cinetpay/notify").permitAll()
-                        .requestMatchers("/files/images/**").permitAll()
+                        .requestMatchers("/files/images/**", "/files/documents/**").permitAll()
+                        .requestMatchers("/ws-notifications/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/projets/**", "/api/v1/projets", "/api/v1/social/**", "/api/v1/analyses-ia/**").permitAll()
                         .requestMatchers("/api/v1/ai/chat").permitAll()
 
