@@ -1,4 +1,5 @@
-package com.example.project.service.interfaces; // syntax fix
+
+package com.example.project.service.interfaces;
 
 import com.example.project.dto.NotificationRequestDTO;
 import com.example.project.dto.NotificationResponseDTO;
@@ -31,4 +32,10 @@ public interface NotificationService {
      * @param id the notification ID.
      */
     void markAsRead(Long id);
+
+    /**
+     * Supprime une notification par son identifiant.
+     * @param id l'identifiant de la notification
+     */
+    void deleteNotification(Long id);
 }

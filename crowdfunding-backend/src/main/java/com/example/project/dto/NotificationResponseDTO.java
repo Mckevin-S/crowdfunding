@@ -27,7 +27,10 @@ public class NotificationResponseDTO {
     
     @Schema(description = "Indique si la notification a été lue", example = "false")
     private Boolean estLu;
-    
+
+    @Schema(description = "Catégorie/type de notification", example = "INFO")
+    private String categorie;
+
     @Schema(description = "Date d'envoi", example = "2026-03-17T12:00:00")
     private LocalDateTime dateCreation;
 }

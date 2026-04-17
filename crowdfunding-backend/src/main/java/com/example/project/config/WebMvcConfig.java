@@ -25,5 +25,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // Expose uploads directory to serve images statically
         registry.addResourceHandler("/files/images/**")
                 .addResourceLocations("file:uploads/images/");
+        // Expose documents directory to serve KYC docs statically
+        registry.addResourceHandler("/files/documents/**")
+                .addResourceLocations("file:uploads/documents/");
     }
 }

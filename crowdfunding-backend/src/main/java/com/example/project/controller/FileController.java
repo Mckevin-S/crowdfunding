@@ -36,4 +36,19 @@ public class FileController {
         
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/upload/document")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Uploader un document KYC (PDF, JPG, PNG)")
+    public ResponseEntity<Map<String, String>> uploadDocument(
+            @RequestParam("file") MultipartFile file) {
+
+        String fileUrl = fileService.uploadDocument(file);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("url", fileUrl);
+        response.put("message", "Document enregistré avec succès.");
+
+        return ResponseEntity.ok(response);
+    }
 }

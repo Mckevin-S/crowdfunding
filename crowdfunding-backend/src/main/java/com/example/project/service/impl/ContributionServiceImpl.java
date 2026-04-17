@@ -200,17 +200,17 @@ public class ContributionServiceImpl implements ContributionService {
                 try {
                         // Notify Owner
                         String ownerMsg = String.format(
-                                        "🎉 Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.",
+                                        "Nouvelle contribution ! Vous avez reçu %s XAF pour votre projet '%s'.",
                                         contribution.getAmount().toString(), projet.getTitre());
                         notificationService.createNotification(
-                                        new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, true));
+                                        new NotificationRequestDTO(projet.getPorteur().getId(), ownerMsg, "ALERTE", true));
 
                         // Notify Contributor
                         String contribMsg = String.format(
                                         "Merci ! Votre contribution de %s XAF pour le projet '%s' est confirmée.",
                                         contribution.getAmount().toString(), projet.getTitre());
                         notificationService.createNotification(new NotificationRequestDTO(
-                                        contribution.getUtilisateur().getId(), contribMsg, true));
+                                        contribution.getUtilisateur().getId(), contribMsg, "ALERTE", true));
                 } catch (Exception e) {
                         // Log but don't fail transaction
                 }

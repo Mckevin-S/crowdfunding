@@ -74,4 +74,17 @@ public class NotificationController {
         notificationService.markAsRead(id);
         return ResponseEntity.ok().build();
     }
+
+        /**
+     * Supprime une notification (utilisateur ou admin).
+     * @param id l'identifiant de la notification
+     */
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or @securityService.isNotificationOwner(#id)")
+    @Operation(summary = "Supprimer une notification", description = "Supprime une notification pour l'utilisateur courant ou un admin.")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
+        notificationService.deleteNotification(id);
+        return ResponseEntity.noContent().build();
+    }
 }

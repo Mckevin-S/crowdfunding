@@ -10,4 +10,12 @@ public interface FileService {
      * @return the generated URL path to access the file
      */
     String uploadAndOptimizeImage(MultipartFile file);
+
+    /**
+     * Upload a KYC document (PDF or image) and save it as-is.
+     * @param file the multipart file from client
+     * @return the generated URL path to access the file
+     */
+    String uploadDocument(MultipartFile file);
 }
+

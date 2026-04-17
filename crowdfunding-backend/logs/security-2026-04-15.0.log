@@ -1,0 +1,15 @@
+2026-04-15 04:51:44.486 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/active
+2026-04-15 04:51:44.782 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:44.854 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/active
+2026-04-15 04:51:46.226 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/active
+2026-04-15 04:51:46.230 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.232 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/active
+2026-04-15 04:51:46.339 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg
+2026-04-15 04:51:46.342 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.343 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.346 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg
+2026-04-15 04:51:46.348 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.349 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.788 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.791 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.792 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/3?utilisateurId=3

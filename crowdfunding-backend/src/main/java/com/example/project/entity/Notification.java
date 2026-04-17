@@ -21,8 +21,12 @@ public class Notification {
     @JoinColumn(name = "user_id")
     private Utilisateur utilisateur;
     
+
     @Column(columnDefinition = "TEXT")
     private String message;
+
+    @Column(length = 50)
+    private String categorie; // ex: INFO, ALERTE, SYSTEME, etc.
     
     @Column(name = "is_read")
     private Boolean estLu = false;

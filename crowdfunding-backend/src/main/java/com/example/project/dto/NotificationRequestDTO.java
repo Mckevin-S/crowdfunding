@@ -25,6 +25,9 @@ public class NotificationRequestDTO {
     @NotBlank(message = "Le message ne doit pas être vide")
     private String message;
 
+    @Schema(description = "Catégorie/type de notification", example = "INFO")
+    private String categorie = "INFO";
+
     @Schema(description = "Envoyer également un email ?", example = "false")
     private boolean sendEmail = false;
 }

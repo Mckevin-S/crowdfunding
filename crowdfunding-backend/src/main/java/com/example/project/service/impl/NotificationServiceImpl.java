@@ -10,6 +10,7 @@ import com.example.project.repository.NotificationRepository;
 import com.example.project.repository.UtilisateurRepository;
 import com.example.project.service.interfaces.EmailService;
 import com.example.project.service.interfaces.NotificationService;
+import com.example.project.websocket.NotificationWebSocketController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationMapper notificationMapper;
     private final UtilisateurRepository utilisateurRepository;
     private final EmailService emailService;
+    private final NotificationWebSocketController notificationWebSocketController;
 
     @Override
     @Transactional
@@ -55,7 +57,10 @@ public class NotificationServiceImpl implements NotificationService {
             }
         }
 
-        return notificationMapper.toResponseDTO(notification);
+        NotificationResponseDTO responseDTO = notificationMapper.toResponseDTO(notification);
+        // Envoi temps réel via WebSocket
+        notificationWebSocketController.sendNotificationToUser(utilisateur.getId(), responseDTO);
+        return responseDTO;
     }
 
     @Override
@@ -75,5 +80,12 @@ public class NotificationServiceImpl implements NotificationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Notification", id));
         notification.setEstLu(true);
         notificationRepository.save(notification);
+    }
+    @Override
+    @Transactional
+    public void deleteNotification(Long id) {
+        Notification notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification", id));
+        notificationRepository.delete(notification);
     }
 }

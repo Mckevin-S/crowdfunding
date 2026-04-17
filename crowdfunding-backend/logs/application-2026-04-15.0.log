@@ -1,0 +1,393 @@
+2026-04-15 00:33:55.005 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.ProjetServiceImpl.closeExpiredProjects]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-04-15 00:33:55.257 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.282 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@196c66b3]
+2026-04-15 00:33:55.290 [scheduling-1] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: ProjetServiceImpl.closeExpiredProjects
+2026-04-15 00:33:55.319 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.321 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 00:33:55.537 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-04-15 00:33:55.605 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 00:33:55.671 [scheduling-1] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_QUERY: $Proxy172.findAll took 353ms
+2026-04-15 00:33:55.673 [scheduling-1] WARN  c.e.p.util.DatabaseLoggingAspect - SLOW_QUERY: Method=findAll, Duration=357ms (threshold: 100ms)
+2026-04-15 00:33:55.882 [scheduling-1] DEBUG c.e.p.util.DatabaseLoggingAspect - DATABASE_SAVE_START: Entity=Projet
+2026-04-15 00:33:55.953 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.957 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 00:33:56.719 [scheduling-1] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_QUERY: $Proxy172.save took 835ms
+2026-04-15 00:33:56.723 [scheduling-1] INFO  c.e.p.util.DatabaseLoggingAspect - DATABASE_SAVE_SUCCESS: Entity=Projet, Duration=841ms
+2026-04-15 00:33:56.724 [scheduling-1] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_SERVICE_METHOD: ProjetServiceImpl.closeExpiredProjects took 1434ms (threshold: 500ms)
+2026-04-15 00:33:56.725 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-04-15 00:33:56.727 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1584894769<open>)]
+2026-04-15 00:33:57.800 [scheduling-1] DEBUG org.hibernate.SQL - 
+    update
+        projects 
+    set
+        admin_notes=?,
+        all_or_nothing=?,
+        categorie=?,
+        start_date=?,
+        end_date=?,
+        description=?,
+        cover_image=?,
+        localisation=?,
+        current_amount=?,
+        investors_count=?,
+        funding_goal=?,
+        equity_percentage=?,
+        owner_id=?,
+        status=?,
+        suspension_deadline=?,
+        interest_rate=?,
+        titre=?,
+        funding_type=? 
+    where
+        id=?
+2026-04-15 00:33:58.050 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(1584894769<open>)] after transaction
+2026-04-15 00:59:59.995 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.LoanServiceImpl.applyPenalties]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-04-15 01:00:00.000 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(481344369<open>)] for JPA transaction
+2026-04-15 01:00:00.010 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1796eb02]
+2026-04-15 01:00:00.013 [scheduling-1] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: LoanServiceImpl.applyPenalties
+2026-04-15 01:00:00.075 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(481344369<open>)] for JPA transaction
+2026-04-15 01:00:00.076 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 01:00:00.095 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        rs1_0.id,
+        rs1_0.remaining_principal,
+        rs1_0.created_at,
+        rs1_0.due_date,
+        rs1_0.paid_at,
+        rs1_0.principal_amount,
+        rs1_0.interest_amount,
+        rs1_0.penalty_amount,
+        rs1_0.total_amount,
+        rs1_0.installment_number,
+        rs1_0.project_id,
+        rs1_0.status 
+    from
+        repayment_schedule rs1_0
+2026-04-15 01:00:00.156 [scheduling-1] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy194.findAll | Duration: 87ms
+2026-04-15 01:00:00.156 [scheduling-1] DEBUG c.e.p.util.DatabaseLoggingAspect - QUERY_EXECUTED: Method=findAll, Duration=87ms
+2026-04-15 01:00:00.159 [scheduling-1] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_END: LoanServiceImpl.applyPenalties | Duration: 146ms
+2026-04-15 01:00:00.160 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-04-15 01:00:00.160 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(481344369<open>)]
+2026-04-15 01:00:00.161 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(481344369<open>)] after transaction
+2026-04-15 04:51:44.486 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/active
+2026-04-15 04:51:44.782 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:44.854 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/active
+2026-04-15 04:51:44.905 [http-nio-0.0.0.0-8080-exec-9] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_START [b7fc7486-2649-46c0-a555-63790b52050c] GET /api/v1/projets/active | IP: 0:0:0:0:0:0:0:1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+2026-04-15 04:51:44.954 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:45.226 [http-nio-0.0.0.0-8080-exec-9] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_START: ProjetController.getActiveProjets
+2026-04-15 04:51:45.235 [http-nio-0.0.0.0-8080-exec-9] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: ProjetServiceImpl.getActiveProjets
+2026-04-15 04:51:45.569 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:45.903 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:46.013 [http-nio-0.0.0.0-8080-exec-9] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_QUERY: $Proxy172.findActiveProjectsByStatus took 747ms
+2026-04-15 04:51:46.032 [http-nio-0.0.0.0-8080-exec-9] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_SERVICE_METHOD: ProjetServiceImpl.getActiveProjets took 798ms (threshold: 500ms)
+2026-04-15 04:51:46.038 [http-nio-0.0.0.0-8080-exec-9] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_END: ProjetController.getActiveProjets | Duration: 814ms
+2026-04-15 04:51:46.213 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.223 [http-nio-0.0.0.0-8080-exec-9] WARN  c.e.p.util.HttpLoggingInterceptor - SLOW_REQUEST [b7fc7486-2649-46c0-a555-63790b52050c] GET /api/v1/projets/active | Status: 200 | Duration: 1322ms
+2026-04-15 04:51:46.226 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/projets/active
+2026-04-15 04:51:46.230 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.232 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/projets/active
+2026-04-15 04:51:46.234 [http-nio-0.0.0.0-8080-exec-5] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_START [bc59088d-a098-42c4-b5fa-73dc1fe8dbee] GET /api/v1/projets/active | IP: 0:0:0:0:0:0:0:1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+2026-04-15 04:51:46.236 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.237 [http-nio-0.0.0.0-8080-exec-5] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_START: ProjetController.getActiveProjets
+2026-04-15 04:51:46.238 [http-nio-0.0.0.0-8080-exec-5] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: ProjetServiceImpl.getActiveProjets
+2026-04-15 04:51:46.240 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:46.247 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:46.255 [http-nio-0.0.0.0-8080-exec-5] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy172.findActiveProjectsByStatus | Duration: 16ms
+2026-04-15 04:51:46.257 [http-nio-0.0.0.0-8080-exec-5] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_END: ProjetServiceImpl.getActiveProjets | Duration: 20ms
+2026-04-15 04:51:46.257 [http-nio-0.0.0.0-8080-exec-5] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_END: ProjetController.getActiveProjets | Duration: 20ms
+2026-04-15 04:51:46.262 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.263 [http-nio-0.0.0.0-8080-exec-5] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_END [bc59088d-a098-42c4-b5fa-73dc1fe8dbee] GET /api/v1/projets/active | Status: 200 | Duration: 29ms
+2026-04-15 04:51:46.339 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg
+2026-04-15 04:51:46.342 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.343 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.346 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg
+2026-04-15 04:51:46.347 [http-nio-0.0.0.0-8080-exec-1] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_START [930b670d-3822-46e3-86a1-8dd521f04e9e] GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg | IP: 0:0:0:0:0:0:0:1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+2026-04-15 04:51:46.348 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.348 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.349 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.354 [http-nio-0.0.0.0-8080-exec-3] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_START [3f27af29-0861-4041-bb7b-1e1d2cac50f3] GET /api/v1/social/stats/project/3 | IP: 0:0:0:0:0:0:0:1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+2026-04-15 04:51:46.354 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.HttpLoggingInterceptor - REQUEST_PARAMS [3f27af29-0861-4041-bb7b-1e1d2cac50f3] Query: utilisateurId=3
+2026-04-15 04:51:46.354 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.417 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.418 [http-nio-0.0.0.0-8080-exec-1] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_END [930b670d-3822-46e3-86a1-8dd521f04e9e] GET /files/images/ea33902d-0267-44e1-ab52-e55484ff0585.jpg | Status: 200 | Duration: 71ms
+2026-04-15 04:51:46.454 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_START: SocialController.getStats
+2026-04-15 04:51:46.465 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: SocialServiceImpl.getProjectSocialStats
+2026-04-15 04:51:46.666 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.697 [http-nio-0.0.0.0-8080-exec-3] WARN  c.e.p.util.PerformanceLoggingAspect - SLOW_QUERY: $Proxy199.countByProjetIdAndType took 227ms
+2026-04-15 04:51:46.710 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.715 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy199.countByProjetIdAndType | Duration: 14ms
+2026-04-15 04:51:46.736 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.748 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy198.findByProjetIdOrderByDateCreationDesc | Duration: 30ms
+2026-04-15 04:51:46.757 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.770 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy199.findByUtilisateurIdAndProjetIdAndType | Duration: 20ms
+2026-04-15 04:51:46.771 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_END: SocialServiceImpl.getProjectSocialStats | Duration: 306ms
+2026-04-15 04:51:46.771 [http-nio-0.0.0.0-8080-exec-3] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_END: SocialController.getStats | Duration: 317ms
+2026-04-15 04:51:46.779 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.780 [http-nio-0.0.0.0-8080-exec-3] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_END [3f27af29-0861-4041-bb7b-1e1d2cac50f3] GET /api/v1/social/stats/project/3 | Status: 200 | Duration: 426ms
+2026-04-15 04:51:46.788 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.791 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-04-15 04:51:46.792 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/social/stats/project/3?utilisateurId=3
+2026-04-15 04:51:46.794 [http-nio-0.0.0.0-8080-exec-7] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_START [08022792-3825-4e7e-8557-d7c61ede9ca2] GET /api/v1/social/stats/project/3 | IP: 0:0:0:0:0:0:0:1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+2026-04-15 04:51:46.794 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.HttpLoggingInterceptor - REQUEST_PARAMS [08022792-3825-4e7e-8557-d7c61ede9ca2] Query: utilisateurId=3
+2026-04-15 04:51:46.795 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.796 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_START: SocialController.getStats
+2026-04-15 04:51:46.796 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_START: SocialServiceImpl.getProjectSocialStats
+2026-04-15 04:51:46.799 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.802 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy199.countByProjetIdAndType | Duration: 4ms
+2026-04-15 04:51:46.803 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.805 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy199.countByProjetIdAndType | Duration: 3ms
+2026-04-15 04:51:46.807 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.811 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy198.findByProjetIdOrderByDateCreationDesc | Duration: 5ms
+2026-04-15 04:51:46.814 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.821 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - QUERY_EXECUTED: $Proxy199.findByUtilisateurIdAndProjetIdAndType | Duration: 8ms
+2026-04-15 04:51:46.821 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - SERVICE_METHOD_END: SocialServiceImpl.getProjectSocialStats | Duration: 25ms
+2026-04-15 04:51:46.822 [http-nio-0.0.0.0-8080-exec-7] DEBUG c.e.p.util.PerformanceLoggingAspect - CONTROLLER_METHOD_END: SocialController.getStats | Duration: 26ms
+2026-04-15 04:51:46.824 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.824 [http-nio-0.0.0.0-8080-exec-7] INFO  c.e.p.util.HttpLoggingInterceptor - REQUEST_END [08022792-3825-4e7e-8557-d7c61ede9ca2] GET /api/v1/social/stats/project/3 | Status: 200 | Duration: 30ms

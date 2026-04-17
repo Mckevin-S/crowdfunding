@@ -28,13 +28,19 @@ const KYCVerification = () => {
 
     setLoading(true);
     try {
-      // Simulation d'upload pour le moment puisque nous utilisons documentUrl
-      const documentUrl = "https://storage.investafrika.com/mock-kyc-" + Math.random().toString(36).substr(2, 9) + ".pdf";
+      // 1. Upload du fichier réel vers le backend
+      const formData = new FormData();
+      formData.append('file', file);
+      const uploadRes = await api.post('/files/upload/document', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      const documentUrl = uploadRes.data.url;
 
+      // 2. Enregistrement du document KYC avec l'URL réelle
       const payload = {
         utilisateurId: user.id,
         typeDocument: docType,
-        documentUrl: documentUrl
+        documentUrl: documentUrl,
       };
 
       await api.post('/kyc-documents', payload);

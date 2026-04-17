@@ -1,0 +1,630 @@
+2026-04-15 00:33:55.005 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.ProjetServiceImpl.closeExpiredProjects]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-04-15 00:33:55.257 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.282 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@196c66b3]
+2026-04-15 00:33:55.319 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.321 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 00:33:55.537 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-04-15 00:33:55.537 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0
+2026-04-15 00:33:55.605 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 00:33:55.605 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 00:33:55.953 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(1584894769<open>)] for JPA transaction
+2026-04-15 00:33:55.957 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 00:33:56.725 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-04-15 00:33:56.727 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(1584894769<open>)]
+2026-04-15 00:33:57.800 [scheduling-1] DEBUG org.hibernate.SQL - 
+    update
+        projects 
+    set
+        admin_notes=?,
+        all_or_nothing=?,
+        categorie=?,
+        start_date=?,
+        end_date=?,
+        description=?,
+        cover_image=?,
+        localisation=?,
+        current_amount=?,
+        investors_count=?,
+        funding_goal=?,
+        equity_percentage=?,
+        owner_id=?,
+        status=?,
+        suspension_deadline=?,
+        interest_rate=?,
+        titre=?,
+        funding_type=? 
+    where
+        id=?
+2026-04-15 00:33:57.800 [scheduling-1] DEBUG org.hibernate.SQL - 
+    update
+        projects 
+    set
+        admin_notes=?,
+        all_or_nothing=?,
+        categorie=?,
+        start_date=?,
+        end_date=?,
+        description=?,
+        cover_image=?,
+        localisation=?,
+        current_amount=?,
+        investors_count=?,
+        funding_goal=?,
+        equity_percentage=?,
+        owner_id=?,
+        status=?,
+        suspension_deadline=?,
+        interest_rate=?,
+        titre=?,
+        funding_type=? 
+    where
+        id=?
+2026-04-15 00:33:58.050 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(1584894769<open>)] after transaction
+2026-04-15 00:59:59.995 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.example.project.service.impl.LoanServiceImpl.applyPenalties]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-04-15 01:00:00.000 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(481344369<open>)] for JPA transaction
+2026-04-15 01:00:00.010 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1796eb02]
+2026-04-15 01:00:00.075 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Found thread-bound EntityManager [SessionImpl(481344369<open>)] for JPA transaction
+2026-04-15 01:00:00.076 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Participating in existing transaction
+2026-04-15 01:00:00.095 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        rs1_0.id,
+        rs1_0.remaining_principal,
+        rs1_0.created_at,
+        rs1_0.due_date,
+        rs1_0.paid_at,
+        rs1_0.principal_amount,
+        rs1_0.interest_amount,
+        rs1_0.penalty_amount,
+        rs1_0.total_amount,
+        rs1_0.installment_number,
+        rs1_0.project_id,
+        rs1_0.status 
+    from
+        repayment_schedule rs1_0
+2026-04-15 01:00:00.095 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        rs1_0.id,
+        rs1_0.remaining_principal,
+        rs1_0.created_at,
+        rs1_0.due_date,
+        rs1_0.paid_at,
+        rs1_0.principal_amount,
+        rs1_0.interest_amount,
+        rs1_0.penalty_amount,
+        rs1_0.total_amount,
+        rs1_0.installment_number,
+        rs1_0.project_id,
+        rs1_0.status 
+    from
+        repayment_schedule rs1_0
+2026-04-15 01:00:00.160 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2026-04-15 01:00:00.160 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(481344369<open>)]
+2026-04-15 01:00:00.161 [scheduling-1] DEBUG o.s.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(481344369<open>)] after transaction
+2026-04-15 04:51:44.954 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:45.569 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:45.569 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:45.903 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:45.903 [http-nio-0.0.0.0-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:46.213 [http-nio-0.0.0.0-8080-exec-9] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.236 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.240 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:46.240 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.admin_notes,
+        p1_0.all_or_nothing,
+        p1_0.categorie,
+        p1_0.created_at,
+        p1_0.start_date,
+        p1_0.end_date,
+        p1_0.description,
+        p1_0.cover_image,
+        p1_0.localisation,
+        p1_0.current_amount,
+        p1_0.investors_count,
+        p1_0.funding_goal,
+        p1_0.equity_percentage,
+        p1_0.owner_id,
+        p1_0.status,
+        p1_0.suspension_deadline,
+        p1_0.interest_rate,
+        p1_0.titre,
+        p1_0.funding_type 
+    from
+        projects p1_0 
+    where
+        p1_0.status=? 
+        and p1_0.end_date>=?
+2026-04-15 04:51:46.247 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:46.247 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-04-15 04:51:46.262 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.348 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.354 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.417 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.666 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.666 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.710 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.710 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.736 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.736 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.757 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.757 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.779 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.795 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-04-15 04:51:46.799 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.799 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.803 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.803 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        count(i1_0.id) 
+    from
+        interactions i1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.807 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.807 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.contenu,
+        c1_0.created_at,
+        c1_0.project_id,
+        c1_0.user_id 
+    from
+        comments c1_0 
+    left join
+        projects p1_0 
+            on p1_0.id=c1_0.project_id 
+    where
+        p1_0.id=? 
+    order by
+        c1_0.created_at desc
+2026-04-15 04:51:46.814 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.814 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.project_id,
+        i1_0.type,
+        i1_0.user_id 
+    from
+        interactions i1_0 
+    left join
+        users u1_0 
+            on u1_0.id=i1_0.user_id 
+    left join
+        projects p1_0 
+            on p1_0.id=i1_0.project_id 
+    where
+        u1_0.id=? 
+        and p1_0.id=? 
+        and i1_0.type=?
+2026-04-15 04:51:46.824 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor

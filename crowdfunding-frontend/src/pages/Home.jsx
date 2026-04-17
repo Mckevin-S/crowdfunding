@@ -170,7 +170,7 @@ const Home = () => {
 
       {/* --- FLOATING STATS BAR --- */}
       <div className="container mx-auto px-6 -mt-24 relative z-20">
-        <div className="bg-white rounded-[3.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] border border-gray-50 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-50 overflow-hidden transform hover:scale-[1.01] transition-transform duration-700">
+        <div className="bg-white/90 backdrop-blur-xl rounded-[3.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] border border-emerald-100 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-emerald-50 overflow-hidden transform hover:scale-[1.01] transition-transform duration-700">
           {stats.map((stat, idx) => (
             <div key={idx} className="flex-1 p-10 md:p-14 transition-all hover:bg-gray-50/50 group">
               <div className="flex flex-col">
@@ -190,7 +190,8 @@ const Home = () => {
       </div>
 
       {/* --- CATEGORIES SECTION --- */}
-      <section className="py-32">
+      <section className="py-32 bg-gradient-to-b from-white via-gray-50 to-emerald-50 border-t border-b border-emerald-100 relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage:'radial-gradient(#10b981 1.5px, transparent 1.5px)',backgroundSize:'60px 60px'}} />
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-20">
             <h2 className="text-4xl md:text-5xl font-display font-black text-primary-900 mb-6 tracking-tighter italic">L'Afrique qui gagne.</h2>
@@ -200,7 +201,7 @@ const Home = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {categories.map((cat, i) => (
-              <button key={i} className="group relative p-10 bg-gray-50 rounded-[3rem] border border-transparent hover:border-primary-100 hover:bg-white hover:shadow-2xl transition-all duration-500 text-left overflow-hidden">
+              <button key={i} className="group relative p-10 bg-white/80 backdrop-blur-xl rounded-[3rem] border border-emerald-100 shadow-xl hover:border-primary-200 hover:bg-white hover:shadow-2xl transition-all duration-500 text-left overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary-100/20 rounded-full -mr-16 -mt-16 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mb-8 text-primary-900 group-hover:bg-primary-900 group-hover:text-white transition-all scale-110">
                   {cat.icon}
@@ -214,7 +215,7 @@ const Home = () => {
       </section>
 
       {/* --- FEATURED PROJECTS --- */}
-      <section className="py-32 bg-[#F9FBFA] relative overflow-hidden">
+      <section className="py-32 bg-[#F9FBFA] relative overflow-hidden border-t-4 border-emerald-100">
         {/* Background Gradients */}
         <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-emerald-50/50 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 -z-10" />
 
@@ -268,7 +269,8 @@ const Home = () => {
       </section>
 
       {/* --- HOW IT WORKS (REWORKED) --- */}
-      <section className="py-40">
+      <section className="py-40 bg-gradient-to-b from-white via-gray-50 to-primary-50 border-t border-primary-100 relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage:'radial-gradient(#0ea5e9 1.5px, transparent 1.5px)',backgroundSize:'60px 60px'}} />
         <div className="container mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-5xl font-display font-black text-primary-900 mb-6 tracking-tighter leading-none">
@@ -307,7 +309,7 @@ const Home = () => {
               { id: '03', title: 'Action', icon: <PlusCircle />, desc: 'Financement sécurisé via Mobile Money & Cartes.' },
               { id: '04', title: 'Impact', icon: <BarChart3 />, desc: 'Suivi transparent des étapes & dividendes en temps réel.' },
             ].map((step, i) => (
-              <div key={i} className="group flex flex-col items-center text-center space-y-8 p-10 rounded-[3rem] hover:bg-gray-50/50 transition-all">
+              <div key={i} className="group flex flex-col items-center text-center space-y-8 p-10 rounded-[3rem] bg-white/80 backdrop-blur-xl border border-primary-100 shadow-lg hover:bg-primary-50/60 transition-all">
                 <div className="relative">
                   <span className="absolute -top-6 -right-6 text-7xl font-black text-gray-100 group-hover:text-primary-50 transition-colors z-0">{step.id}</span>
                   <div className="w-20 h-20 bg-primary-900 rounded-[1.5rem] flex items-center justify-center text-white scale-110 shadow-2xl z-10 relative">
@@ -323,7 +325,7 @@ const Home = () => {
       </section>
 
       {/* --- FINAL CTA POSTER STYLE --- */}
-      <section className="py-40 px-6 bg-white relative">
+      <section className="py-40 px-6 bg-gradient-to-br from-primary-50 via-white to-emerald-50 relative border-t-4 border-primary-100">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#064e3b 1.5px, transparent 1.5px)', backgroundSize: '60px 60px' }} />
         
         <div className="container mx-auto max-w-6xl">
@@ -363,7 +365,7 @@ const Home = () => {
       </section>
 
       {/* --- TRUST BAR (LOGOS) --- */}
-      <section className="py-24 border-t border-gray-100 grayscale hover:grayscale-0 transition-all duration-1000">
+      <section className="py-24 border-t-4 border-emerald-200 bg-white grayscale hover:grayscale-0 transition-all duration-1000">
         <div className="container mx-auto px-6 text-center">
             <h5 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 mb-12">Nos protocoles de confiance</h5>
             <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32">

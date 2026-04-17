@@ -29,6 +29,9 @@ public class FileServiceImpl implements FileService {
     @Value("${app.upload.dir:uploads/images}")
     private String uploadDir;
 
+    @Value("${app.upload.doc-dir:uploads/documents}")
+    private String docUploadDir;
+
     private static final int MAX_WIDTH = 1200;
 
     @Override
@@ -58,6 +61,33 @@ public class FileServiceImpl implements FileService {
         } catch (Exception ex) {
             log.error("Could not store image. Please try again!", ex);
             throw new RuntimeException("Could not store file " + originalFileName + ". Please try again!", ex);
+        }
+    }
+
+    @Override
+    public String uploadDocument(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("Cannot upload empty file");
+        }
+        String originalFileName = StringUtils.cleanPath(
+                file.getOriginalFilename() != null ? file.getOriginalFilename() : "document");
+        String extension = "";
+        int dotIdx = originalFileName.lastIndexOf('.');
+        if (dotIdx > 0) {
+            extension = originalFileName.substring(dotIdx); // e.g. ".pdf"
+        }
+        try {
+            Path targetLocation = Paths.get(docUploadDir).toAbsolutePath().normalize();
+            Files.createDirectories(targetLocation);
+            String newFileName = UUID.randomUUID().toString() + extension;
+            Path targetPath = targetLocation.resolve(newFileName);
+            file.transferTo(targetPath.toFile());
+            String fileUrl = "/files/documents/" + newFileName;
+            log.info("KYC document saved at: {}", targetPath);
+            return fileUrl;
+        } catch (Exception ex) {
+            log.error("Could not store document.", ex);
+            throw new RuntimeException("Could not store document " + originalFileName + ". Please try again!", ex);
         }
     }
 

@@ -67,6 +67,7 @@ public class LitigeServiceImpl implements LitigeService {
                 notificationService.createNotification(new NotificationRequestDTO(
                     savedLitige.getAccuse().getId(),
                     msg,
+                    "ALERTE",
                     true // Critical
                 ));
             }
@@ -127,11 +128,11 @@ public class LitigeServiceImpl implements LitigeService {
             String msg = "Résolution de litige : Le litige #" + id + " (" + saved.getTitre() + ") a été marqué comme " + resolution.getStatut() + ". Décision : " + resolution.getDecisionAdmin();
 
             // Notify Plaignant
-            notificationService.createNotification(new NotificationRequestDTO(saved.getPlaignant().getId(), msg, true));
+            notificationService.createNotification(new NotificationRequestDTO(saved.getPlaignant().getId(), msg, "ALERTE", true));
 
             // Notify Accuse
             if (saved.getAccuse() != null) {
-                notificationService.createNotification(new NotificationRequestDTO(saved.getAccuse().getId(), msg, true));
+                notificationService.createNotification(new NotificationRequestDTO(saved.getAccuse().getId(), msg, "ALERTE", true));
             }
         } catch (Exception e) {
             // Log

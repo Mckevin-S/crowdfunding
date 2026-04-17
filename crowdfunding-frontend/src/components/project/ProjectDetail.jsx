@@ -27,6 +27,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 import AIAnalysisSection from './AIAnalysisSection';
+import AIChatBot from './AIChatBot';
 
 const ProjectDetail = ({ project }) => {
   const navigate = useNavigate();
@@ -416,6 +417,7 @@ const ProjectDetail = ({ project }) => {
           user={activeUser}
         />
       )}
+      {project && <AIChatBot project={project} />}
     </div>
   );
 };

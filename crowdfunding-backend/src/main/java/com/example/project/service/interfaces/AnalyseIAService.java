@@ -39,7 +39,8 @@ public interface AnalyseIAService {
      *
      * @param message  The user message.
      * @param projetId The project ID (optional).
+     * @param history  The conversation history (optional).
      * @return The AI's response text.
      */
-    String chatWithAI(String message, Long projetId);
+    String chatWithAI(String message, Long projetId, java.util.List<java.util.Map<String, String>> history);
 }

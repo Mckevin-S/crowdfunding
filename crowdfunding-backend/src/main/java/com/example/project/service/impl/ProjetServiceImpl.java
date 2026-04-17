@@ -156,6 +156,7 @@ public class ProjetServiceImpl implements ProjetService {
                 notificationService.createNotification(new NotificationRequestDTO(
                     updatedProjet.getPorteur().getId(),
                     message,
+                    "ALERTE",
                     true // Always send email for project status updates
                 ));
             }

@@ -19,9 +19,9 @@ const aiChatService = {
     return response.data;
   },
 
-  // Discuter avec le chatbot
-  sendMessage: async (message, projetId = null) => {
-    const response = await axios.post(API_CHAT, { message, projetId });
+  // Discuter avec le chatbot (avec historique pour la mémoire)
+  sendMessage: async (message, projetId = null, history = []) => {
+    const response = await axios.post(API_CHAT, { message, projetId, history });
     return response.data.response;
   }
 };

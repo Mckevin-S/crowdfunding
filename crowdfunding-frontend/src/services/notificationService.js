@@ -14,6 +14,11 @@ export const notificationService = {
   // Créer une notification (principalement pour l'admin ou usage système)
   createNotification: (data) => {
     return api.post('/notifications', data);
+  },
+
+  // Supprimer une notification
+  deleteNotification: (id) => {
+    return api.delete(`/notifications/${id}`);
   }
 };
 

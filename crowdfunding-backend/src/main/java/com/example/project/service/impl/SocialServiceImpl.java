@@ -49,6 +49,7 @@ public class SocialServiceImpl implements SocialService {
             notificationService.createNotification(new NotificationRequestDTO(
                     projet.getPorteur().getId(),
                     utilisateur.getPrenom() + " a commenté votre projet : " + projet.getTitre(),
+                    "INFO",
                     false
             ));
         }
@@ -95,6 +96,7 @@ public class SocialServiceImpl implements SocialService {
                         notificationService.createNotification(new NotificationRequestDTO(
                                 projet.getPorteur().getId(),
                                 utilisateur.getPrenom() + " a aimé votre projet : " + projet.getTitre(),
+                                "INFO",
                                 false
                         ));
                     }
@@ -121,6 +123,7 @@ public class SocialServiceImpl implements SocialService {
             notificationService.createNotification(new NotificationRequestDTO(
                     projet.getPorteur().getId(),
                     utilisateur.getPrenom() + " a partagé votre projet : " + projet.getTitre(),
+                    "INFO",
                     false
             ));
         }

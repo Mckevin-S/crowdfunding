@@ -46,7 +46,7 @@ const GlobalChatbot = () => {
     try {
       // Pass projetId if we are on a project details page
       const currentProjetId = location.pathname.includes('/projects/') ? projetId : null;
-      const response = await aiChatService.sendMessage(userMsg, currentProjetId);
+      const response = await aiChatService.sendMessage(userMsg, currentProjetId, chatHistory);
       setChatHistory(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (err) {
       setChatHistory(prev => [...prev, { role: 'assistant', content: "Désolé, je rencontre une petite difficulté technique. Veuillez réessayer." }]);

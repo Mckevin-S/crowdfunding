@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Bell, BellRing, Check, Clock, ExternalLink, X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { notificationService } from '../../services/notificationService';
+import { useNotificationWebSocket } from '../../hooks/useNotificationWebSocket';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ const NotificationDropdown = () => {
   const { user } = useSelector(state => state.auth);
   const dropdownRef = useRef(null);
 
-  const fetchNotifications = async () => {
+  const fetchNotifications = useCallback(async () => {
     if (!user?.id) return;
     try {
       const res = await notificationService.getNotificationsByUser(user.id);
@@ -38,13 +39,26 @@ const NotificationDropdown = () => {
     } catch (error) {
       console.error("Erreur notifications:", error);
     }
-  };
+  }, [user?.id]);
+
 
   useEffect(() => {
     fetchNotifications();
     const interval = setInterval(fetchNotifications, 60000);
     return () => clearInterval(interval);
-  }, [user?.id]);
+  }, [user?.id, fetchNotifications]);
+
+  // Notifications temps réel via WebSocket
+  useNotificationWebSocket(user?.id, useCallback((notif) => {
+    setNotifications(prev => {
+      const exists = prev.some(n => n.id === notif.id);
+      if (exists) return prev;
+      const updated = [notif, ...prev];
+      updated.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
+      return updated;
+    });
+    setUnreadCount(prev => prev + 1);
+  }, []));
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -144,15 +158,32 @@ const NotificationDropdown = () => {
                     </div>
                   </div>
 
-                  {!notification.estLu && (
-                    <button 
-                      onClick={() => handleMarkAsRead(notification.id)}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 bg-white rounded-lg border border-slate-100 text-primary-600 shadow-sm transition-all hover:scale-110"
-                      title="Marquer comme lu"
+                  <div className="flex flex-col gap-1 items-end">
+                    {!notification.estLu && (
+                      <button 
+                        onClick={() => handleMarkAsRead(notification.id)}
+                        className="opacity-0 group-hover:opacity-100 p-1.5 bg-white rounded-lg border border-slate-100 text-primary-600 shadow-sm transition-all hover:scale-110"
+                        title="Marquer comme lu"
+                      >
+                        <Check className="w-4 h-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={async () => {
+                        try {
+                          await notificationService.deleteNotification(notification.id);
+                          setNotifications(notifications.filter(n => n.id !== notification.id));
+                          if (!notification.estLu) setUnreadCount(prev => Math.max(0, prev - 1));
+                        } catch (e) {
+                          // Optionally: afficher une erreur
+                        }
+                      }}
+                      className="opacity-0 group-hover:opacity-100 p-1.5 bg-white rounded-lg border border-slate-100 text-red-500 shadow-sm transition-all hover:scale-110"
+                      title="Supprimer la notification"
                     >
-                      <Check className="w-4 h-4" />
+                      <X className="w-4 h-4" />
                     </button>
-                  )}
+                  </div>
                 </div>
               ))
             )}

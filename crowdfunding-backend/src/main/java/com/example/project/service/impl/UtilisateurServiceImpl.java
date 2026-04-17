@@ -78,6 +78,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             notificationService.createNotification(new NotificationRequestDTO(
                 id,
                 "Votre compte a été suspendu par l'administration. Veuillez contacter le support pour plus d'informations.",
+                "ALERTE",
                 true // Critical (Email)
             ));
         } catch (Exception e) {
@@ -97,6 +98,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             notificationService.createNotification(new NotificationRequestDTO(
                 id,
                 "Bonne nouvelle ! Votre compte a été réactivé. Vous pouvez de nouveau accéder à toutes les fonctionnalités.",
+                "INFO",
                 true // Critical (Email)
             ));
         } catch (Exception e) {
