@@ -102,7 +102,8 @@ public class KycDocumentServiceImpl implements KycDocumentService {
             if (status == StatutDocument.APPROUVE) {
                 msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été approuvé.";
             } else if (status == StatutDocument.REJETE) {
-                msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été rejeté. Motif : " + reason;
+                msg = "Votre document KYC (" + updatedDoc.getTypeDocument() + ") a été rejeté. Motif : " + reason
+                        + ". Veuillez soumettre un nouveau document rapidement sous peine de bannissement.";
             }
 
             if (!msg.isEmpty()) {
