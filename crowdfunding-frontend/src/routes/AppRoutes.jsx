@@ -28,6 +28,7 @@ const Messages = lazy(() => import('@pages/Messages'));
 const KYCVerification = lazy(() => import('@pages/KYC/KYCVerification'));
 const PaymentSuccess = lazy(() => import('@pages/Payments/PaymentSuccess'));
 const MyContributions = lazy(() => import('@pages/User/MyContributions'));
+const EditProject = lazy(() => import('@pages/Projects/EditProject'));
 
 const AdminLayout = lazy(() => import('@components/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('@pages/Admin/AdminDashboard'));
@@ -72,6 +73,7 @@ const AppRoutes = () => {
               <Route path="/profile/edit" element={<EditProfile />} />
             </Route>
             <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/projects/:id/edit" element={<PrivateRoute><EditProject /></PrivateRoute>} />
             <Route path="/profile/:id" element={<PublicProfile />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             

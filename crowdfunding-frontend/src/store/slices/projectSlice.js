@@ -49,6 +49,18 @@ export const createProject = createAsyncThunk(
   }
 );
 
+export const updateProject = createAsyncThunk(
+  'project/update',
+  async ({ id, projectData }, { rejectWithValue }) => {
+    try {
+      const response = await projectService.updateProject(id, projectData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Erreur lors de la mise à jour du projet');
+    }
+  }
+);
+
 export const fetchProjects = createAsyncThunk(
   'project/fetchAll',
   async (params, { rejectWithValue }) => {
@@ -129,6 +141,21 @@ const projectSlice = createSlice({
         state.projects.unshift(action.payload);
       })
       .addCase(createProject.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateProject.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProject.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentProject = action.payload;
+        state.userProjects = state.userProjects.map((project) =>
+          project.id === action.payload.id ? action.payload : project
+        );
+      })
+      .addCase(updateProject.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

@@ -36,4 +36,4 @@ build/
 .env
 
 # Backend logs
-#
+logs/

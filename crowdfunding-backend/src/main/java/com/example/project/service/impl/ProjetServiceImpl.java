@@ -66,8 +66,20 @@ public class ProjetServiceImpl implements ProjetService {
     public ProjetResponseDTO updateProjet(Long id, ProjetRequestDTO request) {
         Projet projet = getProjetById(id);
 
-        if (projet.getStatut() != StatutProjet.BROUILLON) {
-            throw new BadRequestException("Seuls les projets en brouillon peuvent être modifiés");
+        if (projet.getStatut() != StatutProjet.BROUILLON && projet.getStatut() != StatutProjet.REJETE) {
+            throw new BadRequestException("Seuls les projets en brouillon ou rejetés peuvent être modifiés");
+        }
+
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (currentUserEmail == null || currentUserEmail.isBlank()) {
+            throw new BadRequestException("Utilisateur non authentifié");
+        }
+
+        Utilisateur currentUser = utilisateurRepository.findByEmail(currentUserEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur", "email", currentUserEmail));
+
+        if (!projet.getPorteur().getId().equals(currentUser.getId())) {
+            throw new BadRequestException("Vous n'êtes pas autorisé à modifier ce projet");
         }
 
         projet.setTitre(request.getTitre());

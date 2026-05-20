@@ -22,6 +22,7 @@ import ProjectProgress from '@components/project/ProjectProgress';
 import clsx from 'clsx';
 import ContributionModal from './ContributionModal';
 import socialService from '../../services/socialService';
+import api from '../../services/api';
 import { toast } from 'react-toastify';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -403,6 +404,16 @@ const ProjectDetail = ({ project }) => {
                    </p>
                  )}
                </div>
+             )}
+             {activeUser?.id === project.porteurId && (project.statut === 'BROUILLON' || project.statut === 'REJETE') && (
+               <Button
+                 variant="outline"
+                 fullWidth
+                 onClick={() => navigate(`/projects/${id}/edit`)}
+                 className="border-yellow-400 text-yellow-700 hover:bg-yellow-50"
+               >
+                 Modifier ce projet
+               </Button>
              )}
           </div>
         </div>

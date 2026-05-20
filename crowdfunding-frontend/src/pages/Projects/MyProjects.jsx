@@ -17,7 +17,7 @@ import {
   BarChart2
 } from 'lucide-react';
 import { fetchUserProjects } from '../../store/slices/projectSlice';
-import { formatCurrency, formatDate } from '../../utils/formatters';
+import { formatCurrency } from '../../utils/formatters';
 import Button from '../../components/common/Button';
 import Badge from '../../components/common/Badge';
 import clsx from 'clsx';
@@ -30,6 +30,32 @@ const MyProjects = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
+
+  const resolveImageUrl = (img) => {
+    const fallback = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800';
+    if (!img) return fallback;
+
+    if (/^https?:\/\//.test(img)) return img;
+
+    if (img.startsWith('/api/v1/files/images/')) {
+      return `http://localhost:8080${img.replace('/api/v1', '')}`;
+    }
+
+    if (img.startsWith('/files/images/')) {
+      return `http://localhost:8080${img}`;
+    }
+
+    if (img.startsWith('/uploads/images/')) {
+      const filename = img.split('/').pop();
+      return `http://localhost:8080/files/images/${filename}`;
+    }
+
+    if (img.startsWith('/')) {
+      return `http://localhost:8080${img}`;
+    }
+
+    return img;
+  };
 
   useEffect(() => {
     if (user?.id) {
@@ -149,8 +175,15 @@ const MyProjects = () => {
               >
                 {/* Image Placeholder or Actual Image */}
                 <div className="aspect-video bg-slate-100 relative overflow-hidden">
-                  {project.imageUrl ? (
-                    <img src={project.imageUrl} alt={project.titre} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  {project.imageCouverture ? (
+                    <img 
+                      src={resolveImageUrl(project.imageCouverture)} 
+                      alt={project.titre} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      onError={(e) => {
+                        e.target.src = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800';
+                      }}
+                    />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-slate-300 italic text-sm">Aperçu indisponible</div>
                   )}
@@ -215,14 +248,16 @@ const MyProjects = () => {
                       >
                         Voir
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="px-3"
-                        onClick={() => navigate(`/projects/${project.id}`)}
-                      >
-                        <Edit3 className="w-4 h-4" />
-                      </Button>
+                      {(project.statut === 'BROUILLON' || project.statut === 'REJETE') && (
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="px-3"
+                          onClick={() => navigate(`/projects/${project.id}/edit`)}
+                        >
+                          <Edit3 className="w-4 h-4" />
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
