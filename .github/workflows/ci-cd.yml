@@ -1,0 +1,86 @@
+name: CI – Backend + Frontend (no Docker)
+# -----------------------------------------------------------------
+# Run on every push to the main branch and on pull‑requests targeting it
+# -----------------------------------------------------------------
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+# -----------------------------------------------------------------
+# Jobs
+# -----------------------------------------------------------------
+jobs:
+  # ------------------------------
+  # 1️⃣ Backend – Maven build & tests
+  # ------------------------------
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./crowdfunding-backend   # path to the backend module
+    steps:
+      - name: ⏬ Checkout repository
+        uses: actions/checkout@v4
+      - name: ☕ Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+      - name: 📦 Cache Maven local repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: 🧪 Run Maven verify (compile + unit tests)
+        run: mvn -B verify
+      - name: 📤 Upload backend test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: |
+            **/target/surefire-reports/**
+            **/target/failsafe-reports/**
+  # ------------------------------
+  # 2️⃣ Frontend – Node install, lint & tests, build
+  # ------------------------------
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./crowdfunding-frontend   # path to the frontend module
+    steps:
+      - name: ⏬ Checkout repository
+        uses: actions/checkout@v4
+      - name: 📦 Set up Node 20 (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: 📂 Install npm dependencies
+        run: npm ci
+      - name: 🔎 Lint (eslint)
+        run: npm run lint
+      - name: 🧪 Run unit tests (jest)
+        run: npm test -- --ci --coverage
+      - name: 📤 Upload frontend test coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: coverage
+      - name: 🏗️ Build production assets
+        run: npm run build   # creates ./dist (or ./build depending on Vite config)
+      - name: 📤 Upload built static files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: dist/
+# -----------------------------------------------------------------
+# End of workflow
+# -----------------------------------------------------------------

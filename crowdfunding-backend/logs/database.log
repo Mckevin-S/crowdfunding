@@ -4347,3 +4347,297 @@
         u1_0.email=?
 2026-05-23 05:14:20.078 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
 2026-05-23 05:14:20.088 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:15:20.068 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:15:20.072 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:15:20.072 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:15:20.082 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:15:20.090 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:16:20.062 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:16:20.065 [http-nio-0.0.0.0-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:16:20.065 [http-nio-0.0.0.0-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:16:20.078 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:16:20.088 [http-nio-0.0.0.0-8080-exec-2] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:18:06.062 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:18:06.064 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:18:06.064 [http-nio-0.0.0.0-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:18:06.075 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:18:06.085 [http-nio-0.0.0.0-8080-exec-5] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:19:07.073 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:19:07.078 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:19:07.078 [http-nio-0.0.0.0-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:19:07.086 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:19:07.096 [http-nio-0.0.0.0-8080-exec-3] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:20:08.054 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:20:08.058 [http-nio-0.0.0.0-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:20:08.058 [http-nio-0.0.0.0-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:20:08.184 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:20:08.204 [http-nio-0.0.0.0-8080-exec-1] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:21:09.070 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2026-05-23 05:21:09.071 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:21:09.071 [http-nio-0.0.0.0-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.address,
+        u1_0.admin_notes,
+        u1_0.avatar_url,
+        u1_0.bio,
+        u1_0.preferred_category,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.google_id,
+        u1_0.kyc_status,
+        u1_0.password,
+        u1_0.last_name,
+        u1_0.first_name,
+        u1_0.role,
+        u1_0.status,
+        u1_0.phone,
+        u1_0.ville 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-05-23 05:21:09.080 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2026-05-23 05:21:09.087 [http-nio-0.0.0.0-8080-exec-7] DEBUG o.s.o.j.s.OpenEntityManagerInViewInterceptor - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
