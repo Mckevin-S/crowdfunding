@@ -1,10 +1,9 @@
-# Crowdfunding Platform - Backend
+# Crowdfunding Platform
 
-This is the backend for a crowdfunding platform built with Spring Boot and JPA/Hibernate.
 
 ## Tech Stack
-- **Framework**: Spring Boot 4.0.3
-- **Language**: Java 17
+- **Backend**: Spring Boot 4.0.3
+- **Frontend**: React 
 - **Database**: MySQL 8.0
 - **Persistence**: Spring Data JPA / Hibernate
 - **Build Tool**: Maven
